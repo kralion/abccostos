@@ -1,12 +1,4 @@
 import { useSearch } from '@tanstack/react-router'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@workspace/ui/components/card'
 import { AuthLayout } from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
 
@@ -15,37 +7,31 @@ export function SignIn() {
 
   return (
     <AuthLayout>
-      <Card className='gap-4'>
-        <CardHeader>
-          <CardTitle className='text-lg tracking-tight'>Sign in</CardTitle>
-          <CardDescription>
-            Enter your email and password below to <br />
-            log into your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+
+     <div className='flex flex-col gap-6 mt-4 text-center'>
+          <h2 className='text-xl font-semibold tracking-tight'>Iniciar sesión</h2>
+        
           <UserAuthForm redirectTo={redirect} />
-        </CardContent>
-        <CardFooter>
-          <p className='text-muted-foreground px-8 text-center text-sm'>
-            By clicking sign in, you agree to our{' '}
+        
+          <div className='flex flex-col gap-2 mt-4 text-sm justify-center items-center'>
+          <p className='text-muted-foreground text-center '>
+            Quieres crear una cuenta y empezar con CP60°?
+            </p>
             <a
-              href='/terms'
+              href='/sign-up'
               className='hover:text-primary underline underline-offset-4'
             >
-              Terms of Service
-            </a>{' '}
-            and{' '}
-            <a
-              href='/privacy'
-              className='hover:text-primary underline underline-offset-4'
-            >
-              Privacy Policy
+              Crear periodo de prueba gratuito
             </a>
-            .
-          </p>
-        </CardFooter>
-      </Card>
+           
+            <a
+              href='https://wa.me/51971419928?text=Hola%2C%20quisiera%20una%20demo%20de%20CP360%20Presupuestos'
+              className='hover:text-primary underline underline-offset-4'
+            >
+              Agenda una demostración aqui
+            </a>
+            </div>
+        </div>
     </AuthLayout>
   )
 }

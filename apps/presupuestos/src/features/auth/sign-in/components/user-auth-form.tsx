@@ -1,14 +1,9 @@
-import { useState } from 'react'
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
+import { PasswordInput } from '@/components/password-input'
+import { useAuthStore } from '@/stores/auth-store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
-import { Loader2, LogIn } from 'lucide-react'
-import { toast } from 'sonner'
-import { IconFacebook, IconGithub } from '@/assets/brand-icons'
-import { useAuthStore } from '@/stores/auth-store'
-import { sleep, cn } from '@workspace/ui/lib/utils'
 import { Button } from '@workspace/ui/components/button'
+import { Checkbox } from '@workspace/ui/components/checkbox'
 import {
   Form,
   FormControl,
@@ -18,16 +13,21 @@ import {
   FormMessage,
 } from '@workspace/ui/components/form'
 import { Input } from '@workspace/ui/components/input'
-import { PasswordInput } from '@/components/password-input'
+import { cn, sleep } from '@workspace/ui/lib/utils'
+import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { z } from 'zod'
 
 const formSchema = z.object({
   email: z.email({
-    error: (iss) => (iss.input === '' ? 'Please enter your email' : undefined),
+    error: (iss) => (iss.input === '' ? 'Por favor ingresa tu correo electrónico' : undefined),
   }),
   password: z
     .string()
-    .min(1, 'Please enter your password')
-    .min(7, 'Password must be at least 7 characters long'),
+    .min(1, 'Por favor ingresa tu contraseña')
+    .min(7, 'La contraseña debe tener al menos 7 caracteres'),
 })
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLFormElement> {
@@ -63,7 +63,7 @@ export function UserAuthForm({
     }
 
     toast.promise(sleep(2000), {
-      loading: 'Signing in...',
+      loading: 'Iniciando sesión...',
       success: () => {
         setIsLoading(false)
 
@@ -75,7 +75,7 @@ export function UserAuthForm({
         const targetPath = redirectTo || '/'
         navigate({ to: targetPath, replace: true })
 
-        return `Welcome back, ${data.email}!`
+        return `¡Bienvenido de nuevo, ${data.email}!`
       },
       error: 'Error',
     })
@@ -85,7 +85,7 @@ export function UserAuthForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn('grid gap-3', className)}
+        className={cn('grid gap-6', className)}
         {...props}
       >
         <FormField
@@ -93,9 +93,9 @@ export function UserAuthForm({
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Correo electrónico</FormLabel>
               <FormControl>
-                <Input placeholder='name@example.com' {...field} />
+                <Input placeholder='nombre@ejemplo.com' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,23 +106,31 @@ export function UserAuthForm({
           name='password'
           render={({ field }) => (
             <FormItem className='relative'>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Contraseña</FormLabel>
               <FormControl>
                 <PasswordInput placeholder='********' {...field} />
               </FormControl>
               <FormMessage />
-              <Link
-                to='/forgot-password'
-                className='text-muted-foreground absolute end-0 -top-0.5 text-sm font-medium hover:opacity-75'
-              >
-                Forgot password?
-              </Link>
+             
             </FormItem>
           )}
         />
+        <div className='flex justify-between'>
+          <FormItem className='flex items-center gap-2'>
+
+          <Checkbox />
+          <FormLabel>Recordarme</FormLabel>
+          </FormItem>
+        <Link
+                to='/forgot-password'
+                className='text-muted-foreground text-sm font-medium hover:opacity-75'
+              >
+                ¿Olvidaste tu contraseña?
+              </Link>
+          </div>
         <Button className='mt-2' disabled={isLoading}>
-          {isLoading ? <Loader2 className='animate-spin' /> : <LogIn />}
-          Sign in
+          {isLoading ? <Loader2 className='animate-spin' /> : null}
+          Iniciar sesión
         </Button>
 
         <div className='relative my-2'>
@@ -130,18 +138,24 @@ export function UserAuthForm({
             <span className='w-full border-t' />
           </div>
           <div className='relative flex justify-center text-xs uppercase'>
-            <span className='bg-background text-muted-foreground px-2'>
-              Or continue with
+            <span className='bg-background text-muted-foreground px-2 uppercase'>
+              O inicia sesión con
             </span>
           </div>
         </div>
 
-        <div className='grid grid-cols-2 gap-2'>
+        <div className='grid grid-cols-3 gap-2'>
           <Button variant='outline' type='button' disabled={isLoading}>
-            <IconGithub className='h-4 w-4' /> GitHub
+            <img src='https://img.icons8.com/?size=100&id=17949&format=png&color=000000' alt='Google' className='h-4 w-4' /> 
+            Google
           </Button>
           <Button variant='outline' type='button' disabled={isLoading}>
-            <IconFacebook className='h-4 w-4' /> Facebook
+            <img src='https://img.icons8.com/?size=100&id=22989&format=png&color=000000' alt='Microsoft' className='h-4 w-4' />
+            Microsoft
+          </Button>
+          <Button variant='outline' type='button' disabled={isLoading}>
+            <img src='https://img.icons8.com/?size=100&id=118497&format=png&color=000000' alt='Facebook' className='h-4 w-4' />
+            Facebook
           </Button>
         </div>
       </form>
