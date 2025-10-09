@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
 import { SignOutDialog } from '@/components/sign-out-dialog'
+import { Badge } from '@workspace/ui/components/badge'
 
 export function ProfileDropdown() {
   const [open, setOpen] = useDialogState()
@@ -20,14 +21,48 @@ export function ProfileDropdown() {
   return (
     <>
       <DropdownMenu modal={false}>
+        <div className='flex items-center space-x-2'> 
+
+          <span className='text-xs text-muted-foreground'>
+            {new Date().toLocaleDateString('es-ES', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </span>
+          <Badge>
+          {(() => {
+            const now = new Date()
+            // Get first day of year
+            const start = new Date(now.getFullYear(), 0, 1)
+            // Calculate number of days between now and start of year
+            const diff = (now.getTime() - start.getTime()) / 86400000
+            // Get week number (ISO-8601, but simple version: week starts on Jan 1)
+            const week = Math.ceil((diff + start.getDay() + 1) / 7)
+            return `${now.getFullYear()}.${week.toString().padStart(2, '0')}`
+          })()}
+          </Badge>
+        </div>
+
+        <div className='flex items-center space-x-2'>
+
         <DropdownMenuTrigger asChild>
-          <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
-            <Avatar className='h-8 w-8'>
+          <div className='flex items-center space-x-2'>
+
+          <Button variant='ghost' className='relative h-10 w-10 rounded-full'>
+            <Avatar className='h-10 w-10'>
               <AvatarImage src='/avatars/01.png' alt='@shadcn' />
               <AvatarFallback>SN</AvatarFallback>
             </Avatar>
           </Button>
+          <div className='flex flex-col'>
+          <p className='text-sm font-medium'>Alejandro Bravo</p>
+          <p className='text-xs text-muted-foreground'>Control de Costos</p>
+          </div>
+          </div>
         </DropdownMenuTrigger>
+        </div>
         <DropdownMenuContent className='w-56' align='end' forceMount>
           <DropdownMenuLabel className='font-normal'>
             <div className='flex flex-col gap-1.5'>

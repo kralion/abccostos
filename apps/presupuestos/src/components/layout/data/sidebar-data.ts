@@ -44,7 +44,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Datos Principales',
-          url: '/tasks',
+          url: '/datos-principales',
           icon: FileX,
         },
         {
@@ -53,7 +53,7 @@ export const sidebarData: SidebarData = {
           icon: Package,
         },
         {
-          title: 'Parámetros del Presupuesto',
+          title: 'Parámetros',
           url: '/chats',
           badge: '3',
           icon: Settings,
