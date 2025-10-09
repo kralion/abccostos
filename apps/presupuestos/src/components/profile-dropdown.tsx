@@ -1,6 +1,9 @@
-import { Link } from '@tanstack/react-router'
+import { SignOutDialog } from '@/components/sign-out-dialog'
 import useDialogState from '@/hooks/use-dialog-state'
+import { useAuthStore } from '@/stores/auth-store'
+import { Link } from '@tanstack/react-router'
 import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar'
+import { Badge } from '@workspace/ui/components/badge'
 import { Button } from '@workspace/ui/components/button'
 import {
   DropdownMenu,
@@ -9,14 +12,27 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '@workspace/ui/components/dropdown-menu'
-import { SignOutDialog } from '@/components/sign-out-dialog'
-import { Badge } from '@workspace/ui/components/badge'
 
 export function ProfileDropdown() {
   const [open, setOpen] = useDialogState()
+  const { profile } = useAuthStore()
+
+  const roles = [
+    { value: 'user', label: 'Usuario' },
+    { value: 'admin', label: 'Administrador' },
+    { value: 'manager', label: 'Gerente' },
+    { value: 'cashier', label: 'Cajero' },
+    { value: 'superadmin', label: 'Superadministrador' },
+  ]
+
+  const roleLabel =
+    profile?.role === 'user'
+      ? 'Usuario'
+      : profile?.role
+      ? roles.find((role) => role.value === profile.role)?.label || 'Usuario'
+      : 'Usuario'
 
   return (
     <>
@@ -52,13 +68,17 @@ export function ProfileDropdown() {
 
           <Button variant='ghost' className='relative h-10 w-10 rounded-full'>
             <Avatar className='h-10 w-10'>
-              <AvatarImage src='/avatars/01.png' alt='@shadcn' />
-              <AvatarFallback>SN</AvatarFallback>
+              <AvatarImage src={profile?.image_url || '/avatars/01.png'} alt={profile?.name || 'User'} />
+              <AvatarFallback>
+                {profile?.name?.[0]}{profile?.last_name?.[0]}
+              </AvatarFallback>
             </Avatar>
           </Button>
           <div className='flex-col hidden md:flex'>
-          <p className='text-sm font-medium'>Alejandro Bravo</p>
-          <p className='text-xs text-muted-foreground'>Control de Costos</p>
+          <p className='text-sm font-medium'>
+            {profile ? `${profile.name} ${profile.last_name}` : 'Usuario'}
+          </p>
+          <p className='text-xs text-muted-foreground'>{roleLabel}</p>
           </div>
           </div>
         </DropdownMenuTrigger>
@@ -66,9 +86,11 @@ export function ProfileDropdown() {
         <DropdownMenuContent className='w-56' align='end' forceMount>
           <DropdownMenuLabel className='font-normal'>
             <div className='flex flex-col gap-1.5'>
-              <p className='text-sm leading-none font-medium'>satnaing</p>
+              <p className='text-sm leading-none font-medium'>
+                {profile ? `${profile.name} ${profile.last_name}` : 'Usuario'}
+              </p>
               <p className='text-muted-foreground text-xs leading-none'>
-                satnaingdev@gmail.com
+                {roleLabel}
               </p>
             </div>
           </DropdownMenuLabel>
@@ -76,28 +98,18 @@ export function ProfileDropdown() {
           <DropdownMenuGroup>
             <DropdownMenuItem asChild>
               <Link to='/settings'>
-                Profile
-                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                Perfil
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link to='/settings'>
-                Billing
-                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                Configuración
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link to='/settings'>
-                Settings
-                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>New Team</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            Sign out
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          <DropdownMenuItem variant='destructive' onClick={() => setOpen(true)}>
+            Cerrar sesión
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

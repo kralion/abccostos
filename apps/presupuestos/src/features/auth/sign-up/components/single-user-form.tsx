@@ -1,5 +1,8 @@
 import { PasswordInput } from '@/components/password-input'
+import { useAuthStore } from '@/stores/auth-store'
+import { supabase } from '@/lib/supabase'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from '@tanstack/react-router'
 import { Button } from '@workspace/ui/components/button'
 import {
   Form,
@@ -11,8 +14,10 @@ import {
 } from '@workspace/ui/components/form'
 import { Input } from '@workspace/ui/components/input'
 import { cn } from '@workspace/ui/lib/utils'
+import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 const formSchema = z
@@ -57,6 +62,8 @@ export function SingleUserForm({
   ...props
 }: React.HTMLAttributes<HTMLFormElement>) {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+  const { setAuth } = useAuthStore()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -72,14 +79,49 @@ export function SingleUserForm({
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
 
-    setTimeout(() => {
+    try {
+      // Sign up the user with Supabase
+      const { data: authData, error } = await supabase.auth.signUp({
+        email: data.correo,
+        password: data.contraseña,
+        options: {
+          data: {
+            dni: data.dni,
+            nombre_completo: data.nombreCompleto,
+            telefono: data.telefono,
+            limite_proyectos: data.limiteProyectos,
+            limite_usuarios: data.limiteUsuarios,
+            account_type: 'single_user',
+          },
+        },
+      })
+
+      if (error) {
+        toast.error(error.message || 'Error al crear la cuenta')
+        setIsLoading(false)
+        return
+      }
+
+      if (authData.user) {
+        toast.success('¡Cuenta creada exitosamente! Revisa tu correo para confirmar tu cuenta.')
+        
+        // If session is available, set auth and redirect
+        if (authData.session) {
+          setAuth(authData.user, authData.session)
+          navigate({ to: '/', replace: true })
+        } else {
+          // Redirect to sign-in if email confirmation is required
+          navigate({ to: '/sign-in', replace: true })
+        }
+      }
+    } catch (error) {
+      console.error('Sign up error:', error)
+      toast.error('Error inesperado al crear la cuenta')
       setIsLoading(false)
-    }, 3000)
+    }
   }
 
   return (
@@ -204,6 +246,7 @@ export function SingleUserForm({
           )}
         />
         <Button className='mt-2' disabled={isLoading}>
+          {isLoading ? <Loader2 className='animate-spin' /> : null}
           Crear Cuenta de Usuario
         </Button>
       </form>
