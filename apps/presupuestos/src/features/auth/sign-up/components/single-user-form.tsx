@@ -128,7 +128,7 @@ export function SingleUserForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn('grid gap-3', className)}
+        className={cn('grid md:gap-3 gap-6', className)}
         {...props}
       >
         <FormField

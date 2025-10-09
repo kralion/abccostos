@@ -191,7 +191,7 @@ export function CompanyForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn('grid md:grid-cols-2 grid-cols-1 gap-3', className)}
+        className={cn('grid grid-cols-1 md:grid-cols-2 md:gap-3 gap-6', className)}
         {...props}
       >
         <FormField
@@ -237,7 +237,7 @@ export function CompanyForm({
           control={form.control}
           name='direccionFiscal'
           render={({ field }) => (
-            <FormItem className="col-span-2">
+            <FormItem className="md:col-span-2">
               <FormLabel>Dirección Fiscal</FormLabel>
               <FormControl>
                 <Input placeholder='Av. Principal 123, Lima' {...field} />
@@ -250,7 +250,7 @@ export function CompanyForm({
           control={form.control}
           name='direccionOficina'
           render={({ field }) => (
-            <FormItem className="col-span-2">
+            <FormItem className="md:col-span-2">
               <FormLabel>Dirección Oficina</FormLabel>
               <FormControl>
                 <Input placeholder='Jr. Secundario 456, Lima' {...field} />
@@ -289,7 +289,7 @@ export function CompanyForm({
           control={form.control}
           name='descripcionEmpresa'
           render={({ field }) => (
-            <FormItem className="col-span-2">
+            <FormItem className="md:col-span-2">
               <FormLabel>Descripción de la Empresa</FormLabel>
               <FormControl>
                 <Textarea
@@ -306,7 +306,7 @@ export function CompanyForm({
           control={form.control}
           name='responsable'
           render={({ field }) => (
-            <FormItem className="col-span-2">
+            <FormItem className="md:col-span-2">
               <FormLabel>Responsable</FormLabel>
               <FormControl>
                 <Input placeholder='Juan Pérez García' {...field} />
@@ -319,7 +319,7 @@ export function CompanyForm({
           control={form.control}
           name='logoEmpresa'
           render={() => (
-            <FormItem className="col-span-2">
+            <FormItem className="md:col-span-2">
               <FormLabel>Logo de la Empresa</FormLabel>
               <FormControl>
                 <div className='space-y-2'>
@@ -361,7 +361,7 @@ export function CompanyForm({
           control={form.control}
           name='contraseña'
           render={({ field }) => (
-            <FormItem className="col-span-2">
+            <FormItem className="md:col-span-2">
               <FormLabel>Contraseña</FormLabel>
               <FormControl>
                 <PasswordInput placeholder='********' {...field} />
@@ -374,7 +374,7 @@ export function CompanyForm({
           control={form.control}
           name='confirmarContraseña'
           render={({ field }) => (
-            <FormItem className="col-span-2">
+            <FormItem className="md:col-span-2">
               <FormLabel>Confirmar Contraseña</FormLabel>
               <FormControl>
                 <PasswordInput placeholder='********' {...field} />
@@ -383,7 +383,7 @@ export function CompanyForm({
             </FormItem>
           )}
         />
-        <Button className='mt-2 col-span-2' disabled={isLoading}>
+        <Button className='mt-2 md:col-span-2' disabled={isLoading}>
           {isLoading ? <Loader2 className='animate-spin' /> : null}
           Crear Cuenta Empresarial
         </Button>

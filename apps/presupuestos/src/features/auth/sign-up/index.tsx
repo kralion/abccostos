@@ -12,10 +12,10 @@ import { SingleUserForm } from './components/single-user-form'
 
 export function SignUp() {
   return (
-    <div className='flex flex-col gap-4  mx-auto items-center justify-center h-screen'>
+    <div className='flex flex-col gap-4  mx-auto items-center justify-center md:h-screen'>
 
     
-      <Card className='gap-4 w-xl sm:w-[480px]'>
+      <Card className='gap-4 md:w-xl w-sm'>
         <CardHeader>
           <CardTitle className='text-lg tracking-tight'>
             Crear una cuenta
