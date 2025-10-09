@@ -191,7 +191,7 @@ export function CompanyForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn('grid grid-cols-2 gap-3', className)}
+        className={cn('grid md:grid-cols-2 grid-cols-1 gap-3', className)}
         {...props}
       >
         <FormField
