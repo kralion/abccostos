@@ -54,12 +54,12 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Parámetros',
-          url: '/chats',
+          url: '/parametros-presupuesto',
           icon: Settings,
         },
         {
           title: 'Catálogos',
-          url: '/users',
+          url: '/catalogos',
           icon: Users,
         },
         

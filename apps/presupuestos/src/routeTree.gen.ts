@@ -26,9 +26,11 @@ import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedPresupuestoIndexRouteImport } from './routes/_authenticated/presupuesto/index'
+import { Route as AuthenticatedParametrosPresupuestoIndexRouteImport } from './routes/_authenticated/parametros-presupuesto/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedDatosPrincipalesIndexRouteImport } from './routes/_authenticated/datos-principales/index'
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
+import { Route as AuthenticatedCatalogosIndexRouteImport } from './routes/_authenticated/catalogos/index'
 import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
 import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
@@ -123,6 +125,12 @@ const AuthenticatedPresupuestoIndexRoute =
     path: '/presupuesto/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedParametrosPresupuestoIndexRoute =
+  AuthenticatedParametrosPresupuestoIndexRouteImport.update({
+    id: '/parametros-presupuesto/',
+    path: '/parametros-presupuesto/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedHelpCenterIndexRoute =
   AuthenticatedHelpCenterIndexRouteImport.update({
     id: '/help-center/',
@@ -140,6 +148,12 @@ const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
   path: '/chats/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCatalogosIndexRoute =
+  AuthenticatedCatalogosIndexRouteImport.update({
+    id: '/catalogos/',
+    path: '/catalogos/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexRouteImport.update({
   id: '/apps/',
   path: '/apps/',
@@ -195,9 +209,11 @@ export interface FileRoutesByFullPath {
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
+  '/catalogos': typeof AuthenticatedCatalogosIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/datos-principales': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/parametros-presupuesto': typeof AuthenticatedParametrosPresupuestoIndexRoute
   '/presupuesto': typeof AuthenticatedPresupuestoIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
@@ -221,9 +237,11 @@ export interface FileRoutesByTo {
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
+  '/catalogos': typeof AuthenticatedCatalogosIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/datos-principales': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/parametros-presupuesto': typeof AuthenticatedParametrosPresupuestoIndexRoute
   '/presupuesto': typeof AuthenticatedPresupuestoIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
@@ -250,9 +268,11 @@ export interface FileRoutesById {
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
+  '/_authenticated/catalogos/': typeof AuthenticatedCatalogosIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
   '/_authenticated/datos-principales/': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
+  '/_authenticated/parametros-presupuesto/': typeof AuthenticatedParametrosPresupuestoIndexRoute
   '/_authenticated/presupuesto/': typeof AuthenticatedPresupuestoIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
@@ -279,9 +299,11 @@ export interface FileRouteTypes {
     | '/settings/display'
     | '/settings/notifications'
     | '/apps'
+    | '/catalogos'
     | '/chats'
     | '/datos-principales'
     | '/help-center'
+    | '/parametros-presupuesto'
     | '/presupuesto'
     | '/settings/'
     | '/tasks'
@@ -305,9 +327,11 @@ export interface FileRouteTypes {
     | '/settings/display'
     | '/settings/notifications'
     | '/apps'
+    | '/catalogos'
     | '/chats'
     | '/datos-principales'
     | '/help-center'
+    | '/parametros-presupuesto'
     | '/presupuesto'
     | '/settings'
     | '/tasks'
@@ -333,9 +357,11 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/display'
     | '/_authenticated/settings/notifications'
     | '/_authenticated/apps/'
+    | '/_authenticated/catalogos/'
     | '/_authenticated/chats/'
     | '/_authenticated/datos-principales/'
     | '/_authenticated/help-center/'
+    | '/_authenticated/parametros-presupuesto/'
     | '/_authenticated/presupuesto/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
@@ -477,6 +503,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPresupuestoIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/parametros-presupuesto/': {
+      id: '/_authenticated/parametros-presupuesto/'
+      path: '/parametros-presupuesto'
+      fullPath: '/parametros-presupuesto'
+      preLoaderRoute: typeof AuthenticatedParametrosPresupuestoIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/help-center/': {
       id: '/_authenticated/help-center/'
       path: '/help-center'
@@ -496,6 +529,13 @@ declare module '@tanstack/react-router' {
       path: '/chats'
       fullPath: '/chats'
       preLoaderRoute: typeof AuthenticatedChatsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/catalogos/': {
+      id: '/_authenticated/catalogos/'
+      path: '/catalogos'
+      fullPath: '/catalogos'
+      preLoaderRoute: typeof AuthenticatedCatalogosIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/apps/': {
@@ -571,9 +611,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
+  AuthenticatedCatalogosIndexRoute: typeof AuthenticatedCatalogosIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedDatosPrincipalesIndexRoute: typeof AuthenticatedDatosPrincipalesIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
+  AuthenticatedParametrosPresupuestoIndexRoute: typeof AuthenticatedParametrosPresupuestoIndexRoute
   AuthenticatedPresupuestoIndexRoute: typeof AuthenticatedPresupuestoIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
@@ -584,10 +626,13 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
+  AuthenticatedCatalogosIndexRoute: AuthenticatedCatalogosIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedDatosPrincipalesIndexRoute:
     AuthenticatedDatosPrincipalesIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
+  AuthenticatedParametrosPresupuestoIndexRoute:
+    AuthenticatedParametrosPresupuestoIndexRoute,
   AuthenticatedPresupuestoIndexRoute: AuthenticatedPresupuestoIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
