@@ -3,6 +3,7 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { useState } from 'react'
 import PrimaryTabs from './components/primarytabs'
+import { ThemeSwitch } from '@/components/theme-switch'
 
 export function Dashboard() {
   const [activeTab, setActiveTab] = useState('resumen')
@@ -11,6 +12,7 @@ export function Dashboard() {
       {/* ===== Top Heading ===== */}
       <Header>
         <div className='ms-auto flex items-center space-x-4'>
+          <ThemeSwitch />
           <ProfileDropdown />
         </div>
       </Header>

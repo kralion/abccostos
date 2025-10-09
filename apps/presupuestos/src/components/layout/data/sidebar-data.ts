@@ -1,10 +1,10 @@
 import {
   AudioWaveform,
   Command,
+  FileSearch,
   FileX,
   GalleryVerticalEnd,
   Monitor,
-  Package,
   Settings,
   Users
 } from 'lucide-react'
@@ -49,8 +49,8 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Presupuesto',
-          url: '/apps',
-          icon: Package,
+          url: '/presupuesto',
+          icon: FileSearch,
         },
         {
           title: 'Parámetros',
