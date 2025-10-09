@@ -9,7 +9,6 @@ import {
   TabsList,
   TabsTrigger
 } from "@workspace/ui/components/tabs"
-import { ScrollArea } from "@workspace/ui/components/scroll-area"
 
 interface PrimaryTabsProps {
   activeTab: string

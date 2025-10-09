@@ -1,12 +1,15 @@
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@workspace/ui/lib/utils"
 
-interface EmptyProps extends Omit<React.ComponentProps<"div">, "ref"> {
+interface EmptyProps extends Omit<React.ComponentProps<"div">, "ref" | "popover"> {
   className?: string
   children?: React.ReactNode
 }
 
 function Empty({ className, ...props }: EmptyProps) {
+  // Filter out potentially problematic props for React 19 compatibility
+  const { popover, ...safeProps } = props as any;
+  
   return (
     <div
       data-slot="empty"
@@ -14,12 +17,15 @@ function Empty({ className, ...props }: EmptyProps) {
         "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-lg border-dashed p-6 text-center text-balance md:p-12",
         className
       )}
-      {...props}
+      {...safeProps}
     />
   )
 }
 
-function EmptyHeader({ className, ...props }: Omit<React.ComponentProps<"div">, "ref">) {
+function EmptyHeader({ className, ...props }: Omit<React.ComponentProps<"div">, "ref" | "popover">) {
+  // Filter out potentially problematic props for React 19 compatibility
+  const { popover, ...safeProps } = props as any;
+  
   return (
     <div
       data-slot="empty-header"
@@ -27,7 +33,7 @@ function EmptyHeader({ className, ...props }: Omit<React.ComponentProps<"div">, 
         "flex max-w-sm flex-col items-center gap-2 text-center",
         className
       )}
-      {...props}
+      {...safeProps}
     />
   )
 }
@@ -51,28 +57,37 @@ function EmptyMedia({
   className,
   variant = "default",
   ...props
-}: Omit<React.ComponentProps<"div">, "ref"> & VariantProps<typeof emptyMediaVariants>) {
+}: Omit<React.ComponentProps<"div">, "ref" | "popover"> & VariantProps<typeof emptyMediaVariants>) {
+  // Filter out potentially problematic props for React 19 compatibility
+  const { popover, ...safeProps } = props as any;
+  
   return (
     <div
       data-slot="empty-icon"
       data-variant={variant}
       className={cn(emptyMediaVariants({ variant, className }))}
-      {...props}
+      {...safeProps}
     />
   )
 }
 
-function EmptyTitle({ className, ...props }: Omit<React.ComponentProps<"div">, "ref">) {
+function EmptyTitle({ className, ...props }: Omit<React.ComponentProps<"div">, "ref" | "popover">) {
+  // Filter out potentially problematic props for React 19 compatibility
+  const { popover, ...safeProps } = props as any;
+  
   return (
     <div
       data-slot="empty-title"
       className={cn("text-lg font-medium tracking-tight", className)}
-      {...props}
+      {...safeProps}
     />
   )
 }
 
-function EmptyDescription({ className, ...props }: Omit<React.ComponentProps<"p">, "ref">) {
+function EmptyDescription({ className, ...props }: Omit<React.ComponentProps<"p">, "ref" | "popover">) {
+  // Filter out potentially problematic props for React 19 compatibility
+  const { popover, ...safeProps } = props as any;
+  
   return (
     <div
       data-slot="empty-description"
@@ -80,12 +95,15 @@ function EmptyDescription({ className, ...props }: Omit<React.ComponentProps<"p"
         "text-muted-foreground [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4",
         className
       )}
-      {...props}
+      {...safeProps}
     />
   )
 }
 
-function EmptyContent({ className, ...props }: Omit<React.ComponentProps<"div">, "ref">) {
+function EmptyContent({ className, ...props }: Omit<React.ComponentProps<"div">, "ref" | "popover">) {
+  // Filter out potentially problematic props for React 19 compatibility
+  const { popover, ...safeProps } = props as any;
+  
   return (
     <div
       data-slot="empty-content"
@@ -93,7 +111,7 @@ function EmptyContent({ className, ...props }: Omit<React.ComponentProps<"div">,
         "flex w-full max-w-sm min-w-0 flex-col items-center gap-4 text-sm text-balance",
         className
       )}
-      {...props}
+      {...safeProps}
     />
   )
 }
