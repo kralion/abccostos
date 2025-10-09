@@ -15,7 +15,7 @@ export function SignUp() {
     <div className='flex flex-col gap-4  mx-auto items-center justify-center h-screen'>
 
     
-      <Card className='gap-4 w-xl'>
+      <Card className='gap-4 w-xl sm:w-[480px]'>
         <CardHeader>
           <CardTitle className='text-lg tracking-tight'>
             Crear una cuenta
