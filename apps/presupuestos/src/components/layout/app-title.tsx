@@ -1,64 +1,30 @@
 import { Link } from '@tanstack/react-router'
-import { Menu, X } from 'lucide-react'
-import { cn } from '@workspace/ui/lib/utils'
+import { Badge } from '@workspace/ui/components/badge'
 import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
+  useSidebar
 } from '@workspace/ui/components/sidebar'
-import { Button } from '@workspace/ui/components/button'
+import { Search } from '../search'
 
 export function AppTitle() {
   const { setOpenMobile } = useSidebar()
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <SidebarMenuButton
-          size='lg'
-          className='gap-0 py-0 hover:bg-transparent active:bg-transparent'
-          asChild
-        >
-          <div>
+    
+          <div className='flex flex-col items-center justify-center gap-4 '>
             <Link
               to='/'
               onClick={() => setOpenMobile(false)}
-              className='grid flex-1 text-start text-sm leading-tight'
+              className='grid flex-1 text-center text-sm leading-tight'
             >
-              <span className='truncate font-bold'>Shadcn-Admin</span>
-              <span className='truncate text-xs'>Vite + ShadcnUI</span>
+              <h3 className='truncate text-2xl font-bold'>CP360°</h3>
+              <span className='truncate'>Presupuestos</span>
             </Link>
-            <ToggleSidebar />
+
+            <p className='text-xs text-muted-foreground'>Consorcio Ejecutor Niña María</p>
+
+            <Badge className='bg-green-500'>Activo</Badge>
+            {/* <ToggleSidebar /> */}
+            <Search />
           </div>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
-  )
-}
-
-function ToggleSidebar({
-  className,
-  onClick,
-  ...props
-}: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar()
-
-  return (
-    <Button
-      data-sidebar='trigger'
-      data-slot='sidebar-trigger'
-      variant='ghost'
-      size='icon'
-      className={cn('aspect-square size-8 max-md:scale-125', className)}
-      onClick={(event) => {
-        onClick?.(event)
-        toggleSidebar()
-      }}
-      {...props}
-    >
-      <X className='md:hidden' />
-      <Menu className='max-md:hidden' />
-      <span className='sr-only'>Toggle Sidebar</span>
-    </Button>
+       
   )
 }

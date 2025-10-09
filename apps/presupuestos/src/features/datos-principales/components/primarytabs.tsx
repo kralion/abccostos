@@ -9,6 +9,7 @@ import {
   TabsList,
   TabsTrigger
 } from "@workspace/ui/components/tabs"
+import { ScrollArea } from "@workspace/ui/components/scroll-area"
 
 interface PrimaryTabsProps {
   activeTab: string
@@ -29,7 +30,10 @@ interface PrimaryTabsProps {
                 size={16}
                 aria-hidden="true"
               />
+              <span className="hidden md:block">
+
               Datos Generales
+              </span>
             </TabsTrigger>
             <TabsTrigger
               value="configurations"
@@ -40,7 +44,10 @@ interface PrimaryTabsProps {
                 size={16}
                 aria-hidden="true"
               />
+              <span className="hidden md:block">
+
               Configuraciones
+              </span>
              
             </TabsTrigger>
             <TabsTrigger
@@ -52,7 +59,10 @@ interface PrimaryTabsProps {
                 size={16}
                 aria-hidden="true"
               />
+              <span className="hidden md:block">
+
               Roles
+              </span>
             </TabsTrigger>
           </TabsList>
         </div>

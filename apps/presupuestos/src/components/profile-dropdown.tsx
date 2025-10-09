@@ -23,7 +23,7 @@ export function ProfileDropdown() {
       <DropdownMenu modal={false}>
         <div className='flex items-center space-x-2'> 
 
-          <span className='text-xs text-muted-foreground'>
+          <span className='text-xs text-muted-foreground hidden md:block'>
             {new Date().toLocaleDateString('es-ES', {
               weekday: 'long',
               year: 'numeric',
@@ -56,7 +56,7 @@ export function ProfileDropdown() {
               <AvatarFallback>SN</AvatarFallback>
             </Avatar>
           </Button>
-          <div className='flex flex-col'>
+          <div className='flex-col hidden md:flex'>
           <p className='text-sm font-medium'>Alejandro Bravo</p>
           <p className='text-xs text-muted-foreground'>Control de Costos</p>
           </div>

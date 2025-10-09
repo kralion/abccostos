@@ -35,7 +35,7 @@ export const sidebarData: SidebarData = {
   ],
   navGroups: [
     {
-      title: 'General',
+      title: '',
       items: [
         {
           title: 'Dashboard',
@@ -55,7 +55,6 @@ export const sidebarData: SidebarData = {
         {
           title: 'Parámetros',
           url: '/chats',
-          badge: '3',
           icon: Settings,
         },
         {

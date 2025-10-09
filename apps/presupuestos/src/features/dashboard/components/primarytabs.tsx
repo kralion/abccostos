@@ -20,7 +20,7 @@ interface PrimaryTabsProps {
     return (
       <Tabs value={activeTab} onValueChange={onTabChange}>
         <div className="mb-2 flex items-center justify-between space-y-2">
-        <h1 className='text-2xl font-bold tracking-tight'>Dashboard</h1>
+        <h1 className='text-2xl font-bold tracking-tight hidden md:block'>Dashboard</h1>
           <TabsList className="text-foreground mb-3 h-auto gap-2 rounded-none border-b bg-transparent px-0 py-1">
             <TabsTrigger
               value="resumen"
