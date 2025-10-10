@@ -4,49 +4,32 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@workspace/ui/components/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@workspace/ui/components/tabs'
-import { CompanyForm } from './components/company-form'
-import { SingleUserForm } from './components/single-user-form'
+import { SignUpForm } from './components/sign-up-form'
 
 export function SignUp() {
   return (
-    <div className='flex flex-col gap-4  mx-auto items-center justify-center md:h-screen'>
-
-    
-      <Card className='gap-4 md:w-xl w-sm'>
+    <div className='mx-auto flex flex-col items-center justify-center gap-4 py-8 md:h-screen'>
+      <Card className='w-full max-w-2xl gap-4'>
         <CardHeader>
           <CardTitle className='text-lg tracking-tight'>
             Crear una cuenta
           </CardTitle>
           <CardDescription>
-            Elige tu tipo de cuenta y completa tus datos para crear una cuenta. <br />
-            Ya tienes una cuenta?{' '}
-            <Link
-              to='/sign-in'
-              className='hover:text-primary underline underline-offset-4'
-            >
-              Iniciar sesión
-            </Link>
+            En el periodo de prueba tendrás acceso a 2 proyectos y 6 usuarios
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="single-user" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="single-user">Usuario Individual</TabsTrigger>
-              <TabsTrigger value="company">Empresa</TabsTrigger>
-            </TabsList>
-            <TabsContent value="single-user" className="mt-4">
-              <SingleUserForm />
-            </TabsContent>
-            <TabsContent value="company" className="mt-4">
-              <CompanyForm />
-            </TabsContent>
-          </Tabs>
+          <SignUpForm />
+          <div className='mt-4 text-center text-sm'>
+            ¿Ya tienes cuenta?{' '}
+            <Link to='/sign-in' className='text-primary hover:underline'>
+              Inicia sesión
+            </Link>
+          </div>
         </CardContent>
-        
       </Card>
-      </div>
+    </div>
   )
 }
