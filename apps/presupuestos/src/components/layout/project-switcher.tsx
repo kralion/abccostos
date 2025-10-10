@@ -1,9 +1,10 @@
+import * as React from 'react'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
 import {
   SidebarMenu,
@@ -12,7 +13,6 @@ import {
   useSidebar,
 } from '@workspace/ui/components/sidebar'
 import { ChevronsUpDown } from 'lucide-react'
-import * as React from 'react'
 
 type ProjectSwitcherProps = {
   projects: {
@@ -23,7 +23,7 @@ type ProjectSwitcherProps = {
 }
 
 export function ProjectSwitcher({ projects }: ProjectSwitcherProps) {
-  const { isMobile,  } = useSidebar()
+  const { isMobile } = useSidebar()
   const [activeProject, setActiveProject] = React.useState(projects[0])
 
   return (
@@ -31,12 +31,10 @@ export function ProjectSwitcher({ projects }: ProjectSwitcherProps) {
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
-            >
-                <span className='truncate flex-1 text-center font-semibold'>
-                  {activeProject.name}
-                </span>
+            <SidebarMenuButton className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'>
+              <span className='flex-1 truncate text-center font-semibold'>
+                {activeProject.name}
+              </span>
               <ChevronsUpDown className='ms-auto' />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
