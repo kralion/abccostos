@@ -17,6 +17,7 @@ import {
   TabsTrigger,
 } from "@workspace/ui/components/tabs"
 import { Button } from "@workspace/ui/components/button"
+import { Separator } from "@workspace/ui/components/separator"
 
 interface SecondaryTab {
   label: string
@@ -30,17 +31,17 @@ const secondaryTabs: Record<string, SecondaryTab[] | null> = {
     {
       label: "U.P.",
       value: "unidades-produccion",
-      icon: <BoxesIcon size={16} className="-ms-0.5 me-1.5 opacity-60" aria-hidden="true" />,
+      icon: <BoxesIcon size={16} className="me-1.5 opacity-60 md:-ms-0.5" aria-hidden="true" />,
     },
     {
       label: "Trenes",
       value: "trenes",
-      icon: <PickaxeIcon size={16} className="-ms-0.5 me-1.5 opacity-60" aria-hidden="true" />,
+      icon: <PickaxeIcon size={16} className="me-1.5 opacity-60 md:-ms-0.5" aria-hidden="true" />,
     },
     {
       label: "Fases",
       value: "fases",
-      icon: <Rows4Icon size={16} className="-ms-0.5 me-1.5 opacity-60" aria-hidden="true" />,
+      icon: <Rows4Icon size={16} className="me-1.5 opacity-60 md:-ms-0.5" aria-hidden="true" />,
     },
   ],
   roles: null
@@ -136,13 +137,10 @@ interface SecondaryTabsComponentProps {
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                className="group hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
               >
                 {tab.icon}
-                <span className="hidden md:block">
-
-                {tab.label}
-                </span>
+                <span className="hidden group-data-[state=active]:inline md:inline">{tab.label}</span>
               </TabsTrigger>
             ))}
           </TabsList>
@@ -156,6 +154,7 @@ interface SecondaryTabsComponentProps {
             <CustomNewButton trigger="fases" title="Nueva Fase" />
           )}
         </div>
+        <Separator /> 
         {currentSecondaryTabs.map((tab) => (
           <TabsContent key={tab.value} value={tab.value}>
             <CustomEmpty {...getEmptyContent(activePrimaryTab, tab.value)} />

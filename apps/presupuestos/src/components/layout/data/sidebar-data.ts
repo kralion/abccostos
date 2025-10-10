@@ -16,7 +16,7 @@ export const sidebarData: SidebarData = {
     email: 'alejandro@gmail.com',
     avatar: 'https://untitledui.com/images/avatars/olly-schroeder',
   },
-  teams: [
+  projects: [
     {
       name: 'Colegio ULP',
       logo: Command,

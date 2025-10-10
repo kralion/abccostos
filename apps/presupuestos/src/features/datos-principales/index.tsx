@@ -22,14 +22,14 @@ export function DatosPrincipales() {
 
       {/* ===== Main ===== */}
       <Main>
-        <div className='mb-2 flex items-center justify-between space-y-2'>
+        <div className=' flex items-center justify-between'>
           <h1 className='text-2xl font-bold tracking-tight hidden md:block'>Datos Principales</h1>
         <PrimaryTabs
           activeTab={activePrimaryTab}
           onTabChange={setActivePrimaryTab}
         />
         </div>
-        <Separator className='my-4' />
+        <Separator className='mb-4' />
         <SecondaryTabs activePrimaryTab={activePrimaryTab} />
       </Main>
     </>

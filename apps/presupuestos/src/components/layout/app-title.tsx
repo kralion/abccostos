@@ -3,7 +3,8 @@ import { Badge } from '@workspace/ui/components/badge'
 import {
   useSidebar
 } from '@workspace/ui/components/sidebar'
-import { Search } from '../search'
+import { sidebarData } from './data/sidebar-data'
+import { ProjectSwitcher } from './project-switcher'
 
 export function AppTitle() {
   const { setOpenMobile } = useSidebar()
@@ -19,11 +20,10 @@ export function AppTitle() {
               <span className='truncate'>Presupuestos</span>
             </Link>
 
-            <p className='text-xs text-muted-foreground'>Consorcio Ejecutor Niña María</p>
+            <ProjectSwitcher projects={sidebarData.projects} />
 
-            <Badge className='bg-green-500'>Activo</Badge>
-            {/* <ToggleSidebar /> */}
-            <Search />
+
+            <Badge className='bg-green-500 truncate'>Activo</Badge>
           </div>
        
   )

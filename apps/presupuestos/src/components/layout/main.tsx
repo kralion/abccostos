@@ -17,8 +17,9 @@ export function Main({ fixed, className, fluid, ...props }: MainProps) {
         fixed && 'flex grow flex-col overflow-hidden',
 
         // If layout is not fluid, set the max-width
+        //FIX: I change the max-width to full from 7xl in the fluid mode
         !fluid &&
-          '@7xl/content:mx-auto @7xl/content:w-full @7xl/content:max-w-7xl',
+          '@7xl/content:mx-auto @7xl/content:w-full @7xl/content:max-w-full',
         className
       )}
       {...props}

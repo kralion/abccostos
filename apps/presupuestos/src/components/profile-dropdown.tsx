@@ -106,6 +106,12 @@ export function ProfileDropdown() {
                 Configuración
               </Link>
             </DropdownMenuItem>
+          <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link to='/settings'>
+                Ir a Módulos
+              </Link>
+            </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem variant='destructive' onClick={() => setOpen(true)}>
