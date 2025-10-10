@@ -16,51 +16,40 @@ interface PrimaryTabsProps {
   export default function PrimaryTabs({ activeTab, onTabChange }: PrimaryTabsProps) {
     return (
       <Tabs value={activeTab} onValueChange={onTabChange}>
-        <div className="mb-2 flex items-center justify-between space-y-2">
-          <TabsList className="text-foreground mb-3 h-auto gap-2 rounded-none border-b bg-transparent px-0 py-1">
+        <div className="flex items-center justify-between">
+          <TabsList className="text-foreground h-auto rounded-none border-b bg-transparent px-0 ">
             <TabsTrigger
               value="titulos"
-              className="hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+              className="group hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
             >
               <FileTextIcon
-                className="-ms-0.5 me-1.5 opacity-60"
+                className="me-1.5 opacity-60 md:-ms-0.5"
                 size={16}
                 aria-hidden="true"
               />
-              <span className="hidden md:block">
-
-              Titulos
-              </span>
+              <span className="hidden group-data-[state=active]:inline md:inline">Titulos</span>
             </TabsTrigger>
             <TabsTrigger
               value="partidas"
-              className="hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+              className="group hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
             >
               <FileTextIcon
-                className="-ms-0.5 me-1.5 opacity-60"
+                className="me-1.5 opacity-60 md:-ms-0.5"
                 size={16}
                 aria-hidden="true"
               />
-              <span className="hidden md:block">
-
-              Partidas
-              </span>
-             
+              <span className="hidden group-data-[state=active]:inline md:inline">Partidas</span>
             </TabsTrigger>
             <TabsTrigger
               value="recursos"
-              className="hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+              className="group hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
             >
               <FileTextIcon
-                className="-ms-0.5 me-1.5 opacity-60"
+                className="me-1.5 opacity-60 md:-ms-0.5"
                 size={16}
                 aria-hidden="true"
               />
-              <span className="hidden md:block">
-
-              Recursos
-              </span>
-             
+              <span className="hidden group-data-[state=active]:inline md:inline">Recursos</span>
             </TabsTrigger>
           </TabsList>
         </div>

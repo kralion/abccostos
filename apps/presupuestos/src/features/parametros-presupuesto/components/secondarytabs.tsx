@@ -83,13 +83,10 @@ interface SecondaryTabsComponentProps {
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                className="group hover:bg-accent hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
               >
                 {tab.icon}
-                <span className="hidden md:block">
-
-                {tab.label}
-                </span>
+                <span className="hidden group-data-[state=active]:inline md:inline">{tab.label}</span>
               </TabsTrigger>
             ))}
           </TabsList>

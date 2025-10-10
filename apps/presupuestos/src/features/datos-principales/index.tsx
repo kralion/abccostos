@@ -22,6 +22,7 @@ export function DatosPrincipales() {
 
       {/* ===== Main ===== */}
       <Main>
+        <Separator className='mb-2' />
         <div className=' flex items-center justify-between'>
           <h1 className='text-2xl font-bold tracking-tight hidden md:block'>Datos Principales</h1>
         <PrimaryTabs

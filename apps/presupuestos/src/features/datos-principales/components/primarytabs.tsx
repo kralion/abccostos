@@ -9,7 +9,6 @@ import {
   TabsList,
   TabsTrigger
 } from "@workspace/ui/components/tabs"
-import { Separator } from "@workspace/ui/components/separator"
 
 interface PrimaryTabsProps {
   activeTab: string
@@ -55,7 +54,6 @@ interface PrimaryTabsProps {
               <span className="hidden group-data-[state=active]:inline md:inline">Roles</span>
             </TabsTrigger>
           </TabsList>
-          <Separator />
         </div>
       </Tabs>
     )

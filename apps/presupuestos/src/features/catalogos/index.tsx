@@ -22,14 +22,15 @@ export function Catalogos() {
 
       {/* ===== Main ===== */}
       <Main>
-        <div className='mb-2 flex items-center justify-between space-y-2'>
+        <Separator className='mb-2' />
+        <div className='flex items-center justify-between'>
           <h1 className='text-2xl font-bold tracking-tight hidden md:block'>Catálogos</h1>
         <PrimaryTabs
           activeTab={activePrimaryTab}
           onTabChange={setActivePrimaryTab}
         />
         </div>
-        <Separator className='my-4' />
+        <Separator  />
         <SecondaryTabs activePrimaryTab={activePrimaryTab} />
       </Main>
     </>

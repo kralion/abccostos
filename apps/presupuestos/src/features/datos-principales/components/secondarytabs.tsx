@@ -131,8 +131,8 @@ interface SecondaryTabsComponentProps {
 
     return (
       <Tabs value={activeSecondaryTab} onValueChange={setActiveSecondaryTab}>
-        <div className="mb-2 flex items-center justify-between space-y-2">
-          <TabsList className="text-foreground mb-3 h-auto gap-2 rounded-none border-b bg-transparent px-0 py-1">
+        <div className="flex items-center justify-between">
+        <TabsList className="text-foreground h-auto  rounded-none border-b bg-transparent px-0 ">
             {currentSecondaryTabs.map((tab) => (
               <TabsTrigger
                 key={tab.value}
