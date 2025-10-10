@@ -1,6 +1,6 @@
-import { PasswordInput } from '@/components/password-input'
-import { useAuthStore } from '@/stores/auth-store'
-import { supabase } from '@/lib/supabase'
+import { useState } from 'react'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { Button } from '@workspace/ui/components/button'
@@ -16,14 +16,15 @@ import {
 import { Input } from '@workspace/ui/components/input'
 import { cn } from '@workspace/ui/lib/utils'
 import { Loader2 } from 'lucide-react'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { z } from 'zod'
+import { useAuthStore } from '@/stores/auth-store'
+import { supabase } from '@/lib/supabase'
+import { PasswordInput } from '@/components/password-input'
 
 const formSchema = z.object({
   email: z.email({
-    error: (iss) => (iss.input === '' ? 'Por favor ingresa tu correo electrónico' : undefined),
+    error: (iss) =>
+      iss.input === '' ? 'Por favor ingresa tu correo electrónico' : undefined,
   }),
   password: z
     .string()
@@ -69,15 +70,15 @@ export function UserAuthForm({
 
       if (authData.user && authData.session) {
         await setAuth(authData.user, authData.session)
-        
+
         // Get profile after setAuth completes
         const { profile } = useAuthStore.getState()
-        const welcomeMessage = profile?.name 
-          ? `¡Bienvenido de nuevo, ${profile.name}!` 
+        const welcomeMessage = profile?.name
+          ? `¡Bienvenido de nuevo, ${profile.name}!`
           : '¡Bienvenido de nuevo!'
-        
+
         toast.success(welcomeMessage)
-        
+
         // Redirect to the stored location or default to dashboard
         const targetPath = redirectTo || '/'
         navigate({ to: targetPath, replace: true })
@@ -103,7 +104,7 @@ export function UserAuthForm({
             <FormItem>
               <FormLabel>Correo electrónico</FormLabel>
               <FormControl>
-                <Input placeholder='nombre@ejemplo.com' {...field} />
+                <Input placeholder='presupuestos@mail.com' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -119,23 +120,21 @@ export function UserAuthForm({
                 <PasswordInput placeholder='********' {...field} />
               </FormControl>
               <FormMessage />
-             
             </FormItem>
           )}
         />
         <div className='flex justify-between'>
           <FormItem className='flex items-center gap-2'>
-
-          <Checkbox />
-          <FormLabel>Recordarme</FormLabel>
+            <Checkbox />
+            <FormLabel>Recordarme</FormLabel>
           </FormItem>
-        <Link
-                to='/forgot-password'
-                className='text-muted-foreground text-sm font-medium hover:opacity-75'
-              >
-                ¿Olvidaste tu contraseña?
-              </Link>
-          </div>
+          <Link
+            to='/forgot-password'
+            className='text-muted-foreground text-sm font-medium hover:opacity-75'
+          >
+            ¿Olvidaste tu contraseña?
+          </Link>
+        </div>
         <Button className='mt-2' disabled={isLoading}>
           {isLoading ? <Loader2 className='animate-spin' /> : null}
           Iniciar sesión
