@@ -1,8 +1,5 @@
 import React from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { ArrowRight, ChevronRight, Laptop, Moon, Sun } from 'lucide-react'
-import { useSearch } from '@/context/search-provider'
-import { useTheme } from '@/context/theme-provider'
 import {
   CommandDialog,
   CommandEmpty,
@@ -12,13 +9,19 @@ import {
   CommandList,
   CommandSeparator,
 } from '@workspace/ui/components/command'
-import { sidebarData } from './layout/data/sidebar-data'
 import { ScrollArea } from '@workspace/ui/components/scroll-area'
+import { ArrowRight, ChevronRight, Laptop, Moon, Sun } from 'lucide-react'
+import { useAuthStore } from '@/stores/auth-store'
+import { useSearch } from '@/context/search-provider'
+import { useTheme } from '@/context/theme-provider'
+import { getSidebarData } from './layout/data/sidebar-data'
 
 export function CommandMenu() {
   const navigate = useNavigate()
   const { setTheme } = useTheme()
   const { open, setOpen } = useSearch()
+  const { profile, user } = useAuthStore()
+  const sidebarData = getSidebarData(profile, user?.email)
 
   const runCommand = React.useCallback(
     (command: () => unknown) => {
