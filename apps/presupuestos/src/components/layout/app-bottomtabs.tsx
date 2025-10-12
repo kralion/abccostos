@@ -1,16 +1,38 @@
 import { Link, useLocation } from '@tanstack/react-router'
 import { Button } from '@workspace/ui/components/button'
+import { useAuthStore } from '@/stores/auth-store'
 import { sidebarData } from './data/sidebar-data'
 import type { NavLink } from './types'
+
+const getRoleGroupTitle = (role: string): string => {
+  switch (role) {
+    case 'owner':
+      return 'Propietario'
+    case 'admin':
+      return 'Administrador'
+    case 'user':
+      return 'Proyecto'
+    default:
+      return 'Proyecto'
+  }
+}
 
 export default function AppBottomTabs() {
   const location = useLocation()
   const pathname = location.pathname || '/'
+  const profile = useAuthStore((state) => state.profile)
+
+  const userRole = profile?.role || 'user'
+  const groupTitle = getRoleGroupTitle(userRole)
+
+  const navGroup = sidebarData.navGroups.find(
+    (group) => group.title === groupTitle
+  )
 
   return (
     <div className='bg-sidebar border-border fixed right-0 bottom-0 left-0 z-50 border-t'>
       <div className='flex h-16 items-center justify-around px-2'>
-        {sidebarData.navGroups[0]?.items
+        {navGroup?.items
           .filter((item): item is NavLink => 'url' in item)
           .map((item) => {
             const isActive =
@@ -28,7 +50,7 @@ export default function AppBottomTabs() {
                 size='sm'
                 className={`h-full flex-1 rounded-none ${
                   isActive
-                    ? 'text-sidebar-primary'
+                    ? 'text-white'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
                 asChild

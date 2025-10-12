@@ -1,12 +1,14 @@
 import {
   AudioWaveform,
+  Boxes,
   Command,
+  Crown,
   FileSearch,
   FileX,
   GalleryVerticalEnd,
   Monitor,
   Settings,
-  Users
+  Users,
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
@@ -35,7 +37,32 @@ export const sidebarData: SidebarData = {
   ],
   navGroups: [
     {
-      title: '',
+      title: 'Propietario',
+      items: [
+        {
+          title: 'Clientes',
+          url: '/clientes',
+          icon: Crown,
+        },
+      ],
+    },
+    {
+      title: 'Administrador',
+      items: [
+        {
+          title: 'Usuarios',
+          url: '/usuarios',
+          icon: Users,
+        },
+        {
+          title: 'Proyectos',
+          url: '/proyectos',
+          icon: Boxes,
+        },
+      ],
+    },
+    {
+      title: 'Proyecto',
       items: [
         {
           title: 'Dashboard',
@@ -62,9 +89,7 @@ export const sidebarData: SidebarData = {
           url: '/catalogos',
           icon: Users,
         },
-        
       ],
     },
-    
   ],
 }

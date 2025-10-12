@@ -22,13 +22,16 @@ import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
+import { Route as AuthenticatedUsuariosIndexRouteImport } from './routes/_authenticated/usuarios/index'
 import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
+import { Route as AuthenticatedProyectosIndexRouteImport } from './routes/_authenticated/proyectos/index'
 import { Route as AuthenticatedPresupuestoIndexRouteImport } from './routes/_authenticated/presupuesto/index'
 import { Route as AuthenticatedParametrosPresupuestoIndexRouteImport } from './routes/_authenticated/parametros-presupuesto/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedDatosPrincipalesIndexRouteImport } from './routes/_authenticated/datos-principales/index'
+import { Route as AuthenticatedClientesIndexRouteImport } from './routes/_authenticated/clientes/index'
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
 import { Route as AuthenticatedCatalogosIndexRouteImport } from './routes/_authenticated/catalogos/index'
 import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
@@ -103,6 +106,12 @@ const AuthenticatedSettingsRouteRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedUsuariosIndexRoute =
+  AuthenticatedUsuariosIndexRouteImport.update({
+    id: '/usuarios/',
+    path: '/usuarios/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
   id: '/users/',
   path: '/users/',
@@ -118,6 +127,12 @@ const AuthenticatedSettingsIndexRoute =
     id: '/',
     path: '/',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
+  } as any)
+const AuthenticatedProyectosIndexRoute =
+  AuthenticatedProyectosIndexRouteImport.update({
+    id: '/proyectos/',
+    path: '/proyectos/',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedPresupuestoIndexRoute =
   AuthenticatedPresupuestoIndexRouteImport.update({
@@ -141,6 +156,12 @@ const AuthenticatedDatosPrincipalesIndexRoute =
   AuthenticatedDatosPrincipalesIndexRouteImport.update({
     id: '/datos-principales/',
     path: '/datos-principales/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedClientesIndexRoute =
+  AuthenticatedClientesIndexRouteImport.update({
+    id: '/clientes/',
+    path: '/clientes/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
@@ -211,13 +232,16 @@ export interface FileRoutesByFullPath {
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/catalogos': typeof AuthenticatedCatalogosIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
+  '/clientes': typeof AuthenticatedClientesIndexRoute
   '/datos-principales': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/parametros-presupuesto': typeof AuthenticatedParametrosPresupuestoIndexRoute
   '/presupuesto': typeof AuthenticatedPresupuestoIndexRoute
+  '/proyectos': typeof AuthenticatedProyectosIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/usuarios': typeof AuthenticatedUsuariosIndexRoute
 }
 export interface FileRoutesByTo {
   '/forgot-password': typeof authForgotPasswordRoute
@@ -239,13 +263,16 @@ export interface FileRoutesByTo {
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/catalogos': typeof AuthenticatedCatalogosIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
+  '/clientes': typeof AuthenticatedClientesIndexRoute
   '/datos-principales': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/parametros-presupuesto': typeof AuthenticatedParametrosPresupuestoIndexRoute
   '/presupuesto': typeof AuthenticatedPresupuestoIndexRoute
+  '/proyectos': typeof AuthenticatedProyectosIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/usuarios': typeof AuthenticatedUsuariosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -270,13 +297,16 @@ export interface FileRoutesById {
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
   '/_authenticated/catalogos/': typeof AuthenticatedCatalogosIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
+  '/_authenticated/clientes/': typeof AuthenticatedClientesIndexRoute
   '/_authenticated/datos-principales/': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/parametros-presupuesto/': typeof AuthenticatedParametrosPresupuestoIndexRoute
   '/_authenticated/presupuesto/': typeof AuthenticatedPresupuestoIndexRoute
+  '/_authenticated/proyectos/': typeof AuthenticatedProyectosIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/usuarios/': typeof AuthenticatedUsuariosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -301,13 +331,16 @@ export interface FileRouteTypes {
     | '/apps'
     | '/catalogos'
     | '/chats'
+    | '/clientes'
     | '/datos-principales'
     | '/help-center'
     | '/parametros-presupuesto'
     | '/presupuesto'
+    | '/proyectos'
     | '/settings/'
     | '/tasks'
     | '/users'
+    | '/usuarios'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/forgot-password'
@@ -329,13 +362,16 @@ export interface FileRouteTypes {
     | '/apps'
     | '/catalogos'
     | '/chats'
+    | '/clientes'
     | '/datos-principales'
     | '/help-center'
     | '/parametros-presupuesto'
     | '/presupuesto'
+    | '/proyectos'
     | '/settings'
     | '/tasks'
     | '/users'
+    | '/usuarios'
   id:
     | '__root__'
     | '/_authenticated'
@@ -359,13 +395,16 @@ export interface FileRouteTypes {
     | '/_authenticated/apps/'
     | '/_authenticated/catalogos/'
     | '/_authenticated/chats/'
+    | '/_authenticated/clientes/'
     | '/_authenticated/datos-principales/'
     | '/_authenticated/help-center/'
     | '/_authenticated/parametros-presupuesto/'
     | '/_authenticated/presupuesto/'
+    | '/_authenticated/proyectos/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
+    | '/_authenticated/usuarios/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -475,6 +514,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/usuarios/': {
+      id: '/_authenticated/usuarios/'
+      path: '/usuarios'
+      fullPath: '/usuarios'
+      preLoaderRoute: typeof AuthenticatedUsuariosIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
@@ -495,6 +541,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/settings/'
       preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/proyectos/': {
+      id: '/_authenticated/proyectos/'
+      path: '/proyectos'
+      fullPath: '/proyectos'
+      preLoaderRoute: typeof AuthenticatedProyectosIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/presupuesto/': {
       id: '/_authenticated/presupuesto/'
@@ -522,6 +575,13 @@ declare module '@tanstack/react-router' {
       path: '/datos-principales'
       fullPath: '/datos-principales'
       preLoaderRoute: typeof AuthenticatedDatosPrincipalesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/clientes/': {
+      id: '/_authenticated/clientes/'
+      path: '/clientes'
+      fullPath: '/clientes'
+      preLoaderRoute: typeof AuthenticatedClientesIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/chats/': {
@@ -613,12 +673,15 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedCatalogosIndexRoute: typeof AuthenticatedCatalogosIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
+  AuthenticatedClientesIndexRoute: typeof AuthenticatedClientesIndexRoute
   AuthenticatedDatosPrincipalesIndexRoute: typeof AuthenticatedDatosPrincipalesIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedParametrosPresupuestoIndexRoute: typeof AuthenticatedParametrosPresupuestoIndexRoute
   AuthenticatedPresupuestoIndexRoute: typeof AuthenticatedPresupuestoIndexRoute
+  AuthenticatedProyectosIndexRoute: typeof AuthenticatedProyectosIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+  AuthenticatedUsuariosIndexRoute: typeof AuthenticatedUsuariosIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -628,14 +691,17 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedCatalogosIndexRoute: AuthenticatedCatalogosIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
+  AuthenticatedClientesIndexRoute: AuthenticatedClientesIndexRoute,
   AuthenticatedDatosPrincipalesIndexRoute:
     AuthenticatedDatosPrincipalesIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedParametrosPresupuestoIndexRoute:
     AuthenticatedParametrosPresupuestoIndexRoute,
   AuthenticatedPresupuestoIndexRoute: AuthenticatedPresupuestoIndexRoute,
+  AuthenticatedProyectosIndexRoute: AuthenticatedProyectosIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+  AuthenticatedUsuariosIndexRoute: AuthenticatedUsuariosIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
