@@ -71,7 +71,6 @@ export function UserAuthForm({
       if (authData.user && authData.session) {
         await setAuth(authData.user, authData.session)
 
-        // Get profile after setAuth completes
         const { profile } = useAuthStore.getState()
         const welcomeMessage = profile?.name
           ? `¡Bienvenido de nuevo, ${profile.name}!`
@@ -79,8 +78,18 @@ export function UserAuthForm({
 
         toast.success(welcomeMessage)
 
-        // Redirect to the stored location or default to dashboard
-        const targetPath = redirectTo || '/'
+        const getDefaultRoute = (role?: string) => {
+          switch (role) {
+            case 'owner':
+              return '/clientes'
+            case 'admin':
+              return '/usuarios'
+            case 'user':
+            default:
+              return '/'
+          }
+        }
+        const targetPath = redirectTo || getDefaultRoute(profile?.role)
         navigate({ to: targetPath, replace: true })
       }
     } catch (error) {
