@@ -1,7 +1,7 @@
 import { Link, useLocation } from '@tanstack/react-router'
 import { Button } from '@workspace/ui/components/button'
 import { useAuthStore } from '@/stores/auth-store'
-import { sidebarData } from './data/sidebar-data'
+import { getSidebarData } from './data/sidebar-data'
 import type { NavLink } from './types'
 
 const getRoleGroupTitle = (role: string): string => {
@@ -20,7 +20,8 @@ const getRoleGroupTitle = (role: string): string => {
 export default function AppBottomTabs() {
   const location = useLocation()
   const pathname = location.pathname || '/'
-  const profile = useAuthStore((state) => state.profile)
+  const { profile, user } = useAuthStore()
+  const sidebarData = getSidebarData(profile, user?.email)
 
   const userRole = profile?.role || 'user'
   const groupTitle = getRoleGroupTitle(userRole)

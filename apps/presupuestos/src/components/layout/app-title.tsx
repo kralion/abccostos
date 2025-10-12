@@ -2,12 +2,14 @@ import { Link } from '@tanstack/react-router'
 import { Badge } from '@workspace/ui/components/badge'
 import { useSidebar } from '@workspace/ui/components/sidebar'
 import { useAuthStore } from '@/stores/auth-store'
-import { sidebarData } from './data/sidebar-data'
+import { getSidebarData } from './data/sidebar-data'
 import { ProjectSwitcher } from './project-switcher'
 
 export function AppTitle() {
   const { setOpenMobile, state } = useSidebar()
-  const profile = useAuthStore((state) => state.profile)
+  const { profile, user } = useAuthStore()
+  const sidebarData = getSidebarData(profile, user?.email)
+
   return (
     <div className='flex flex-col items-center justify-center gap-4'>
       <Link

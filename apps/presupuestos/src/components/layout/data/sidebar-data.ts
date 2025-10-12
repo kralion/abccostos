@@ -10,13 +10,19 @@ import {
   Settings,
   Users,
 } from 'lucide-react'
+import { type Profile } from '@/stores/auth-store'
 import { type SidebarData } from '../types'
 
-export const sidebarData: SidebarData = {
+export const getSidebarData = (
+  profile: Profile | null,
+  userEmail?: string
+): SidebarData => ({
   user: {
-    name: 'alejandro',
-    email: 'alejandro@gmail.com',
-    avatar: 'https://untitledui.com/images/avatars/olly-schroeder',
+    name: profile ? `${profile.name} ${profile.last_name}` : 'Usuario',
+    email: userEmail || 'usuario@ejemplo.com',
+    avatar:
+      profile?.image_url ||
+      'https://img.icons8.com/?size=100&id=p8UFrp2VUgHR&format=png&color=000000',
   },
   projects: [
     {
@@ -92,4 +98,4 @@ export const sidebarData: SidebarData = {
       ],
     },
   ],
-}
+})

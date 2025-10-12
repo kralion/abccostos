@@ -8,7 +8,7 @@ import {
 import { useAuthStore } from '@/stores/auth-store'
 import { useLayout } from '@/context/layout-provider'
 import { AppTitle } from './app-title'
-import { sidebarData } from './data/sidebar-data'
+import { getSidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
 
 const getRoleGroupTitle = (role: string): string => {
@@ -26,10 +26,10 @@ const getRoleGroupTitle = (role: string): string => {
 
 export function AppSidebar() {
   const { collapsible } = useLayout()
-  const profile = useAuthStore((state) => state.profile)
-
+  const { profile, user } = useAuthStore()
   const userRole = profile?.role || 'user'
   const groupTitle = getRoleGroupTitle(userRole)
+  const sidebarData = getSidebarData(profile, user?.email)
 
   const filteredNavGroups = sidebarData.navGroups.filter(
     (group) => group.title === groupTitle
