@@ -1,45 +1,44 @@
-import { useState } from 'react'
-import { Button } from '@workspace/ui/components/button'
-import { Separator } from '@workspace/ui/components/separator'
-import { PlusIcon, UsersIcon } from 'lucide-react'
-import { CustomEmpty } from '@/components/custom-empty'
+import { getRouteApi } from '@tanstack/react-router'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
+import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import ClientForm from './components/client-form'
+import { ClientesDialogs } from './components/clientes-dialogs'
+import { ClientesPrimaryButtons } from './components/clientes-primary-buttons'
+import { ClientesProvider } from './components/clientes-provider'
+import { ClientesTable } from './components/clientes-table'
+import { clientes } from './data/clientes'
+
+const route = getRouteApi('/_authenticated/(propietario)/clientes/')
 
 export function Clientes() {
-  const [openClientForm, setOpenClientForm] = useState(false)
+  const search = route.useSearch()
+  const navigate = route.useNavigate()
 
   return (
-    <>
-      {/* ===== Top Heading ===== */}
-      <Header>
+    <ClientesProvider>
+      <Header fixed>
+        <Search />
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <ProfileDropdown />
         </div>
       </Header>
 
-      {/* ===== Main ===== */}
       <Main>
-        <Separator className='mb-2' />
-        <ClientForm open={openClientForm} onOpenChange={setOpenClientForm} />
-        <div className='flex items-center justify-between'>
-          <h1 className='hidden text-2xl font-bold tracking-tight md:block'>
-            Clientes
-          </h1>
-          <Button onClick={() => setOpenClientForm(true)}>
-            Nuevo Cliente <PlusIcon />
-          </Button>
+        <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
+          <div>
+            <h2 className='text-2xl font-bold tracking-tight'>Clientes</h2>
+            <p className='text-muted-foreground'>Gestiona tus clientes aquí.</p>
+          </div>
+          <ClientesPrimaryButtons />
         </div>
-        <CustomEmpty
-          title='Sin Clientes'
-          description='Aqui se mostrarán los clientes de CP360 Presupuestos'
-          icon={<UsersIcon />}
-        />
+        <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
+          <ClientesTable data={clientes} search={search} navigate={navigate} />
+        </div>
       </Main>
-    </>
+      <ClientesDialogs />
+    </ClientesProvider>
   )
 }

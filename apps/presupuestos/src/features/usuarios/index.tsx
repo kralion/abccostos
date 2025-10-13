@@ -1,42 +1,46 @@
-import { useState } from 'react'
-import { Separator } from '@workspace/ui/components/separator'
+import { getRouteApi } from '@tanstack/react-router'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
+import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import PrimaryTabs from './components/primarytabs'
-import SecondaryTabs from './components/secondarytabs'
+import { UsersDialogs } from './components/users-dialogs'
+import { UsersPrimaryButtons } from './components/users-primary-buttons'
+import { UsersProvider } from './components/users-provider'
+import { UsersTable } from './components/users-table'
+import { users } from './data/users'
+
+const route = getRouteApi('/_authenticated/(principal)/usuarios/')
 
 export function Usuarios() {
-  const [activePrimaryTab, setActivePrimaryTab] = useState('principales')
+  const search = route.useSearch()
+  const navigate = route.useNavigate()
 
   return (
-    <>
-      {/* ===== Top Heading ===== */}
-      <Header>
+    <UsersProvider>
+      <Header fixed>
+        <Search />
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <ProfileDropdown />
         </div>
       </Header>
 
-      {/* ===== Main ===== */}
       <Main>
-        <Separator className='mb-2' />
-        <div className='flex items-center justify-between'>
-          <div className='md:hidden' />
-
-          <h1 className='hidden text-2xl font-bold tracking-tight md:block'>
-            Usuarios
-          </h1>
-          <PrimaryTabs
-            activeTab={activePrimaryTab}
-            onTabChange={setActivePrimaryTab}
-          />
+        <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
+          <div>
+            <h2 className='text-2xl font-bold tracking-tight'>Usuarios</h2>
+            <p className='text-muted-foreground'>
+              Gestiona tus usuarios y sus roles aquí.
+            </p>
+          </div>
+          <UsersPrimaryButtons />
         </div>
-        <Separator />
-        <SecondaryTabs activePrimaryTab={activePrimaryTab} />
+        <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
+          <UsersTable data={users} search={search} navigate={navigate} />
+        </div>
       </Main>
-    </>
+      <UsersDialogs />
+    </UsersProvider>
   )
 }

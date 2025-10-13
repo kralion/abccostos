@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { z } from 'zod'
+import { format } from 'date-fns'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@workspace/ui/components/button'
+import { Calendar } from '@workspace/ui/components/calendar'
 import {
   Dialog,
   DialogContent,
@@ -21,6 +23,11 @@ import {
 import { Input } from '@workspace/ui/components/input'
 import { Label } from '@workspace/ui/components/label'
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@workspace/ui/components/popover'
+import {
   RadioGroup,
   RadioGroupItem,
 } from '@workspace/ui/components/radio-group'
@@ -32,7 +39,8 @@ import {
   SelectValue,
 } from '@workspace/ui/components/select'
 import { cn } from '@workspace/ui/lib/utils'
-import { Loader2 } from 'lucide-react'
+import { es } from 'date-fns/locale'
+import { CalendarIcon, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { PasswordInput } from '@/components/password-input'
 
@@ -108,6 +116,12 @@ const formSchema = z
       error: (iss) =>
         iss.input === undefined ? 'Por favor seleccione un módulo' : undefined,
     }),
+    fechaInicioFacturacion: z.date({
+      error: (iss) =>
+        iss.input === undefined
+          ? 'Por favor seleccione una fecha de inicio'
+          : undefined,
+    }),
   })
   .refine((data) => data.contraseña === data.confirmarContraseña, {
     message: 'Las contraseñas no coinciden',
@@ -117,28 +131,62 @@ const formSchema = z
 interface ClientFormProps {
   open: boolean
   onOpenChange: (open: boolean) => void
+  currentRow?: {
+    id: string
+    nombreEmpresa: string
+    email: string
+    fechaInicioFacturacion: Date
+    fechaFinFacturacion: Date
+  } | null
 }
 
-export default function ClientForm({ open, onOpenChange }: ClientFormProps) {
+export default function ClientForm({
+  open,
+  onOpenChange,
+  currentRow,
+}: ClientFormProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const isEditMode = !!currentRow
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      nombreEmpresa: '',
-      pais: '',
-      nombre: '',
-      apellido: '',
-      email: '',
-      codigoPais: '',
-      telefono: '',
-      contraseña: '',
-      confirmarContraseña: '',
-      modulo: undefined,
-      numeroUsuarios: 0,
-      numeroProyectos: 0,
-    },
+    defaultValues: currentRow
+      ? {
+          nombreEmpresa: currentRow.nombreEmpresa,
+          pais: '',
+          nombre: '',
+          apellido: '',
+          email: currentRow.email,
+          codigoPais: '',
+          telefono: '',
+          contraseña: '********',
+          confirmarContraseña: '********',
+          modulo: undefined,
+          numeroUsuarios: 0,
+          numeroProyectos: 0,
+          fechaInicioFacturacion: currentRow.fechaInicioFacturacion,
+        }
+      : {
+          nombreEmpresa: '',
+          pais: '',
+          nombre: '',
+          apellido: '',
+          email: '',
+          codigoPais: '',
+          telefono: '',
+          contraseña: '',
+          confirmarContraseña: '',
+          modulo: undefined,
+          numeroUsuarios: 0,
+          numeroProyectos: 0,
+          fechaInicioFacturacion: undefined,
+        },
   })
+
+  const fechaInicioFacturacion = form.watch('fechaInicioFacturacion')
+  const fechaFinFacturacion = fechaInicioFacturacion
+    ? new Date(fechaInicioFacturacion.getTime() + 30 * 24 * 60 * 60 * 1000)
+    : null
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
@@ -179,9 +227,13 @@ export default function ClientForm({ open, onOpenChange }: ClientFormProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className='max-h-[90vh] overflow-y-auto sm:max-w-[600px]'>
         <DialogHeader>
-          <DialogTitle>Nuevo Cliente</DialogTitle>
+          <DialogTitle>
+            {isEditMode ? 'Editar Cliente' : 'Nuevo Cliente'}
+          </DialogTitle>
           <DialogDescription>
-            Crea un nuevo cliente para el ERP
+            {isEditMode
+              ? 'Edita la información del cliente'
+              : 'Crea un nuevo cliente para el ERP'}
           </DialogDescription>
         </DialogHeader>
 
@@ -409,6 +461,55 @@ export default function ClientForm({ open, onOpenChange }: ClientFormProps) {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name='fechaInicioFacturacion'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Fecha Inicio Facturación</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant='outline'
+                          className={cn(
+                            'w-full pl-3 text-left font-normal',
+                            !field.value && 'text-muted-foreground'
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, 'PPP', { locale: es })
+                          ) : (
+                            <span>Selecciona una fecha</span>
+                          )}
+                          <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className='w-auto p-0' align='start'>
+                      <Calendar
+                        mode='single'
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date < new Date(new Date().setHours(0, 0, 0, 0))
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div>
+              <FormLabel>Fecha Fin Facturación</FormLabel>
+              <div className='border-input bg-muted mt-2 flex h-10 w-full items-center rounded-md border px-3 py-2 text-sm'>
+                {fechaFinFacturacion
+                  ? format(fechaFinFacturacion, 'PPP', { locale: es })
+                  : 'Se calculará automáticamente'}
+              </div>
+            </div>
             <div className='mt-8 flex gap-2 md:col-span-2'>
               <Button
                 type='button'
@@ -423,8 +524,10 @@ export default function ClientForm({ open, onOpenChange }: ClientFormProps) {
                 {isLoading ? (
                   <>
                     <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-                    Creando...
+                    {isEditMode ? 'Guardando...' : 'Creando...'}
                   </>
+                ) : isEditMode ? (
+                  'Guardar Cambios'
                 ) : (
                   'Crear Cliente'
                 )}

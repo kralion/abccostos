@@ -39,7 +39,6 @@ import { Route as AuthenticatedsecundarioCatalogosIndexRouteImport } from './rou
 import { Route as AuthenticatedpropietarioDashboardPropietarioIndexRouteImport } from './routes/_authenticated/(propietario)/dashboard-propietario/index'
 import { Route as AuthenticatedpropietarioClientesIndexRouteImport } from './routes/_authenticated/(propietario)/clientes/index'
 import { Route as AuthenticatedprincipalUsuariosIndexRouteImport } from './routes/_authenticated/(principal)/usuarios/index'
-import { Route as AuthenticatedprincipalUsersIndexRouteImport } from './routes/_authenticated/(principal)/users/index'
 import { Route as AuthenticatedprincipalProyectosIndexRouteImport } from './routes/_authenticated/(principal)/proyectos/index'
 import { Route as AuthenticatedprincipalDashboardAdminIndexRouteImport } from './routes/_authenticated/(principal)/dashboard-admin/index'
 
@@ -207,12 +206,6 @@ const AuthenticatedprincipalUsuariosIndexRoute =
     path: '/usuarios/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedprincipalUsersIndexRoute =
-  AuthenticatedprincipalUsersIndexRouteImport.update({
-    id: '/(principal)/users/',
-    path: '/users/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedprincipalProyectosIndexRoute =
   AuthenticatedprincipalProyectosIndexRouteImport.update({
     id: '/(principal)/proyectos/',
@@ -251,7 +244,6 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/dashboard-admin': typeof AuthenticatedprincipalDashboardAdminIndexRoute
   '/proyectos': typeof AuthenticatedprincipalProyectosIndexRoute
-  '/users': typeof AuthenticatedprincipalUsersIndexRoute
   '/usuarios': typeof AuthenticatedprincipalUsuariosIndexRoute
   '/clientes': typeof AuthenticatedpropietarioClientesIndexRoute
   '/dashboard-propietario': typeof AuthenticatedpropietarioDashboardPropietarioIndexRoute
@@ -284,7 +276,6 @@ export interface FileRoutesByTo {
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/dashboard-admin': typeof AuthenticatedprincipalDashboardAdminIndexRoute
   '/proyectos': typeof AuthenticatedprincipalProyectosIndexRoute
-  '/users': typeof AuthenticatedprincipalUsersIndexRoute
   '/usuarios': typeof AuthenticatedprincipalUsuariosIndexRoute
   '/clientes': typeof AuthenticatedpropietarioClientesIndexRoute
   '/dashboard-propietario': typeof AuthenticatedpropietarioDashboardPropietarioIndexRoute
@@ -320,7 +311,6 @@ export interface FileRoutesById {
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/(principal)/dashboard-admin/': typeof AuthenticatedprincipalDashboardAdminIndexRoute
   '/_authenticated/(principal)/proyectos/': typeof AuthenticatedprincipalProyectosIndexRoute
-  '/_authenticated/(principal)/users/': typeof AuthenticatedprincipalUsersIndexRoute
   '/_authenticated/(principal)/usuarios/': typeof AuthenticatedprincipalUsuariosIndexRoute
   '/_authenticated/(propietario)/clientes/': typeof AuthenticatedpropietarioClientesIndexRoute
   '/_authenticated/(propietario)/dashboard-propietario/': typeof AuthenticatedpropietarioDashboardPropietarioIndexRoute
@@ -356,7 +346,6 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/dashboard-admin'
     | '/proyectos'
-    | '/users'
     | '/usuarios'
     | '/clientes'
     | '/dashboard-propietario'
@@ -389,7 +378,6 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/dashboard-admin'
     | '/proyectos'
-    | '/users'
     | '/usuarios'
     | '/clientes'
     | '/dashboard-propietario'
@@ -424,7 +412,6 @@ export interface FileRouteTypes {
     | '/_authenticated/tasks/'
     | '/_authenticated/(principal)/dashboard-admin/'
     | '/_authenticated/(principal)/proyectos/'
-    | '/_authenticated/(principal)/users/'
     | '/_authenticated/(principal)/usuarios/'
     | '/_authenticated/(propietario)/clientes/'
     | '/_authenticated/(propietario)/dashboard-propietario/'
@@ -660,13 +647,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedprincipalUsuariosIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/(principal)/users/': {
-      id: '/_authenticated/(principal)/users/'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof AuthenticatedprincipalUsersIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/(principal)/proyectos/': {
       id: '/_authenticated/(principal)/proyectos/'
       path: '/proyectos'
@@ -717,7 +697,6 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedprincipalDashboardAdminIndexRoute: typeof AuthenticatedprincipalDashboardAdminIndexRoute
   AuthenticatedprincipalProyectosIndexRoute: typeof AuthenticatedprincipalProyectosIndexRoute
-  AuthenticatedprincipalUsersIndexRoute: typeof AuthenticatedprincipalUsersIndexRoute
   AuthenticatedprincipalUsuariosIndexRoute: typeof AuthenticatedprincipalUsuariosIndexRoute
   AuthenticatedpropietarioClientesIndexRoute: typeof AuthenticatedpropietarioClientesIndexRoute
   AuthenticatedpropietarioDashboardPropietarioIndexRoute: typeof AuthenticatedpropietarioDashboardPropietarioIndexRoute
@@ -739,7 +718,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedprincipalDashboardAdminIndexRoute,
   AuthenticatedprincipalProyectosIndexRoute:
     AuthenticatedprincipalProyectosIndexRoute,
-  AuthenticatedprincipalUsersIndexRoute: AuthenticatedprincipalUsersIndexRoute,
   AuthenticatedprincipalUsuariosIndexRoute:
     AuthenticatedprincipalUsuariosIndexRoute,
   AuthenticatedpropietarioClientesIndexRoute:
