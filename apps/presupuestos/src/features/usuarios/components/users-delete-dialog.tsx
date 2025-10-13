@@ -8,6 +8,7 @@ import { Input } from '@workspace/ui/components/input'
 import { Label } from '@workspace/ui/components/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { type User } from '../data/schema'
+import { roles } from '../data/data'
 
 type UserDeleteDialogProps = {
   open: boolean
@@ -26,7 +27,7 @@ export function UsersDeleteDialog({
     if (value.trim() !== currentRow.username) return
 
     onOpenChange(false)
-    showSubmittedData(currentRow, 'The following user has been deleted:')
+    showSubmittedData(currentRow, 'El siguiente usuario ha sido eliminado:')
   }
 
   return (
@@ -41,40 +42,40 @@ export function UsersDeleteDialog({
             className='stroke-destructive me-1 inline-block'
             size={18}
           />{' '}
-          Delete User
+          Eliminar Usuario
         </span>
       }
       desc={
         <div className='space-y-4'>
           <p className='mb-2'>
-            Are you sure you want to delete{' '}
+            ¿Estás seguro de que deseas eliminar a{' '}
             <span className='font-bold'>{currentRow.username}</span>?
             <br />
-            This action will permanently remove the user with the role of{' '}
+            Esta acción eliminará permanentemente el usuario con el rol de{' '}
             <span className='font-bold'>
-              {currentRow.role.toUpperCase()}
+              {roles.find(r => r.value === currentRow.role)?.label || currentRow.role}
             </span>{' '}
-            from the system. This cannot be undone.
+            del sistema. Esto no se puede deshacer.
           </p>
 
           <Label className='my-2'>
-            Username:
+            Nombre de usuario:
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder='Enter username to confirm deletion.'
+              placeholder='Ingresa el nombre de usuario para confirmar.'
             />
           </Label>
 
           <Alert variant='destructive'>
-            <AlertTitle>Warning!</AlertTitle>
+            <AlertTitle>¡Advertencia!</AlertTitle>
             <AlertDescription>
-              Please be careful, this operation can not be rolled back.
+              Por favor ten cuidado, esta operación no se puede revertir.
             </AlertDescription>
           </Alert>
         </div>
       }
-      confirmText='Delete'
+      confirmText='Eliminar'
       destructive
     />
   )

@@ -1,5 +1,5 @@
 import { Button } from '@workspace/ui/components/button'
-import { MailPlus, UserPlus } from 'lucide-react'
+import { UserPlus } from 'lucide-react'
 import { useUsers } from './users-provider'
 
 export function UsersPrimaryButtons() {
@@ -11,10 +11,10 @@ export function UsersPrimaryButtons() {
         className='space-x-1'
         onClick={() => setOpen('invite')}
       >
-        <span>Invite User</span> <MailPlus size={18} />
+        <span>Invitar Usuario</span> <MailPlus size={18} />
       </Button> */}
       <Button className='space-x-1' onClick={() => setOpen('add')}>
-        <span>Nuevo</span> <UserPlus size={18} />
+        <span>Registrar</span> <UserPlus size={18} />
       </Button>
     </div>
   )
