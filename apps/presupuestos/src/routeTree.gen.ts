@@ -22,26 +22,26 @@ import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
-import { Route as AuthenticatedUsuariosIndexRouteImport } from './routes/_authenticated/usuarios/index'
-import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
-import { Route as AuthenticatedProyectosIndexRouteImport } from './routes/_authenticated/proyectos/index'
-import { Route as AuthenticatedPresupuestoIndexRouteImport } from './routes/_authenticated/presupuesto/index'
-import { Route as AuthenticatedParametrosPresupuestoIndexRouteImport } from './routes/_authenticated/parametros-presupuesto/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
-import { Route as AuthenticatedDatosPrincipalesIndexRouteImport } from './routes/_authenticated/datos-principales/index'
-import { Route as AuthenticatedDashboardPropietarioIndexRouteImport } from './routes/_authenticated/dashboard-propietario/index'
-import { Route as AuthenticatedDashboardAdminIndexRouteImport } from './routes/_authenticated/dashboard-admin/index'
-import { Route as AuthenticatedClientesIndexRouteImport } from './routes/_authenticated/clientes/index'
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
-import { Route as AuthenticatedCatalogosIndexRouteImport } from './routes/_authenticated/catalogos/index'
 import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
 import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
+import { Route as AuthenticatedsecundarioPresupuestoIndexRouteImport } from './routes/_authenticated/(secundario)/presupuesto/index'
+import { Route as AuthenticatedsecundarioParametrosPresupuestoIndexRouteImport } from './routes/_authenticated/(secundario)/parametros-presupuesto/index'
+import { Route as AuthenticatedsecundarioDatosPrincipalesIndexRouteImport } from './routes/_authenticated/(secundario)/datos-principales/index'
+import { Route as AuthenticatedsecundarioCatalogosIndexRouteImport } from './routes/_authenticated/(secundario)/catalogos/index'
+import { Route as AuthenticatedpropietarioDashboardPropietarioIndexRouteImport } from './routes/_authenticated/(propietario)/dashboard-propietario/index'
+import { Route as AuthenticatedpropietarioClientesIndexRouteImport } from './routes/_authenticated/(propietario)/clientes/index'
+import { Route as AuthenticatedprincipalUsuariosIndexRouteImport } from './routes/_authenticated/(principal)/usuarios/index'
+import { Route as AuthenticatedprincipalUsersIndexRouteImport } from './routes/_authenticated/(principal)/users/index'
+import { Route as AuthenticatedprincipalProyectosIndexRouteImport } from './routes/_authenticated/(principal)/proyectos/index'
+import { Route as AuthenticatedprincipalDashboardAdminIndexRouteImport } from './routes/_authenticated/(principal)/dashboard-admin/index'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -108,17 +108,6 @@ const AuthenticatedSettingsRouteRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedUsuariosIndexRoute =
-  AuthenticatedUsuariosIndexRouteImport.update({
-    id: '/usuarios/',
-    path: '/usuarios/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
-  id: '/users/',
-  path: '/users/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
@@ -130,52 +119,10 @@ const AuthenticatedSettingsIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-const AuthenticatedProyectosIndexRoute =
-  AuthenticatedProyectosIndexRouteImport.update({
-    id: '/proyectos/',
-    path: '/proyectos/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedPresupuestoIndexRoute =
-  AuthenticatedPresupuestoIndexRouteImport.update({
-    id: '/presupuesto/',
-    path: '/presupuesto/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedParametrosPresupuestoIndexRoute =
-  AuthenticatedParametrosPresupuestoIndexRouteImport.update({
-    id: '/parametros-presupuesto/',
-    path: '/parametros-presupuesto/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedHelpCenterIndexRoute =
   AuthenticatedHelpCenterIndexRouteImport.update({
     id: '/help-center/',
     path: '/help-center/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDatosPrincipalesIndexRoute =
-  AuthenticatedDatosPrincipalesIndexRouteImport.update({
-    id: '/datos-principales/',
-    path: '/datos-principales/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardPropietarioIndexRoute =
-  AuthenticatedDashboardPropietarioIndexRouteImport.update({
-    id: '/dashboard-propietario/',
-    path: '/dashboard-propietario/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardAdminIndexRoute =
-  AuthenticatedDashboardAdminIndexRouteImport.update({
-    id: '/dashboard-admin/',
-    path: '/dashboard-admin/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedClientesIndexRoute =
-  AuthenticatedClientesIndexRouteImport.update({
-    id: '/clientes/',
-    path: '/clientes/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
@@ -183,12 +130,6 @@ const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
   path: '/chats/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCatalogosIndexRoute =
-  AuthenticatedCatalogosIndexRouteImport.update({
-    id: '/catalogos/',
-    path: '/catalogos/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexRouteImport.update({
   id: '/apps/',
   path: '/apps/',
@@ -224,6 +165,66 @@ const AuthenticatedErrorsErrorRoute =
     path: '/errors/$error',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedsecundarioPresupuestoIndexRoute =
+  AuthenticatedsecundarioPresupuestoIndexRouteImport.update({
+    id: '/(secundario)/presupuesto/',
+    path: '/presupuesto/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedsecundarioParametrosPresupuestoIndexRoute =
+  AuthenticatedsecundarioParametrosPresupuestoIndexRouteImport.update({
+    id: '/(secundario)/parametros-presupuesto/',
+    path: '/parametros-presupuesto/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedsecundarioDatosPrincipalesIndexRoute =
+  AuthenticatedsecundarioDatosPrincipalesIndexRouteImport.update({
+    id: '/(secundario)/datos-principales/',
+    path: '/datos-principales/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedsecundarioCatalogosIndexRoute =
+  AuthenticatedsecundarioCatalogosIndexRouteImport.update({
+    id: '/(secundario)/catalogos/',
+    path: '/catalogos/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedpropietarioDashboardPropietarioIndexRoute =
+  AuthenticatedpropietarioDashboardPropietarioIndexRouteImport.update({
+    id: '/(propietario)/dashboard-propietario/',
+    path: '/dashboard-propietario/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedpropietarioClientesIndexRoute =
+  AuthenticatedpropietarioClientesIndexRouteImport.update({
+    id: '/(propietario)/clientes/',
+    path: '/clientes/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedprincipalUsuariosIndexRoute =
+  AuthenticatedprincipalUsuariosIndexRouteImport.update({
+    id: '/(principal)/usuarios/',
+    path: '/usuarios/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedprincipalUsersIndexRoute =
+  AuthenticatedprincipalUsersIndexRouteImport.update({
+    id: '/(principal)/users/',
+    path: '/users/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedprincipalProyectosIndexRoute =
+  AuthenticatedprincipalProyectosIndexRouteImport.update({
+    id: '/(principal)/proyectos/',
+    path: '/proyectos/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedprincipalDashboardAdminIndexRoute =
+  AuthenticatedprincipalDashboardAdminIndexRouteImport.update({
+    id: '/(principal)/dashboard-admin/',
+    path: '/dashboard-admin/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
@@ -244,20 +245,20 @@ export interface FileRoutesByFullPath {
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
-  '/catalogos': typeof AuthenticatedCatalogosIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
-  '/clientes': typeof AuthenticatedClientesIndexRoute
-  '/dashboard-admin': typeof AuthenticatedDashboardAdminIndexRoute
-  '/dashboard-propietario': typeof AuthenticatedDashboardPropietarioIndexRoute
-  '/datos-principales': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
-  '/parametros-presupuesto': typeof AuthenticatedParametrosPresupuestoIndexRoute
-  '/presupuesto': typeof AuthenticatedPresupuestoIndexRoute
-  '/proyectos': typeof AuthenticatedProyectosIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
-  '/usuarios': typeof AuthenticatedUsuariosIndexRoute
+  '/dashboard-admin': typeof AuthenticatedprincipalDashboardAdminIndexRoute
+  '/proyectos': typeof AuthenticatedprincipalProyectosIndexRoute
+  '/users': typeof AuthenticatedprincipalUsersIndexRoute
+  '/usuarios': typeof AuthenticatedprincipalUsuariosIndexRoute
+  '/clientes': typeof AuthenticatedpropietarioClientesIndexRoute
+  '/dashboard-propietario': typeof AuthenticatedpropietarioDashboardPropietarioIndexRoute
+  '/catalogos': typeof AuthenticatedsecundarioCatalogosIndexRoute
+  '/datos-principales': typeof AuthenticatedsecundarioDatosPrincipalesIndexRoute
+  '/parametros-presupuesto': typeof AuthenticatedsecundarioParametrosPresupuestoIndexRoute
+  '/presupuesto': typeof AuthenticatedsecundarioPresupuestoIndexRoute
 }
 export interface FileRoutesByTo {
   '/forgot-password': typeof authForgotPasswordRoute
@@ -277,20 +278,20 @@ export interface FileRoutesByTo {
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
-  '/catalogos': typeof AuthenticatedCatalogosIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
-  '/clientes': typeof AuthenticatedClientesIndexRoute
-  '/dashboard-admin': typeof AuthenticatedDashboardAdminIndexRoute
-  '/dashboard-propietario': typeof AuthenticatedDashboardPropietarioIndexRoute
-  '/datos-principales': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
-  '/parametros-presupuesto': typeof AuthenticatedParametrosPresupuestoIndexRoute
-  '/presupuesto': typeof AuthenticatedPresupuestoIndexRoute
-  '/proyectos': typeof AuthenticatedProyectosIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
-  '/usuarios': typeof AuthenticatedUsuariosIndexRoute
+  '/dashboard-admin': typeof AuthenticatedprincipalDashboardAdminIndexRoute
+  '/proyectos': typeof AuthenticatedprincipalProyectosIndexRoute
+  '/users': typeof AuthenticatedprincipalUsersIndexRoute
+  '/usuarios': typeof AuthenticatedprincipalUsuariosIndexRoute
+  '/clientes': typeof AuthenticatedpropietarioClientesIndexRoute
+  '/dashboard-propietario': typeof AuthenticatedpropietarioDashboardPropietarioIndexRoute
+  '/catalogos': typeof AuthenticatedsecundarioCatalogosIndexRoute
+  '/datos-principales': typeof AuthenticatedsecundarioDatosPrincipalesIndexRoute
+  '/parametros-presupuesto': typeof AuthenticatedsecundarioParametrosPresupuestoIndexRoute
+  '/presupuesto': typeof AuthenticatedsecundarioPresupuestoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -313,20 +314,20 @@ export interface FileRoutesById {
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
-  '/_authenticated/catalogos/': typeof AuthenticatedCatalogosIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
-  '/_authenticated/clientes/': typeof AuthenticatedClientesIndexRoute
-  '/_authenticated/dashboard-admin/': typeof AuthenticatedDashboardAdminIndexRoute
-  '/_authenticated/dashboard-propietario/': typeof AuthenticatedDashboardPropietarioIndexRoute
-  '/_authenticated/datos-principales/': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
-  '/_authenticated/parametros-presupuesto/': typeof AuthenticatedParametrosPresupuestoIndexRoute
-  '/_authenticated/presupuesto/': typeof AuthenticatedPresupuestoIndexRoute
-  '/_authenticated/proyectos/': typeof AuthenticatedProyectosIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
-  '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
-  '/_authenticated/usuarios/': typeof AuthenticatedUsuariosIndexRoute
+  '/_authenticated/(principal)/dashboard-admin/': typeof AuthenticatedprincipalDashboardAdminIndexRoute
+  '/_authenticated/(principal)/proyectos/': typeof AuthenticatedprincipalProyectosIndexRoute
+  '/_authenticated/(principal)/users/': typeof AuthenticatedprincipalUsersIndexRoute
+  '/_authenticated/(principal)/usuarios/': typeof AuthenticatedprincipalUsuariosIndexRoute
+  '/_authenticated/(propietario)/clientes/': typeof AuthenticatedpropietarioClientesIndexRoute
+  '/_authenticated/(propietario)/dashboard-propietario/': typeof AuthenticatedpropietarioDashboardPropietarioIndexRoute
+  '/_authenticated/(secundario)/catalogos/': typeof AuthenticatedsecundarioCatalogosIndexRoute
+  '/_authenticated/(secundario)/datos-principales/': typeof AuthenticatedsecundarioDatosPrincipalesIndexRoute
+  '/_authenticated/(secundario)/parametros-presupuesto/': typeof AuthenticatedsecundarioParametrosPresupuestoIndexRoute
+  '/_authenticated/(secundario)/presupuesto/': typeof AuthenticatedsecundarioPresupuestoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -349,20 +350,20 @@ export interface FileRouteTypes {
     | '/settings/display'
     | '/settings/notifications'
     | '/apps'
-    | '/catalogos'
     | '/chats'
-    | '/clientes'
-    | '/dashboard-admin'
-    | '/dashboard-propietario'
-    | '/datos-principales'
     | '/help-center'
-    | '/parametros-presupuesto'
-    | '/presupuesto'
-    | '/proyectos'
     | '/settings/'
     | '/tasks'
+    | '/dashboard-admin'
+    | '/proyectos'
     | '/users'
     | '/usuarios'
+    | '/clientes'
+    | '/dashboard-propietario'
+    | '/catalogos'
+    | '/datos-principales'
+    | '/parametros-presupuesto'
+    | '/presupuesto'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/forgot-password'
@@ -382,20 +383,20 @@ export interface FileRouteTypes {
     | '/settings/display'
     | '/settings/notifications'
     | '/apps'
-    | '/catalogos'
     | '/chats'
-    | '/clientes'
-    | '/dashboard-admin'
-    | '/dashboard-propietario'
-    | '/datos-principales'
     | '/help-center'
-    | '/parametros-presupuesto'
-    | '/presupuesto'
-    | '/proyectos'
     | '/settings'
     | '/tasks'
+    | '/dashboard-admin'
+    | '/proyectos'
     | '/users'
     | '/usuarios'
+    | '/clientes'
+    | '/dashboard-propietario'
+    | '/catalogos'
+    | '/datos-principales'
+    | '/parametros-presupuesto'
+    | '/presupuesto'
   id:
     | '__root__'
     | '/_authenticated'
@@ -417,20 +418,20 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/display'
     | '/_authenticated/settings/notifications'
     | '/_authenticated/apps/'
-    | '/_authenticated/catalogos/'
     | '/_authenticated/chats/'
-    | '/_authenticated/clientes/'
-    | '/_authenticated/dashboard-admin/'
-    | '/_authenticated/dashboard-propietario/'
-    | '/_authenticated/datos-principales/'
     | '/_authenticated/help-center/'
-    | '/_authenticated/parametros-presupuesto/'
-    | '/_authenticated/presupuesto/'
-    | '/_authenticated/proyectos/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
-    | '/_authenticated/users/'
-    | '/_authenticated/usuarios/'
+    | '/_authenticated/(principal)/dashboard-admin/'
+    | '/_authenticated/(principal)/proyectos/'
+    | '/_authenticated/(principal)/users/'
+    | '/_authenticated/(principal)/usuarios/'
+    | '/_authenticated/(propietario)/clientes/'
+    | '/_authenticated/(propietario)/dashboard-propietario/'
+    | '/_authenticated/(secundario)/catalogos/'
+    | '/_authenticated/(secundario)/datos-principales/'
+    | '/_authenticated/(secundario)/parametros-presupuesto/'
+    | '/_authenticated/(secundario)/presupuesto/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -540,20 +541,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/usuarios/': {
-      id: '/_authenticated/usuarios/'
-      path: '/usuarios'
-      fullPath: '/usuarios'
-      preLoaderRoute: typeof AuthenticatedUsuariosIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/users/': {
-      id: '/_authenticated/users/'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/tasks/': {
       id: '/_authenticated/tasks/'
       path: '/tasks'
@@ -568,27 +555,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
-    '/_authenticated/proyectos/': {
-      id: '/_authenticated/proyectos/'
-      path: '/proyectos'
-      fullPath: '/proyectos'
-      preLoaderRoute: typeof AuthenticatedProyectosIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/presupuesto/': {
-      id: '/_authenticated/presupuesto/'
-      path: '/presupuesto'
-      fullPath: '/presupuesto'
-      preLoaderRoute: typeof AuthenticatedPresupuestoIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/parametros-presupuesto/': {
-      id: '/_authenticated/parametros-presupuesto/'
-      path: '/parametros-presupuesto'
-      fullPath: '/parametros-presupuesto'
-      preLoaderRoute: typeof AuthenticatedParametrosPresupuestoIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/help-center/': {
       id: '/_authenticated/help-center/'
       path: '/help-center'
@@ -596,46 +562,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHelpCenterIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/datos-principales/': {
-      id: '/_authenticated/datos-principales/'
-      path: '/datos-principales'
-      fullPath: '/datos-principales'
-      preLoaderRoute: typeof AuthenticatedDatosPrincipalesIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard-propietario/': {
-      id: '/_authenticated/dashboard-propietario/'
-      path: '/dashboard-propietario'
-      fullPath: '/dashboard-propietario'
-      preLoaderRoute: typeof AuthenticatedDashboardPropietarioIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard-admin/': {
-      id: '/_authenticated/dashboard-admin/'
-      path: '/dashboard-admin'
-      fullPath: '/dashboard-admin'
-      preLoaderRoute: typeof AuthenticatedDashboardAdminIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/clientes/': {
-      id: '/_authenticated/clientes/'
-      path: '/clientes'
-      fullPath: '/clientes'
-      preLoaderRoute: typeof AuthenticatedClientesIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/chats/': {
       id: '/_authenticated/chats/'
       path: '/chats'
       fullPath: '/chats'
       preLoaderRoute: typeof AuthenticatedChatsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/catalogos/': {
-      id: '/_authenticated/catalogos/'
-      path: '/catalogos'
-      fullPath: '/catalogos'
-      preLoaderRoute: typeof AuthenticatedCatalogosIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/apps/': {
@@ -680,6 +611,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedErrorsErrorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/(secundario)/presupuesto/': {
+      id: '/_authenticated/(secundario)/presupuesto/'
+      path: '/presupuesto'
+      fullPath: '/presupuesto'
+      preLoaderRoute: typeof AuthenticatedsecundarioPresupuestoIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/(secundario)/parametros-presupuesto/': {
+      id: '/_authenticated/(secundario)/parametros-presupuesto/'
+      path: '/parametros-presupuesto'
+      fullPath: '/parametros-presupuesto'
+      preLoaderRoute: typeof AuthenticatedsecundarioParametrosPresupuestoIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/(secundario)/datos-principales/': {
+      id: '/_authenticated/(secundario)/datos-principales/'
+      path: '/datos-principales'
+      fullPath: '/datos-principales'
+      preLoaderRoute: typeof AuthenticatedsecundarioDatosPrincipalesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/(secundario)/catalogos/': {
+      id: '/_authenticated/(secundario)/catalogos/'
+      path: '/catalogos'
+      fullPath: '/catalogos'
+      preLoaderRoute: typeof AuthenticatedsecundarioCatalogosIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/(propietario)/dashboard-propietario/': {
+      id: '/_authenticated/(propietario)/dashboard-propietario/'
+      path: '/dashboard-propietario'
+      fullPath: '/dashboard-propietario'
+      preLoaderRoute: typeof AuthenticatedpropietarioDashboardPropietarioIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/(propietario)/clientes/': {
+      id: '/_authenticated/(propietario)/clientes/'
+      path: '/clientes'
+      fullPath: '/clientes'
+      preLoaderRoute: typeof AuthenticatedpropietarioClientesIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/(principal)/usuarios/': {
+      id: '/_authenticated/(principal)/usuarios/'
+      path: '/usuarios'
+      fullPath: '/usuarios'
+      preLoaderRoute: typeof AuthenticatedprincipalUsuariosIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/(principal)/users/': {
+      id: '/_authenticated/(principal)/users/'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthenticatedprincipalUsersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/(principal)/proyectos/': {
+      id: '/_authenticated/(principal)/proyectos/'
+      path: '/proyectos'
+      fullPath: '/proyectos'
+      preLoaderRoute: typeof AuthenticatedprincipalProyectosIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/(principal)/dashboard-admin/': {
+      id: '/_authenticated/(principal)/dashboard-admin/'
+      path: '/dashboard-admin'
+      fullPath: '/dashboard-admin'
+      preLoaderRoute: typeof AuthenticatedprincipalDashboardAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -711,19 +712,19 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
-  AuthenticatedCatalogosIndexRoute: typeof AuthenticatedCatalogosIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
-  AuthenticatedClientesIndexRoute: typeof AuthenticatedClientesIndexRoute
-  AuthenticatedDashboardAdminIndexRoute: typeof AuthenticatedDashboardAdminIndexRoute
-  AuthenticatedDashboardPropietarioIndexRoute: typeof AuthenticatedDashboardPropietarioIndexRoute
-  AuthenticatedDatosPrincipalesIndexRoute: typeof AuthenticatedDatosPrincipalesIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
-  AuthenticatedParametrosPresupuestoIndexRoute: typeof AuthenticatedParametrosPresupuestoIndexRoute
-  AuthenticatedPresupuestoIndexRoute: typeof AuthenticatedPresupuestoIndexRoute
-  AuthenticatedProyectosIndexRoute: typeof AuthenticatedProyectosIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
-  AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
-  AuthenticatedUsuariosIndexRoute: typeof AuthenticatedUsuariosIndexRoute
+  AuthenticatedprincipalDashboardAdminIndexRoute: typeof AuthenticatedprincipalDashboardAdminIndexRoute
+  AuthenticatedprincipalProyectosIndexRoute: typeof AuthenticatedprincipalProyectosIndexRoute
+  AuthenticatedprincipalUsersIndexRoute: typeof AuthenticatedprincipalUsersIndexRoute
+  AuthenticatedprincipalUsuariosIndexRoute: typeof AuthenticatedprincipalUsuariosIndexRoute
+  AuthenticatedpropietarioClientesIndexRoute: typeof AuthenticatedpropietarioClientesIndexRoute
+  AuthenticatedpropietarioDashboardPropietarioIndexRoute: typeof AuthenticatedpropietarioDashboardPropietarioIndexRoute
+  AuthenticatedsecundarioCatalogosIndexRoute: typeof AuthenticatedsecundarioCatalogosIndexRoute
+  AuthenticatedsecundarioDatosPrincipalesIndexRoute: typeof AuthenticatedsecundarioDatosPrincipalesIndexRoute
+  AuthenticatedsecundarioParametrosPresupuestoIndexRoute: typeof AuthenticatedsecundarioParametrosPresupuestoIndexRoute
+  AuthenticatedsecundarioPresupuestoIndexRoute: typeof AuthenticatedsecundarioPresupuestoIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -731,22 +732,28 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
-  AuthenticatedCatalogosIndexRoute: AuthenticatedCatalogosIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
-  AuthenticatedClientesIndexRoute: AuthenticatedClientesIndexRoute,
-  AuthenticatedDashboardAdminIndexRoute: AuthenticatedDashboardAdminIndexRoute,
-  AuthenticatedDashboardPropietarioIndexRoute:
-    AuthenticatedDashboardPropietarioIndexRoute,
-  AuthenticatedDatosPrincipalesIndexRoute:
-    AuthenticatedDatosPrincipalesIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
-  AuthenticatedParametrosPresupuestoIndexRoute:
-    AuthenticatedParametrosPresupuestoIndexRoute,
-  AuthenticatedPresupuestoIndexRoute: AuthenticatedPresupuestoIndexRoute,
-  AuthenticatedProyectosIndexRoute: AuthenticatedProyectosIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
-  AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
-  AuthenticatedUsuariosIndexRoute: AuthenticatedUsuariosIndexRoute,
+  AuthenticatedprincipalDashboardAdminIndexRoute:
+    AuthenticatedprincipalDashboardAdminIndexRoute,
+  AuthenticatedprincipalProyectosIndexRoute:
+    AuthenticatedprincipalProyectosIndexRoute,
+  AuthenticatedprincipalUsersIndexRoute: AuthenticatedprincipalUsersIndexRoute,
+  AuthenticatedprincipalUsuariosIndexRoute:
+    AuthenticatedprincipalUsuariosIndexRoute,
+  AuthenticatedpropietarioClientesIndexRoute:
+    AuthenticatedpropietarioClientesIndexRoute,
+  AuthenticatedpropietarioDashboardPropietarioIndexRoute:
+    AuthenticatedpropietarioDashboardPropietarioIndexRoute,
+  AuthenticatedsecundarioCatalogosIndexRoute:
+    AuthenticatedsecundarioCatalogosIndexRoute,
+  AuthenticatedsecundarioDatosPrincipalesIndexRoute:
+    AuthenticatedsecundarioDatosPrincipalesIndexRoute,
+  AuthenticatedsecundarioParametrosPresupuestoIndexRoute:
+    AuthenticatedsecundarioParametrosPresupuestoIndexRoute,
+  AuthenticatedsecundarioPresupuestoIndexRoute:
+    AuthenticatedsecundarioPresupuestoIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

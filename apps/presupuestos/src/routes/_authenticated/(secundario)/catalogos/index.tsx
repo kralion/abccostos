@@ -1,7 +1,7 @@
 import { Catalogos } from '@/features/catalogos'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_authenticated/catalogos/')({
+export const Route = createFileRoute('/_authenticated/(secundario)/catalogos/')({
   component: RouteComponent,
 })
 

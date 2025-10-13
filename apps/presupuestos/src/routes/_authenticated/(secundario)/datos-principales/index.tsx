@@ -1,7 +1,7 @@
 import { DatosPrincipales } from '@/features/datos-principales'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_authenticated/datos-principales/')({
+export const Route = createFileRoute('/_authenticated/(secundario)/datos-principales/')({
   component: RouteComponent,
 })
 
