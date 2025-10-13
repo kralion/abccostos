@@ -45,6 +45,7 @@ export const getSidebarData = (
     {
       title: 'Propietario',
       items: [
+        { title: 'Dashboard', url: '/dashboard-propietario', icon: Monitor },
         {
           title: 'Clientes',
           url: '/clientes',
@@ -55,6 +56,11 @@ export const getSidebarData = (
     {
       title: 'Administrador',
       items: [
+        {
+          title: 'Dashboard',
+          url: '/dashboard-admin',
+          icon: Monitor,
+        },
         {
           title: 'Usuarios',
           url: '/usuarios',

@@ -1,9 +1,9 @@
+import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
+import { toast } from 'sonner'
 import { useAuthStore } from '@/stores/auth-store'
 import { supabase } from '@/lib/supabase'
 import { ConfirmDialog } from '@/components/confirm-dialog'
-import { toast } from 'sonner'
-import { useState } from 'react'
 
 interface SignOutDialogProps {
   open: boolean
@@ -11,6 +11,7 @@ interface SignOutDialogProps {
 }
 
 export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
+  //TODO: Debe eliminar todo lo del local storage y cookies porque al cambiar de usuario, el redirect basado en el role redirige a la ruta por defecto del usuario anterior.
   const navigate = useNavigate()
   const { clearAuth } = useAuthStore()
   const [isLoading, setIsLoading] = useState(false)
@@ -19,7 +20,7 @@ export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
     setIsLoading(true)
     try {
       const { error } = await supabase.auth.signOut()
-      
+
       if (error) {
         toast.error('Error al cerrar sesión')
         console.error('Sign out error:', error)
@@ -27,13 +28,10 @@ export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
         return
       }
 
-      // Close dialog first
       onOpenChange(false)
-      
-      // Clear local auth state
+
       clearAuth()
-      
-      // Navigate to sign-in
+
       await navigate({
         to: '/sign-in',
         replace: true,

@@ -73,17 +73,17 @@ export function UserAuthForm({
 
         const { profile } = useAuthStore.getState()
         const welcomeMessage = profile?.name
-          ? `¡Bienvenido de nuevo, ${profile.name}!`
-          : '¡Bienvenido de nuevo!'
+          ? `¡Bienvenid@ de nuevo, ${profile.name}!`
+          : '¡Bienvenid@ de nuevo!'
 
         toast.success(welcomeMessage)
 
         const getDefaultRoute = (role?: string) => {
           switch (role) {
             case 'owner':
-              return '/clientes'
+              return '/dashboard-propietario'
             case 'admin':
-              return '/usuarios'
+              return '/dashboard-admin'
             case 'user':
             default:
               return '/'

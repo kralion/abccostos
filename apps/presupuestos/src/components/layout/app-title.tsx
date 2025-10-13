@@ -18,8 +18,20 @@ export function AppTitle() {
         className='grid flex-1 text-center text-sm leading-tight'
       >
         <h3 className='truncate text-2xl font-bold'>CP360°</h3>
-        {state !== 'collapsed' && (
+        {state !== 'collapsed' && profile?.role === 'owner' && (
+          <span className='block truncate py-2 text-wrap'>
+            Sistema Integral
+            <br />
+            de Gestión de Proyectos
+          </span>
+        )}
+        {state !== 'collapsed' && profile?.role !== 'owner' && (
           <span className='truncate'>Presupuestos</span>
+        )}
+        {state !== 'collapsed' && profile?.role === 'admin' && (
+          <span className='text-muted-foreground truncate py-2'>
+            Consorcio ABC
+          </span>
         )}
       </Link>
       {state !== 'collapsed' && profile?.role === 'user' && (

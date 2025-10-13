@@ -1,12 +1,17 @@
+import { useState } from 'react'
 import { Button } from '@workspace/ui/components/button'
+import { Separator } from '@workspace/ui/components/separator'
 import { PlusIcon, UsersIcon } from 'lucide-react'
 import { CustomEmpty } from '@/components/custom-empty'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { ThemeSwitch } from '@/components/theme-switch'
+import ClientForm from './components/client-form'
 
 export function Clientes() {
+  const [openClientForm, setOpenClientForm] = useState(false)
+
   return (
     <>
       {/* ===== Top Heading ===== */}
@@ -19,13 +24,14 @@ export function Clientes() {
 
       {/* ===== Main ===== */}
       <Main>
+        <Separator className='mb-2' />
+        <ClientForm open={openClientForm} onOpenChange={setOpenClientForm} />
         <div className='flex items-center justify-between'>
-          <div className='md:hidden' />
           <h1 className='hidden text-2xl font-bold tracking-tight md:block'>
             Clientes
           </h1>
-          <Button>
-            Registrar <PlusIcon />
+          <Button onClick={() => setOpenClientForm(true)}>
+            Nuevo Cliente <PlusIcon />
           </Button>
         </div>
         <CustomEmpty

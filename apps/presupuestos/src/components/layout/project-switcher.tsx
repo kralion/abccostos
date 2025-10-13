@@ -32,7 +32,7 @@ export function ProjectSwitcher({ projects }: ProjectSwitcherProps) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'>
-              <span className='flex-1 truncate text-center font-semibold'>
+              <span className='text-muted-foreground flex-1 truncate text-center font-semibold'>
                 {activeProject.name}
               </span>
               <ChevronsUpDown className='ms-auto' />

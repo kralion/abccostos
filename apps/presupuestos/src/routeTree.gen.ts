@@ -31,6 +31,8 @@ import { Route as AuthenticatedPresupuestoIndexRouteImport } from './routes/_aut
 import { Route as AuthenticatedParametrosPresupuestoIndexRouteImport } from './routes/_authenticated/parametros-presupuesto/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedDatosPrincipalesIndexRouteImport } from './routes/_authenticated/datos-principales/index'
+import { Route as AuthenticatedDashboardPropietarioIndexRouteImport } from './routes/_authenticated/dashboard-propietario/index'
+import { Route as AuthenticatedDashboardAdminIndexRouteImport } from './routes/_authenticated/dashboard-admin/index'
 import { Route as AuthenticatedClientesIndexRouteImport } from './routes/_authenticated/clientes/index'
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
 import { Route as AuthenticatedCatalogosIndexRouteImport } from './routes/_authenticated/catalogos/index'
@@ -158,6 +160,18 @@ const AuthenticatedDatosPrincipalesIndexRoute =
     path: '/datos-principales/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDashboardPropietarioIndexRoute =
+  AuthenticatedDashboardPropietarioIndexRouteImport.update({
+    id: '/dashboard-propietario/',
+    path: '/dashboard-propietario/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAdminIndexRoute =
+  AuthenticatedDashboardAdminIndexRouteImport.update({
+    id: '/dashboard-admin/',
+    path: '/dashboard-admin/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedClientesIndexRoute =
   AuthenticatedClientesIndexRouteImport.update({
     id: '/clientes/',
@@ -233,6 +247,8 @@ export interface FileRoutesByFullPath {
   '/catalogos': typeof AuthenticatedCatalogosIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/clientes': typeof AuthenticatedClientesIndexRoute
+  '/dashboard-admin': typeof AuthenticatedDashboardAdminIndexRoute
+  '/dashboard-propietario': typeof AuthenticatedDashboardPropietarioIndexRoute
   '/datos-principales': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/parametros-presupuesto': typeof AuthenticatedParametrosPresupuestoIndexRoute
@@ -264,6 +280,8 @@ export interface FileRoutesByTo {
   '/catalogos': typeof AuthenticatedCatalogosIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/clientes': typeof AuthenticatedClientesIndexRoute
+  '/dashboard-admin': typeof AuthenticatedDashboardAdminIndexRoute
+  '/dashboard-propietario': typeof AuthenticatedDashboardPropietarioIndexRoute
   '/datos-principales': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/parametros-presupuesto': typeof AuthenticatedParametrosPresupuestoIndexRoute
@@ -298,6 +316,8 @@ export interface FileRoutesById {
   '/_authenticated/catalogos/': typeof AuthenticatedCatalogosIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
   '/_authenticated/clientes/': typeof AuthenticatedClientesIndexRoute
+  '/_authenticated/dashboard-admin/': typeof AuthenticatedDashboardAdminIndexRoute
+  '/_authenticated/dashboard-propietario/': typeof AuthenticatedDashboardPropietarioIndexRoute
   '/_authenticated/datos-principales/': typeof AuthenticatedDatosPrincipalesIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/parametros-presupuesto/': typeof AuthenticatedParametrosPresupuestoIndexRoute
@@ -332,6 +352,8 @@ export interface FileRouteTypes {
     | '/catalogos'
     | '/chats'
     | '/clientes'
+    | '/dashboard-admin'
+    | '/dashboard-propietario'
     | '/datos-principales'
     | '/help-center'
     | '/parametros-presupuesto'
@@ -363,6 +385,8 @@ export interface FileRouteTypes {
     | '/catalogos'
     | '/chats'
     | '/clientes'
+    | '/dashboard-admin'
+    | '/dashboard-propietario'
     | '/datos-principales'
     | '/help-center'
     | '/parametros-presupuesto'
@@ -396,6 +420,8 @@ export interface FileRouteTypes {
     | '/_authenticated/catalogos/'
     | '/_authenticated/chats/'
     | '/_authenticated/clientes/'
+    | '/_authenticated/dashboard-admin/'
+    | '/_authenticated/dashboard-propietario/'
     | '/_authenticated/datos-principales/'
     | '/_authenticated/help-center/'
     | '/_authenticated/parametros-presupuesto/'
@@ -577,6 +603,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDatosPrincipalesIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard-propietario/': {
+      id: '/_authenticated/dashboard-propietario/'
+      path: '/dashboard-propietario'
+      fullPath: '/dashboard-propietario'
+      preLoaderRoute: typeof AuthenticatedDashboardPropietarioIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard-admin/': {
+      id: '/_authenticated/dashboard-admin/'
+      path: '/dashboard-admin'
+      fullPath: '/dashboard-admin'
+      preLoaderRoute: typeof AuthenticatedDashboardAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/clientes/': {
       id: '/_authenticated/clientes/'
       path: '/clientes'
@@ -674,6 +714,8 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCatalogosIndexRoute: typeof AuthenticatedCatalogosIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedClientesIndexRoute: typeof AuthenticatedClientesIndexRoute
+  AuthenticatedDashboardAdminIndexRoute: typeof AuthenticatedDashboardAdminIndexRoute
+  AuthenticatedDashboardPropietarioIndexRoute: typeof AuthenticatedDashboardPropietarioIndexRoute
   AuthenticatedDatosPrincipalesIndexRoute: typeof AuthenticatedDatosPrincipalesIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedParametrosPresupuestoIndexRoute: typeof AuthenticatedParametrosPresupuestoIndexRoute
@@ -692,6 +734,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCatalogosIndexRoute: AuthenticatedCatalogosIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedClientesIndexRoute: AuthenticatedClientesIndexRoute,
+  AuthenticatedDashboardAdminIndexRoute: AuthenticatedDashboardAdminIndexRoute,
+  AuthenticatedDashboardPropietarioIndexRoute:
+    AuthenticatedDashboardPropietarioIndexRoute,
   AuthenticatedDatosPrincipalesIndexRoute:
     AuthenticatedDatosPrincipalesIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
