@@ -1,18 +1,16 @@
-import { useState } from 'react'
+import { Header } from '@/components/layout/header'
+import { Main } from '@/components/layout/main'
+import { ProfileDropdown } from '@/components/profile-dropdown'
+import { ThemeSwitch } from '@/components/theme-switch'
 import { getRouteApi } from '@tanstack/react-router'
 import { Separator } from '@workspace/ui/components/separator'
 import {
   Tabs,
   TabsList,
-  TabsTrigger,
-  TabsContent,
+  TabsTrigger
 } from '@workspace/ui/components/tabs'
 import { FileTextIcon } from 'lucide-react'
-import { Header } from '@/components/layout/header'
-import { Main } from '@/components/layout/main'
-import { ProfileDropdown } from '@/components/profile-dropdown'
-import { Search } from '@/components/search'
-import { ThemeSwitch } from '@/components/theme-switch'
+import { useState } from 'react'
 import { ProyectosDialogs } from './components/proyectos-dialogs'
 import { ProyectosPrimaryButtons } from './components/proyectos-primary-buttons'
 import { ProyectosProvider } from './components/proyectos-provider'
@@ -25,7 +23,7 @@ export function Proyectos() {
   const search = route.useSearch()
   const navigate = route.useNavigate()
   const [activePrimaryTab, setActivePrimaryTab] = useState('activos')
-  const [activeSecondaryTab, setActiveSecondaryTab] = useState<
+  const [activeSecondaryTab, _setActiveSecondaryTab] = useState<
     'all' | 'activo' | 'terminado' | 'en ejecucion'
   >('all')
 
@@ -38,7 +36,6 @@ export function Proyectos() {
   return (
     <ProyectosProvider>
       <Header fixed>
-        <Search />
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <ProfileDropdown />
@@ -55,6 +52,7 @@ export function Proyectos() {
           </h1>
 
           {/* Primary Tabs: Activos / Archivados */}
+          <div className='flex items-center '>
           <Tabs
             value={activePrimaryTab}
             onValueChange={setActivePrimaryTab}
@@ -89,64 +87,15 @@ export function Proyectos() {
               </TabsTrigger>
             </TabsList>
           </Tabs>
-        </div>
-        <Separator />
-
-        {/* Secondary Tabs: Activo / Terminado / En Ejecución */}
-        <Tabs
-          value={activeSecondaryTab}
-          onValueChange={(value) =>
-            setActiveSecondaryTab(
-              value as 'all' | 'activo' | 'terminado' | 'en ejecucion'
-            )
-          }
-        >
-          <div className='flex items-center justify-between border-b pb-2'>
-            <TabsList className='text-foreground h-auto rounded-none bg-transparent px-0'>
-              <TabsTrigger
-                value='all'
-                className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-2 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
-              >
-                <span className='hidden group-data-[state=active]:inline md:inline'>
-                  Todos
-                </span>
-              </TabsTrigger>
-              <TabsTrigger
-                value='activo'
-                className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-2 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
-              >
-                <span className='hidden group-data-[state=active]:inline md:inline'>
-                  Activo
-                </span>
-              </TabsTrigger>
-              <TabsTrigger
-                value='terminado'
-                className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-2 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
-              >
-                <span className='hidden group-data-[state=active]:inline md:inline'>
-                  Terminado
-                </span>
-              </TabsTrigger>
-              <TabsTrigger
-                value='en ejecucion'
-                className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-2 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
-              >
-                <span className='hidden group-data-[state=active]:inline md:inline'>
-                  En Ejecución
-                </span>
-              </TabsTrigger>
-            </TabsList>
             <ProyectosPrimaryButtons />
-          </div>
-
-          <TabsContent value={activeSecondaryTab} className='mt-4'>
+            </div>
+        </div>
+        <Separator className='mb-4' />
             <ProyectosTable
               data={filteredProyectos}
               search={search}
               navigate={navigate}
             />
-          </TabsContent>
-        </Tabs>
       </Main>
       <ProyectosDialogs />
     </ProyectosProvider>

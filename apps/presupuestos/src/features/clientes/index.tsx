@@ -1,9 +1,8 @@
-import { getRouteApi } from '@tanstack/react-router'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
-import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
+import { getRouteApi } from '@tanstack/react-router'
 import { ClientesDialogs } from './components/clientes-dialogs'
 import { ClientesPrimaryButtons } from './components/clientes-primary-buttons'
 import { ClientesProvider } from './components/clientes-provider'
@@ -19,7 +18,6 @@ export function Clientes() {
   return (
     <ClientesProvider>
       <Header fixed>
-        <Search />
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <ProfileDropdown />

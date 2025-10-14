@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import {
   BoxesIcon,
+  BrainIcon,
   HouseIcon,
   PickaxeIcon,
   PlusIcon,
@@ -29,6 +30,11 @@ const secondaryTabs: Record<string, SecondaryTab[] | null> = {
   general: null,
   configurations: [
     {
+      label: "Especialidades",
+      value: "especialidades",
+      icon: <BrainIcon size={16} className="me-1.5 opacity-60 md:-ms-0.5" aria-hidden="true" />,
+    },
+    {
       label: "U.P.",
       value: "unidades-produccion",
       icon: <BoxesIcon size={16} className="me-1.5 opacity-60 md:-ms-0.5" aria-hidden="true" />,
@@ -51,6 +57,12 @@ const getEmptyContent = (primaryTab: string, secondaryTab?: string) => {
   // If secondaryTab is provided, return content specific to that secondary tab
   if (secondaryTab) {
     switch (secondaryTab) {
+      case 'especialidades':
+        return {
+          title: "Sin Especialidades",
+          description: "Aqui se mostrarán las especialidades",
+          icon: <BrainIcon />
+        }
       case 'unidades-produccion':
         return {
           title: "Sin Unidades de Producción",
@@ -144,6 +156,9 @@ interface SecondaryTabsComponentProps {
               </TabsTrigger>
             ))}
           </TabsList>
+          {activeSecondaryTab === "especialidades" && (
+            <CustomNewButton trigger="especialidades" title="Nueva Especialidad" />
+          )}
           {activeSecondaryTab === "unidades-produccion" && (
             <CustomNewButton trigger="unidades-produccion" title="Nueva U.P." />
           )}
@@ -172,7 +187,7 @@ interface SecondaryTabsComponentProps {
   function CustomNewButton({ trigger, title }: CustomNewButtonProps) {
     return (
       <Button
-        variant="secondary"
+        variant="ghost"
         onClick={() => console.log(trigger)}
       >
         <PlusIcon />

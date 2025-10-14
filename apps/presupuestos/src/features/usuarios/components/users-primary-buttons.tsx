@@ -13,8 +13,10 @@ export function UsersPrimaryButtons() {
       >
         <span>Invitar Usuario</span> <MailPlus size={18} />
       </Button> */}
-      <Button className='space-x-1' onClick={() => setOpen('add')}>
-        <span>Registrar</span> <UserPlus size={18} />
+      
+      <Button variant='ghost' className='space-x-1' onClick={() => setOpen('add')}>
+        <UserPlus size={18} />
+        <span>Registrar</span> 
       </Button>
     </div>
   )

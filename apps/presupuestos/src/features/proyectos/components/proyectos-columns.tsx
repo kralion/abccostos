@@ -9,6 +9,7 @@ import { LongText } from '@/components/long-text'
 import { estadoTypes, tipoTypes } from '../data/data'
 import { type Proyecto } from '../data/schema'
 import { DataTableRowActions } from './data-table-row-actions'
+import { Link } from '@tanstack/react-router'
 
 export const proyectosColumns: ColumnDef<Proyecto>[] = [
   {
@@ -131,9 +132,11 @@ export const proyectosColumns: ColumnDef<Proyecto>[] = [
       const badgeColor = tipoTypes.get(tipo)
       return (
         <div className='flex space-x-2'>
+          <Link to='/'>
           <Badge variant='outline' className={cn('capitalize', badgeColor)}>
             {row.getValue('tipo')}
           </Badge>
+          </Link>
         </div>
       )
     },

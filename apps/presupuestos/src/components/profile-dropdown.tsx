@@ -107,11 +107,13 @@ export function ProfileDropdown() {
               <Link to='/settings'>Configuración</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem asChild hidden={profile?.role !== 'admin'}>
+              <Link to='/proyectos'>Ir a Proyectos</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild hidden={profile?.role !== 'admin'}>
               <Link to='/settings'>Ir a Módulos</Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
-          <DropdownMenuSeparator />
           <DropdownMenuItem variant='destructive' onClick={() => setOpen(true)}>
             Cerrar sesión
           </DropdownMenuItem>

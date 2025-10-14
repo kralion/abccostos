@@ -4,14 +4,17 @@ import { useSidebar } from '@workspace/ui/components/sidebar'
 import { useAuthStore } from '@/stores/auth-store'
 import { getSidebarData } from './data/sidebar-data'
 import { ProjectSwitcher } from './project-switcher'
+import { useState } from 'react'
 
 export function AppTitle() {
   const { setOpenMobile, state } = useSidebar()
   const { profile, user } = useAuthStore()
   const sidebarData = getSidebarData(profile, user?.email)
+  //TODO: Cambiar por el tipo de presupuesto
+  const [typePresupuesto, _setTypePresupuesto] = useState('venta')
 
   return (
-    <div className='flex flex-col items-center justify-center gap-4'>
+    <div className='flex flex-col items-center justify-center gap-2 mb-4'>
       <Link
         to='/'
         onClick={() => setOpenMobile(false)}
@@ -40,6 +43,9 @@ export function AppTitle() {
 
       {state !== 'collapsed' && profile?.role === 'user' && (
         <Badge className='truncate bg-green-500'>Activo</Badge>
+      )}
+      {state !== 'collapsed' && profile?.role === 'user' && (
+        <Badge className='truncate bg-orange-500'>Presupuesto {typePresupuesto}</Badge>
       )}
     </div>
   )
