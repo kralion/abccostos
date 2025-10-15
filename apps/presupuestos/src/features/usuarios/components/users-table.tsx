@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { DataTableToolbar } from '@/components/data-table'
+import { type NavigateFn, useTableUrlState } from '@/hooks/use-table-url-state'
 import {
   type SortingState,
   type VisibilityState,
@@ -11,8 +12,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { cn } from '@workspace/ui/lib/utils'
-import { type NavigateFn, useTableUrlState } from '@/hooks/use-table-url-state'
 import {
   Table,
   TableBody,
@@ -21,7 +20,8 @@ import {
   TableHeader,
   TableRow,
 } from '@workspace/ui/components/table'
-import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
+import { cn } from '@workspace/ui/lib/utils'
+import { useEffect, useState } from 'react'
 import { roles } from '../data/data'
 import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
@@ -184,7 +184,6 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
       <DataTableBulkActions table={table} />
     </div>
   )

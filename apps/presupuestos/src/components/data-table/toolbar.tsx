@@ -4,6 +4,7 @@ import { Button } from '@workspace/ui/components/button'
 import { Input } from '@workspace/ui/components/input'
 import { DataTableFacetedFilter } from './faceted-filter'
 import { DataTableViewOptions } from './view-options'
+import { DataTablePagination } from './pagination'
 
 type DataTableToolbarProps<TData> = {
   table: Table<TData>
@@ -64,6 +65,7 @@ export function DataTableToolbar<TData>({
               />
             )
           })}
+        <DataTableViewOptions table={table} />
         </div>
         {isFiltered && (
           <Button
@@ -79,7 +81,7 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      <DataTableViewOptions table={table} />
+      <DataTablePagination table={table} />
     </div>
   )
 }

@@ -44,15 +44,14 @@ export function Proyectos() {
 
       <Main>
         <Separator className='mb-2' />
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between space-y-2'>
           <div className='md:hidden' />
 
           <h1 className='hidden text-2xl font-bold tracking-tight md:block'>
-            Portafolio de proyectos
+            Proyectos
           </h1>
 
-          {/* Primary Tabs: Activos / Archivados */}
-          <div className='flex items-center '>
+         
           <Tabs
             value={activePrimaryTab}
             onValueChange={setActivePrimaryTab}
@@ -87,10 +86,13 @@ export function Proyectos() {
               </TabsTrigger>
             </TabsList>
           </Tabs>
-            <ProyectosPrimaryButtons />
-            </div>
+           
         </div>
-        <Separator className='mb-4' />
+        <Separator className='my-2' />
+        <div className='flex items-center justify-end'>
+            <ProyectosPrimaryButtons />
+        </div>
+        <Separator className='my-2' />
             <ProyectosTable
               data={filteredProyectos}
               search={search}

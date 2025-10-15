@@ -34,13 +34,8 @@ export function Usuarios() {
         <Main>
           <Separator className='mb-2' />
           <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
-            <div>
               <h2 className='text-2xl font-bold tracking-tight'>Usuarios</h2>
-              <p className='text-muted-foreground'>
-                Gestiona tus usuarios y sus roles aquí.
-              </p>
-            </div>
-            <div className='flex items-center'>
+          
               <Tabs
                 value={activePrimaryTab}
                 onValueChange={setActivePrimaryTab}
@@ -75,10 +70,13 @@ export function Usuarios() {
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
+           
+          </div>
+          <Separator className='mb-2' />
+          <div className='flex items-center justify-end'>
               <UsersPrimaryButtons />
             </div>
-          </div>
-          <Separator className='mb-4' />
+          <Separator className='my-2' />
           <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
             <UsersTable data={users} search={search} navigate={navigate} />
           </div>

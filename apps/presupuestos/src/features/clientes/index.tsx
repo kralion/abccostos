@@ -8,6 +8,7 @@ import { ClientesPrimaryButtons } from './components/clientes-primary-buttons'
 import { ClientesProvider } from './components/clientes-provider'
 import { ClientesTable } from './components/clientes-table'
 import { clientes } from './data/clientes'
+import { Separator } from '@workspace/ui/components/separator'
 
 const route = getRouteApi('/_authenticated/(propietario)/clientes/')
 
@@ -25,13 +26,12 @@ export function Clientes() {
       </Header>
 
       <Main>
+        <Separator className='mb-2' />
         <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
-          <div>
             <h2 className='text-2xl font-bold tracking-tight'>Clientes</h2>
-            <p className='text-muted-foreground'>Gestiona tus clientes aquí.</p>
-          </div>
           <ClientesPrimaryButtons />
         </div>
+        <Separator className='mb-4' />
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
           <ClientesTable data={clientes} search={search} navigate={navigate} />
         </div>

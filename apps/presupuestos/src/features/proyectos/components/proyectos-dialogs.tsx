@@ -1,4 +1,6 @@
 import { ProyectosActionDialog } from './proyectos-action-dialog'
+import { ProyectosComparativaDialog } from './proyectos-comparativa-dialog'
+import { ProyectosCreateDialog } from './proyectos-create-dialog'
 import { ProyectosDeleteDialog } from './proyectos-delete-dialog'
 import { useProyectos } from './proyectos-provider'
 
@@ -14,6 +16,16 @@ export function ProyectosDialogs() {
 
       {currentRow && (
         <>
+        <ProyectosCreateDialog
+        key='proyecto-create'
+        open={open === 'create'}
+        onOpenChange={() => setOpen('create')}
+      />
+      <ProyectosComparativaDialog
+        key='proyecto-comparativa'
+        open={open === 'comparativa'}
+        onOpenChange={() => setOpen('comparativa')}
+      />
           <ProyectosActionDialog
             key={`proyecto-edit-${currentRow.codigo}`}
             open={open === 'edit'}

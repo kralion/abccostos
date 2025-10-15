@@ -5,11 +5,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '@workspace/ui/components/dropdown-menu'
-import { Trash2, UserPen } from 'lucide-react'
+import { FolderPlus, GitCompareArrows, Pencil, Trash2 } from 'lucide-react'
 import { type Proyecto } from '../data/schema'
 import { useProyectos } from './proyectos-provider'
 
@@ -38,12 +36,28 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
               setOpen('edit')
             }}
           >
+            <Pencil size={16} className="opacity-60" aria-hidden="true" />
             Editar
-            <DropdownMenuShortcut>
-              <UserPen size={16} />
-            </DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => {
+              setCurrentRow(row.original)
+              setOpen('create')
+            }}
+          >
+            <FolderPlus size={16} className="opacity-60" aria-hidden="true" />
+            Crear Presupuesto
+          </DropdownMenuItem>
+          <DropdownMenuItem
+       
+            onClick={() => {
+              setCurrentRow(row.original)
+              setOpen('comparativa')
+            }}
+          >
+            <GitCompareArrows size={16} className="opacity-60" aria-hidden="true" />
+            Comparativo
+          </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
               setCurrentRow(row.original)
@@ -51,10 +65,8 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             }}
             className='text-red-500!'
           >
+            <Trash2 size={16} className="opacity-60" aria-hidden="true" />
             Eliminar
-            <DropdownMenuShortcut>
-              <Trash2 size={16} />
-            </DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

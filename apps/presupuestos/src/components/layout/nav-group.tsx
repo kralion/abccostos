@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import { useAuthStore } from '@/stores/auth-store'
 import { Link, useLocation } from '@tanstack/react-router'
 import { Badge } from '@workspace/ui/components/badge'
 import {
@@ -26,19 +26,24 @@ import {
   useSidebar,
 } from '@workspace/ui/components/sidebar'
 import { ChevronRight } from 'lucide-react'
+import { useState, type ReactNode } from 'react'
 import {
   type NavCollapsible,
+  type NavGroup as NavGroupProps,
   type NavItem,
   type NavLink,
-  type NavGroup as NavGroupProps,
 } from './types'
 
-export function NavGroup({ title, items }: NavGroupProps) {
+//TODO: He quitado el title del NavGroup para que se pueda obtener el tipo de presupuesto desde el backend
+export function NavGroup({ items }: NavGroupProps) {
   const { state, isMobile } = useSidebar()
+  const { profile } = useAuthStore()
+  const userRole = profile?.role || 'user'
+  const [presupuestoType, _setPresupuestoType] = useState('venta')
   const href = useLocation({ select: (location) => location.href })
   return (
     <SidebarGroup>
-      <SidebarGroupLabel hidden>{title}</SidebarGroupLabel>
+      <SidebarGroupLabel hidden={userRole !== 'user'} className={`${presupuestoType === 'venta' ? 'text-orange-300' : 'text-green-500'} font-light`}>{presupuestoType === 'venta' ? 'Presupuesto  Venta' : 'Presupuesto Meta'}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
           const key = `${item.title}-${item.url}`
