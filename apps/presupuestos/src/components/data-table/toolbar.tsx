@@ -32,7 +32,7 @@ export function DataTableToolbar<TData>({
 
   return (
     <div className='flex items-center justify-between'>
-      <div className='flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2'>
+      <div className='flex flex-1  items-start gap-2 flex-row sm:items-center sm:space-x-2'>
         {searchKey ? (
           <Input
             placeholder={searchPlaceholder}
@@ -76,7 +76,7 @@ export function DataTableToolbar<TData>({
             }}
             className='h-8 px-2 lg:px-3'
           >
-            Limpiar
+            <span className='sr-only'>Limpiar </span>
             <Cross2Icon className='ms-2 h-4 w-4' />
           </Button>
         )}

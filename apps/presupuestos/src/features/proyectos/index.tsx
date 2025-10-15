@@ -14,7 +14,9 @@ import { ProyectosDialogs } from './components/proyectos-dialogs'
 import { ProyectosPrimaryButtons } from './components/proyectos-primary-buttons'
 import { ProyectosProvider } from './components/proyectos-provider'
 import { ProyectosTable } from './components/proyectos-table'
+import { ProyectosCards } from './components/proyectos-cards'
 import { proyectos } from './data/proyectos'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 const route = getRouteApi('/_authenticated/(principal)/proyectos/')
 
@@ -25,6 +27,7 @@ export function Proyectos() {
   const [activeSecondaryTab, _setActiveSecondaryTab] = useState<
     'all' | 'activo' | 'terminado' | 'en ejecucion'
   >('all')
+  const isMobile = useIsMobile()
 
   // Filter proyectos based on secondary tab selection
   const filteredProyectos =
@@ -91,11 +94,15 @@ export function Proyectos() {
             <ProyectosPrimaryButtons />
         </div>
         <Separator className='my-2' />
-            <ProyectosTable
-              data={filteredProyectos}
-              search={search}
-              navigate={navigate}
-            />
+        {isMobile ? (
+          <ProyectosCards data={filteredProyectos} search={search} navigate={navigate} />
+        ) : (
+          <ProyectosTable
+            data={filteredProyectos}
+            search={search}
+            navigate={navigate}
+          />
+        )}
       </Main>
       <ProyectosDialogs />
     </ProyectosProvider>

@@ -26,6 +26,7 @@ import { estados } from '../data/data'
 import { type Cliente } from '../data/schema'
 import { clientesColumns as columns } from './clientes-columns'
 import { DataTableBulkActions } from './data-table-bulk-actions'
+import { DataTablePaginationControls } from '@/components/data-table/pagination-controls'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -171,6 +172,9 @@ export function ClientesTable({ data, search, navigate }: DataTableProps) {
         </Table>
       </div>
       <DataTableBulkActions table={table} />
+      <div className='flex items-center justify-end'>
+        <DataTablePaginationControls table={table} />
+      </div>
     </div>
   )
 }

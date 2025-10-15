@@ -26,6 +26,7 @@ import { roles } from '../data/data'
 import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
 import { usersColumns as columns } from './users-columns'
+import { DataTablePaginationControls } from '@/components/data-table/pagination-controls'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -185,6 +186,9 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
         </Table>
       </div>
       <DataTableBulkActions table={table} />
+      <div className='flex items-center justify-end'>
+        <DataTablePaginationControls table={table} />
+      </div>
     </div>
   )
 }

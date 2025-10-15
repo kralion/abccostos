@@ -26,7 +26,8 @@ export function Clientes() {
       <Main>
         <Separator className='mb-2' />
         <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
-            <h2 className='text-2xl font-bold tracking-tight'>Clientes</h2>
+          <div></div>
+            <h2 className='text-2xl font-bold tracking-tight hidden md:block'>Clientes</h2>
           <ClientesPrimaryButtons />
         </div>
         <Separator className='mb-4' />

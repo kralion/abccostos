@@ -15,8 +15,6 @@ type DataTablePaginationProps<TData> = {
 export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
-  const currentPage = table.getState().pagination.pageIndex + 1
-  const totalPages = table.getPageCount()
 
   return (
     <div
@@ -26,10 +24,7 @@ export function DataTablePagination<TData>({
       )}
       style={{ overflowClipMargin: 1 }}
     >
-      <div className='flex w-full items-center justify-between'>
-        <div className='flex w-[100px] items-center justify-center text-sm font-medium @2xl/content:hidden'>
-          Page {currentPage} of {totalPages}
-        </div>
+      <div className='flex w-full items-center justify-between'>        
         <div className='flex items-center gap-2 @max-2xl/content:flex-row-reverse'>
           <Select
             value={`${table.getState().pagination.pageSize}`}
@@ -50,8 +45,6 @@ export function DataTablePagination<TData>({
           </Select>
         </div>
       </div>
-
-   
     </div>
   )
 }
