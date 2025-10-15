@@ -2,7 +2,6 @@ import { ConfigDrawer } from '@/components/config-drawer'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
-import { ThemeSwitch } from '@/components/theme-switch'
 import { getRouteApi } from '@tanstack/react-router'
 import { Button } from '@workspace/ui/components/button'
 import { Input } from '@workspace/ui/components/input'
@@ -85,7 +84,6 @@ export function Apps() {
       {/* ===== Top Heading ===== */}
       <Header>
         <div className='ms-auto flex items-center gap-4'>
-          <ThemeSwitch />
           <ConfigDrawer />
           <ProfileDropdown />
         </div>

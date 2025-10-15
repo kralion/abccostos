@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
 import { useAuthStore } from '@/stores/auth-store'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@workspace/supabase/client'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 
 interface SignOutDialogProps {

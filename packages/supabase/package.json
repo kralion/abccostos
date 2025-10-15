@@ -1,0 +1,22 @@
+{
+  "name": "@workspace/supabase",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./client": {
+      "types": "./src/client.ts",
+      "default": "./dist/client.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "@workspace/typescript-config": "workspace:*",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.75.0"
+  }
+}

@@ -1,6 +1,6 @@
 import { create } from 'zustand'
-import type { User, Session } from '@supabase/supabase-js'
-import { supabase } from '@/lib/supabase'
+import type { User, Session } from '@workspace/supabase/client'
+import { supabase } from '@workspace/supabase/client'
 
 export interface Profile {
   id: string

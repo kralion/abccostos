@@ -2,7 +2,6 @@ import { ConfigDrawer } from '@/components/config-drawer'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
-import { ThemeSwitch } from '@/components/theme-switch'
 import { Outlet } from '@tanstack/react-router'
 import { Separator } from '@workspace/ui/components/separator'
 import { Bell, Monitor, Palette, UserCog, Wrench } from 'lucide-react'
@@ -42,7 +41,6 @@ export function Settings() {
       {/* ===== Top Heading ===== */}
       <Header>
         <div className='ms-auto flex items-center space-x-4'>
-          <ThemeSwitch />
           <ConfigDrawer />
           <ProfileDropdown />
         </div>

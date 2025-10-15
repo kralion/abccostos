@@ -1,7 +1,6 @@
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
-import { ThemeSwitch } from '@/components/theme-switch'
 import { getRouteApi } from '@tanstack/react-router'
 import { Separator } from '@workspace/ui/components/separator'
 import { Tabs, TabsList, TabsTrigger } from '@workspace/ui/components/tabs'
@@ -26,7 +25,7 @@ export function Usuarios() {
       <>
         <Header fixed>
           <div className='ms-auto flex items-center space-x-4'>
-            <ThemeSwitch />
+          
             <ProfileDropdown />
           </div>
         </Header>

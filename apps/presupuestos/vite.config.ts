@@ -19,6 +19,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       //TODO: Revisar si es necesario
       '@workspace/ui': path.resolve(__dirname, '../../packages/ui/src'),
+      '@workspace/supabase': path.resolve(__dirname, '../../packages/supabase/src'),
     },
   },
 })

@@ -15,6 +15,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
+import { cn } from '@workspace/ui/lib/utils'
+import { useTheme } from '@/context/theme-provider'
+import { Check, Moon, Sun } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth-store'
 import useDialogState from '@/hooks/use-dialog-state'
 import { SignOutDialog } from '@/components/sign-out-dialog'
@@ -22,6 +25,7 @@ import { SignOutDialog } from '@/components/sign-out-dialog'
 export function ProfileDropdown() {
   const [open, setOpen] = useDialogState()
   const { profile } = useAuthStore()
+  const { theme, setTheme } = useTheme()
 
   const roles = [
     { value: 'user', label: 'Secundario' },
@@ -114,6 +118,18 @@ export function ProfileDropdown() {
               <Link to='/settings'>Ir a Módulos</Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => setTheme('light')}>
+          <Sun size={14} />
+          Modo Claro
+          <Check size={14} className={cn('ms-auto', theme !== 'light' && 'hidden')} />
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>
+          <Moon size={14} />
+          Modo Oscuro
+          <Check size={14} className={cn('ms-auto', theme !== 'dark' && 'hidden')} />
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
           <DropdownMenuItem variant='destructive' onClick={() => setOpen(true)}>
             Cerrar sesión
           </DropdownMenuItem>

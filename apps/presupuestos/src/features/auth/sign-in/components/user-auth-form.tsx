@@ -18,7 +18,7 @@ import { cn } from '@workspace/ui/lib/utils'
 import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAuthStore } from '@/stores/auth-store'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@workspace/supabase/client'
 import { PasswordInput } from '@/components/password-input'
 
 const formSchema = z.object({
