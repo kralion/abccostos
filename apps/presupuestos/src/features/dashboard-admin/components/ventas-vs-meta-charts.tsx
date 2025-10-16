@@ -94,11 +94,15 @@ export default function VentasVsMetaCharts() {
   }, [comparisonType])
 
   const dataWithVariance = useMemo(() => {
-    return currentData.map((item) => ({
-      ...item,
-      variance: ((item.venta - item.meta) / item.meta) * 100,
-      difference: item.venta - item.meta,
-    }))
+    return currentData.map((item) => {
+      const label = 'month' in item ? item.month : item.name
+      return {
+        ...item,
+        label,
+        variance: ((item.venta - item.meta) / item.meta) * 100,
+        difference: item.venta - item.meta,
+      }
+    })
   }, [currentData])
 
   const totalMeta = currentData.reduce((sum, item) => sum + item.meta, 0)
@@ -332,7 +336,7 @@ export default function VentasVsMetaCharts() {
                 {dataWithVariance.map((item, index) => (
                   <tr key={index}>
                     <td className='font-medium'>
-                      {comparisonType === 'mensual' ? (item as any).month : item.name}
+                      {item.label}
                     </td>
                     <td className='text-right'>${item.meta.toLocaleString()}</td>
                     <td className='text-right'>${item.venta.toLocaleString()}</td>
