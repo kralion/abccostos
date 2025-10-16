@@ -2,6 +2,7 @@ import { Separator } from '@workspace/ui/components/separator'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
+import ClientesCharts from './components/clientes-charts'
 
 export function DashboardPropietario() {
   return (
@@ -19,6 +20,7 @@ export function DashboardPropietario() {
           Dashboard
         </h1>
         <Separator className='mb-2' />
+        <ClientesCharts />
       </Main>
     </>
   )

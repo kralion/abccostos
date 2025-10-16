@@ -6,7 +6,8 @@ import {
   TabsTrigger,
 } from '@workspace/ui/components/tabs'
 import { ChartNoAxesGanttIcon, FolderSearch } from 'lucide-react'
-import { CustomEmpty } from '@/components/custom-empty'
+import ResumenCharts from './resumen-charts'
+import DetalleCharts from './detalle-charts'
 
 interface PrimaryTabsProps {
   activeTab: string
@@ -55,18 +56,10 @@ export default function PrimaryTabs({
       </div>
       <Separator />
       <TabsContent value='resumen'>
-        <CustomEmpty
-          title='Sin Resumen'
-          description='Aquí se mostrarán gráficos para el resumen de los datos'
-          icon={<ChartNoAxesGanttIcon />}
-        />
+        <ResumenCharts />
       </TabsContent>
       <TabsContent value='detalle'>
-        <CustomEmpty
-          title='Sin Detalle'
-          description='Aquí se mostrarán gráficos para la sección de detalle'
-          icon={<FolderSearch />}
-        />
+        <DetalleCharts />
       </TabsContent>
     </Tabs>
   )

@@ -1,5 +1,8 @@
-import { Tabs, TabsList, TabsTrigger } from '@workspace/ui/components/tabs'
+import { Separator } from '@workspace/ui/components/separator'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@workspace/ui/components/tabs'
 import { FoldersIcon, HouseIcon } from 'lucide-react'
+import ProyectosCharts from './proyectos-charts'
+import VentasVsMetaCharts from './ventas-vs-meta-charts'
 
 interface PrimaryTabsProps {
   activeTab: string
@@ -13,6 +16,10 @@ export default function PrimaryTabs({
   return (
     <Tabs value={activeTab} onValueChange={onTabChange}>
       <div className='flex items-center justify-between'>
+        <h1 className='hidden text-2xl font-bold tracking-tight md:block'>
+          Dashboard Administrador
+        </h1>
+        <div className='md:hidden' />
         <TabsList className='text-foreground h-auto rounded-none border-b bg-transparent px-0'>
           <TabsTrigger
             value='proyectos'
@@ -42,6 +49,13 @@ export default function PrimaryTabs({
           </TabsTrigger>
         </TabsList>
       </div>
+      <Separator />
+      <TabsContent value='proyectos'>
+        <ProyectosCharts />
+      </TabsContent>
+      <TabsContent value='ventas-vs-meta'>
+        <VentasVsMetaCharts />
+      </TabsContent>
     </Tabs>
   )
 }
