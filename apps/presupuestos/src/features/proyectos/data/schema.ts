@@ -4,11 +4,9 @@ const proyectoEstadoSchema = z.union([
   z.literal('activo'),
   z.literal('terminado'),
   z.literal('en ejecucion'),
+  z.literal('archivado'),
 ])
 export type ProyectoEstado = z.infer<typeof proyectoEstadoSchema>
-
-const proyectoTipoSchema = z.union([z.literal('venta'), z.literal('meta')])
-export type ProyectoTipo = z.infer<typeof proyectoTipoSchema>
 
 const proyectoSchema = z.object({
   codigo: z.string(),
@@ -16,8 +14,10 @@ const proyectoSchema = z.object({
   nombreCorto: z.string(),
   estado: proyectoEstadoSchema,
   fechaBase: z.coerce.date(),
+  meta: z.boolean(),
+  venta: z.boolean(),
   plazo: z.string(),
-  tipo: proyectoTipoSchema,
+  desviacion: z.number(),
 })
 export type Proyecto = z.infer<typeof proyectoSchema>
 

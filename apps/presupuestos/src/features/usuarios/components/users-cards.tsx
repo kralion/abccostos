@@ -13,21 +13,17 @@ import {
 import { type NavigateFn, useTableUrlState } from '@/hooks/use-table-url-state'
 import { DataTableToolbar } from '@/components/data-table'
 import { DataTablePaginationControls } from '@/components/data-table/pagination-controls'
-import { estados } from '../data/data'
-import { type Proyecto } from '../data/schema'
-import { ProyectoCard } from './proyecto-card'
+import { roles } from '../data/data'
+import { type User } from '../data/schema'
+import { UserCard } from './user-card'
 
-type ProyectosCardsProps = {
-  data: Proyecto[]
+type UsersCardsProps = {
+  data: User[]
   search: Record<string, unknown>
   navigate: NavigateFn
 }
 
-export function ProyectosCards({
-  data,
-  search,
-  navigate,
-}: ProyectosCardsProps) {
+export function UsersCards({ data, search, navigate }: UsersCardsProps) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([])
@@ -45,11 +41,22 @@ export function ProyectosCards({
     globalFilter: { enabled: false },
     columnFilters: [
       {
-        columnId: 'nombreDeProyecto',
-        searchKey: 'nombreDeProyecto',
+        columnId: 'firstName',
+        searchKey: 'firstName',
         type: 'string',
       },
-      { columnId: 'estado', searchKey: 'estado', type: 'array' },
+      {
+        columnId: 'lastName',
+        searchKey: 'lastName',
+        type: 'string',
+      },
+      {
+        columnId: 'email',
+        searchKey: 'email',
+        type: 'string',
+      },
+      { columnId: 'role', searchKey: 'role', type: 'array' },
+      { columnId: 'status', searchKey: 'status', type: 'array' },
     ],
   })
 
@@ -57,10 +64,21 @@ export function ProyectosCards({
   const columns = useMemo(
     () => [
       {
-        accessorKey: 'nombreDeProyecto',
+        accessorKey: 'firstName',
       },
       {
-        accessorKey: 'estado',
+        accessorKey: 'lastName',
+      },
+      {
+        accessorKey: 'email',
+      },
+      {
+        accessorKey: 'role',
+        filterFn: (row: any, id: string, value: string[]) =>
+          value.includes(row.getValue(id)),
+      },
+      {
+        accessorKey: 'status',
         filterFn: (row: any, id: string, value: string[]) =>
           value.includes(row.getValue(id)),
       },
@@ -101,13 +119,21 @@ export function ProyectosCards({
     <div className='space-y-4'>
       <DataTableToolbar
         table={table as any}
-        searchPlaceholder='Filtrar proyectos...'
-        searchKey='nombreDeProyecto'
+        searchPlaceholder='Filtrar usuarios...'
+        searchKey='firstName'
         filters={[
           {
-            columnId: 'estado',
+            columnId: 'role',
+            title: 'Rol',
+            options: roles.map((r) => ({ ...r })),
+          },
+          {
+            columnId: 'status',
             title: 'Estado',
-            options: estados.map((e) => ({ ...e })),
+            options: [
+              { label: 'Habilitado', value: 'habilitado' },
+              { label: 'Deshabilitado', value: 'deshabilitado' },
+            ],
           },
         ]}
       />
@@ -119,7 +145,7 @@ export function ProyectosCards({
       ) : (
         <div className='grid grid-cols-1 gap-3'>
           {currentRows.map((row) => (
-            <ProyectoCard key={row.id} proyecto={row.original as Proyecto} />
+            <UserCard key={row.id} user={row.original as User} />
           ))}
         </div>
       )}

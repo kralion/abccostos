@@ -1,5 +1,4 @@
-import { DataTableToolbar } from '@/components/data-table'
-import { type NavigateFn, useTableUrlState } from '@/hooks/use-table-url-state'
+import { useEffect, useState } from 'react'
 import {
   type SortingState,
   type VisibilityState,
@@ -21,12 +20,13 @@ import {
   TableRow,
 } from '@workspace/ui/components/table'
 import { cn } from '@workspace/ui/lib/utils'
-import { useEffect, useState } from 'react'
+import { type NavigateFn, useTableUrlState } from '@/hooks/use-table-url-state'
+import { DataTableToolbar } from '@/components/data-table'
+import { DataTablePaginationControls } from '@/components/data-table/pagination-controls'
 import { estados } from '../data/data'
 import { type Proyecto } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
 import { proyectosColumns as columns } from './proyectos-columns'
-import { DataTablePaginationControls } from '@/components/data-table/pagination-controls'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -176,9 +176,11 @@ export function ProyectosTable({ data, search, navigate }: DataTableProps) {
         </Table>
       </div>
       <DataTableBulkActions table={table} />
-      <div className='flex items-center justify-end'>
-
-      <DataTablePaginationControls table={table} />
+      <div className='flex items-center justify-between'>
+        <div className='text-muted-foreground text-sm'>
+          Total: {table.getPrePaginationRowModel().rows.length}
+        </div>
+        <DataTablePaginationControls table={table} />
       </div>
     </div>
   )

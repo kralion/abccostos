@@ -1,9 +1,9 @@
 'use client'
 
+import { useEffect } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@workspace/ui/components/button'
 import {
   Dialog,
@@ -22,10 +22,12 @@ import {
   FormMessage,
 } from '@workspace/ui/components/form'
 import { Input } from '@workspace/ui/components/input'
+import { showSubmittedData } from '@/lib/show-submitted-data'
 import { PasswordInput } from '@/components/password-input'
 import { SelectDropdown } from '@/components/select-dropdown'
 import { roles } from '../data/data'
 import { type User } from '../data/schema'
+import { useUsers } from './users-provider'
 
 const formSchema = z
   .object({
@@ -34,10 +36,12 @@ const formSchema = z
     username: z.string().min(1, 'El nombre de usuario es requerido.'),
     phoneNumber: z.string().min(1, 'El teléfono es requerido.'),
     email: z.email({
-      error: (iss) => (iss.input === '' ? 'El correo es requerido.' : undefined),
+      error: (iss) =>
+        iss.input === '' ? 'El correo es requerido.' : undefined,
     }),
     password: z.string().transform((pwd) => pwd.trim()),
-    role: z.string().min(1, 'El rol es requerido.'),
+    role: z.string().optional(),
+    roleDescription: z.string().optional(),
     confirmPassword: z.string().transform((pwd) => pwd.trim()),
     isEdit: z.boolean(),
   })
@@ -104,6 +108,7 @@ export function UsersActionDialog({
   open,
   onOpenChange,
 }: UserActionDialogProps) {
+  const { activePrimaryTab } = useUsers()
   const isEdit = !!currentRow
   const form = useForm<UserForm>({
     resolver: zodResolver(formSchema),
@@ -119,7 +124,7 @@ export function UsersActionDialog({
           lastName: '',
           username: '',
           email: '',
-          role: '',
+          role: activePrimaryTab === 'secundarios' ? 'secundario' : '',
           phoneNumber: '',
           password: '',
           confirmPassword: '',
@@ -127,9 +132,29 @@ export function UsersActionDialog({
         },
   })
 
+  useEffect(() => {
+    if (!isEdit) {
+      form.reset({
+        firstName: '',
+        lastName: '',
+        username: '',
+        email: '',
+        role: activePrimaryTab === 'secundarios' ? 'secundario' : '',
+        phoneNumber: '',
+        password: '',
+        confirmPassword: '',
+        isEdit: false,
+      })
+    }
+  }, [activePrimaryTab, form, isEdit])
+
   const onSubmit = (values: UserForm) => {
+    const finalValues = {
+      ...values,
+      role: activePrimaryTab === 'secundarios' ? 'secundario' : values.role,
+    }
     form.reset()
-    showSubmittedData(values)
+    showSubmittedData(finalValues)
     onOpenChange(false)
   }
 
@@ -145,9 +170,13 @@ export function UsersActionDialog({
     >
       <DialogContent className='sm:max-w-lg'>
         <DialogHeader className='text-start'>
-          <DialogTitle>{isEdit ? 'Editar Usuario' : 'Agregar Nuevo Usuario'}</DialogTitle>
+          <DialogTitle>
+            {isEdit ? 'Editar Usuario' : 'Agregar Nuevo Usuario'}
+          </DialogTitle>
           <DialogDescription>
-            {isEdit ? 'Actualiza el usuario aquí. ' : 'Crea un nuevo usuario aquí. '}
+            {isEdit
+              ? 'Actualiza el usuario aquí. '
+              : 'Crea un nuevo usuario aquí. '}
             Haz clic en guardar cuando termines.
           </DialogDescription>
         </DialogHeader>
@@ -162,7 +191,7 @@ export function UsersActionDialog({
                 control={form.control}
                 name='firstName'
                 render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                  <FormItem>
                     <FormLabel className='col-span-2 text-end'>
                       Nombre
                     </FormLabel>
@@ -182,7 +211,7 @@ export function UsersActionDialog({
                 control={form.control}
                 name='lastName'
                 render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                  <FormItem>
                     <FormLabel className='col-span-2 text-end'>
                       Apellido
                     </FormLabel>
@@ -202,7 +231,7 @@ export function UsersActionDialog({
                 control={form.control}
                 name='username'
                 render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                  <FormItem>
                     <FormLabel className='col-span-2 text-end'>
                       Usuario
                     </FormLabel>
@@ -221,8 +250,10 @@ export function UsersActionDialog({
                 control={form.control}
                 name='email'
                 render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>Correo</FormLabel>
+                  <FormItem>
+                    <FormLabel className='col-span-2 text-end'>
+                      Correo
+                    </FormLabel>
                     <FormControl>
                       <Input
                         placeholder='juan.perez@gmail.com'
@@ -238,7 +269,7 @@ export function UsersActionDialog({
                 control={form.control}
                 name='phoneNumber'
                 render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                  <FormItem>
                     <FormLabel className='col-span-2 text-end'>
                       Teléfono
                     </FormLabel>
@@ -253,31 +284,54 @@ export function UsersActionDialog({
                   </FormItem>
                 )}
               />
+              {activePrimaryTab === 'principales' && (
+                <FormField
+                  control={form.control}
+                  name='role'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='col-span-2 text-end'>Rol</FormLabel>
+                      <SelectDropdown
+                        defaultValue={field.value}
+                        onValueChange={field.onChange}
+                        placeholder='Selecciona un rol'
+                        className='col-span-4 w-full'
+                        items={roles.map(({ label, value }) => ({
+                          label,
+                          value,
+                        }))}
+                      />
+                      <FormMessage className='col-span-4 col-start-3' />
+                    </FormItem>
+                  )}
+                />
+              )}
+
               <FormField
                 control={form.control}
-                name='role'
+                name='roleDescription'
                 render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>Rol</FormLabel>
-                    <SelectDropdown
-                      defaultValue={field.value}
-                      onValueChange={field.onChange}
-                      placeholder='Selecciona un rol'
-                      className='col-span-4'
-                      items={roles.map(({ label, value }) => ({
-                        label,
-                        value,
-                      }))}
-                    />
+                  <FormItem>
+                    <FormLabel className='col-span-2 text-end'>
+                      Descripción del Rol
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Describa el rol...'
+                        className='col-span-4'
+                        {...field}
+                      />
+                    </FormControl>
                     <FormMessage className='col-span-4 col-start-3' />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name='password'
                 render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                  <FormItem>
                     <FormLabel className='col-span-2 text-end'>
                       Contraseña
                     </FormLabel>
@@ -296,7 +350,7 @@ export function UsersActionDialog({
                 control={form.control}
                 name='confirmPassword'
                 render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                  <FormItem>
                     <FormLabel className='col-span-2 text-end'>
                       Confirmar Contraseña
                     </FormLabel>

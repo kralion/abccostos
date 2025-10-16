@@ -37,13 +37,13 @@ import { cn } from '@workspace/ui/lib/utils'
 import { es } from 'date-fns/locale'
 import { CalendarIcon, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { estados, tipos } from '../data/data'
+import { tipos } from '../data/data'
+
+const fileSchema = z.custom<File>((value) => value instanceof File, {
+  message: 'Seleccione una imagen válida',
+})
 
 const formSchema = z.object({
-  codigo: z
-    .string()
-    .min(1, 'Por favor ingrese el código')
-    .min(3, 'Código debe tener al menos 3 caracteres'),
   nombreDeProyecto: z
     .string()
     .min(1, 'Por favor ingrese el nombre del proyecto')
@@ -52,10 +52,7 @@ const formSchema = z.object({
     .string()
     .min(1, 'Por favor ingrese el nombre corto')
     .min(3, 'Nombre corto debe tener al menos 3 caracteres'),
-  estado: z.enum(['activo', 'terminado', 'en ejecucion'], {
-    error: (iss) =>
-      iss.input === undefined ? 'Por favor seleccione un estado' : undefined,
-  }),
+  ubicacion: z.string().min(1, 'Por favor ingrese la ubicación'),
   fechaBase: z.date({
     error: (iss) =>
       iss.input === undefined
@@ -63,6 +60,7 @@ const formSchema = z.object({
         : undefined,
   }),
   plazo: z.string().min(1, 'Por favor ingrese el plazo'),
+  logoProyecto: fileSchema,
   tipo: z.enum(['venta', 'meta'], {
     error: (iss) =>
       iss.input === undefined ? 'Por favor seleccione un tipo' : undefined,
@@ -73,12 +71,12 @@ interface ProyectoFormProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   currentRow?: {
-    codigo: string
     nombreDeProyecto: string
     nombreCorto: string
-    estado: 'activo' | 'terminado' | 'en ejecucion'
+    ubicacion: string
     fechaBase: Date
     plazo: string
+    logoProyecto?: string
     tipo: 'venta' | 'meta'
   } | null
 }
@@ -95,21 +93,21 @@ export default function ProyectoForm({
     resolver: zodResolver(formSchema),
     defaultValues: currentRow
       ? {
-          codigo: currentRow.codigo,
           nombreDeProyecto: currentRow.nombreDeProyecto,
           nombreCorto: currentRow.nombreCorto,
-          estado: currentRow.estado,
+          ubicacion: currentRow.ubicacion,
           fechaBase: currentRow.fechaBase,
           plazo: currentRow.plazo,
+          logoProyecto: undefined,
           tipo: currentRow.tipo,
         }
       : {
-          codigo: '',
           nombreDeProyecto: '',
           nombreCorto: '',
-          estado: undefined,
+          ubicacion: '',
           fechaBase: undefined,
           plazo: '',
+          logoProyecto: undefined,
           tipo: undefined,
         },
   })
@@ -143,9 +141,11 @@ export default function ProyectoForm({
     }
   }
 
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='max-h-[90vh] overflow-y-auto sm:max-w-[600px]'>
+      <DialogContent className='max-h-[90vh] overflow-y-auto sm:max-w-[500px]'>
         <DialogHeader>
           <DialogTitle>
             {isEditMode ? 'Editar Proyecto' : 'Nuevo Proyecto'}
@@ -164,22 +164,9 @@ export default function ProyectoForm({
           >
             <FormField
               control={form.control}
-              name='codigo'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Código</FormLabel>
-                  <FormControl>
-                    <Input placeholder='001' {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name='tipo'
               render={({ field }) => (
-                <FormItem>
+                <FormItem className='md:col-span-2'>
                   <FormLabel>Tipo</FormLabel>
                   <Select
                     onValueChange={field.onChange}
@@ -207,7 +194,7 @@ export default function ProyectoForm({
               name='nombreDeProyecto'
               render={({ field }) => (
                 <FormItem className='md:col-span-2'>
-                  <FormLabel>Nombre De Proyecto</FormLabel>
+                  <FormLabel>Nombre completo</FormLabel>
                   <FormControl>
                     <Input placeholder='Mejoramiento de...' {...field} />
                   </FormControl>
@@ -220,7 +207,7 @@ export default function ProyectoForm({
               name='nombreCorto'
               render={({ field }) => (
                 <FormItem className='md:col-span-2'>
-                  <FormLabel>Nombre Corto</FormLabel>
+                  <FormLabel>Nombre corto</FormLabel>
                   <FormControl>
                     <Input placeholder='Penal - Puno' {...field} />
                   </FormControl>
@@ -230,27 +217,13 @@ export default function ProyectoForm({
             />
             <FormField
               control={form.control}
-              name='estado'
+              name='ubicacion'
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Estado</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className='w-full'>
-                        <SelectValue placeholder='Selecciona un estado' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {estados.map((estado) => (
-                        <SelectItem key={estado.value} value={estado.value}>
-                          {estado.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                <FormItem className='md:col-span-2'>
+                  <FormLabel>Ubicación</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Ciudad, Dirección...' {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -259,9 +232,12 @@ export default function ProyectoForm({
               control={form.control}
               name='fechaBase'
               render={({ field }) => (
-                <FormItem>
+                <FormItem className='md:col-span-2'>
                   <FormLabel>Fecha Base</FormLabel>
-                  <Popover>
+                  <Popover
+                    open={isCalendarOpen}
+                    onOpenChange={setIsCalendarOpen}
+                  >
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
@@ -284,7 +260,10 @@ export default function ProyectoForm({
                       <Calendar
                         mode='single'
                         selected={field.value}
-                        onSelect={field.onChange}
+                        onSelect={(date) => {
+                          field.onChange(date)
+                          setIsCalendarOpen(false)
+                        }}
                         initialFocus
                       />
                     </PopoverContent>
@@ -298,9 +277,28 @@ export default function ProyectoForm({
               name='plazo'
               render={({ field }) => (
                 <FormItem className='md:col-span-2'>
-                  <FormLabel>Plazo</FormLabel>
+                  <FormLabel>Plazo del proyecto</FormLabel>
                   <FormControl>
                     <Input placeholder='25 meses' {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='logoProyecto'
+              render={({ field }) => (
+                <FormItem className='md:col-span-2'>
+                  <FormLabel>Logo del proyecto</FormLabel>
+                  <FormControl>
+                    <Input
+                      type='file'
+                      accept='image/*'
+                      onChange={(e) =>
+                        field.onChange(e.target.files?.[0] ?? undefined)
+                      }
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

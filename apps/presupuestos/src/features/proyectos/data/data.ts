@@ -20,6 +20,10 @@ export const estadoTypes = new Map([
     'en ejecucion',
     'bg-green-100/50 text-green-800 dark:text-green-200 border-green-200',
   ],
+  [
+    'archivado',
+    'bg-gray-100/50 text-gray-800 dark:text-gray-200 border-gray-200',
+  ],
 ])
 
 export const tipos = [

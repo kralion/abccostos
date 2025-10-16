@@ -1,22 +1,24 @@
-import { Header } from '@/components/layout/header'
-import { Main } from '@/components/layout/main'
-import { ProfileDropdown } from '@/components/profile-dropdown'
+import { useState } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
 import { Separator } from '@workspace/ui/components/separator'
 import {
   Tabs,
+  TabsContent,
   TabsList,
-  TabsTrigger
+  TabsTrigger,
 } from '@workspace/ui/components/tabs'
 import { FileTextIcon } from 'lucide-react'
-import { useState } from 'react'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { Header } from '@/components/layout/header'
+import { Main } from '@/components/layout/main'
+import { ProfileDropdown } from '@/components/profile-dropdown'
+import { ProyectosCards } from './components/proyectos-cards'
 import { ProyectosDialogs } from './components/proyectos-dialogs'
 import { ProyectosPrimaryButtons } from './components/proyectos-primary-buttons'
 import { ProyectosProvider } from './components/proyectos-provider'
 import { ProyectosTable } from './components/proyectos-table'
-import { ProyectosCards } from './components/proyectos-cards'
+import { ProyectosTableArchived } from './components/proyectos-table-archived'
 import { proyectos } from './data/proyectos'
-import { useIsMobile } from '@/hooks/use-mobile'
 
 const route = getRouteApi('/_authenticated/(principal)/proyectos/')
 
@@ -29,11 +31,23 @@ export function Proyectos() {
   >('all')
   const isMobile = useIsMobile()
 
+  // Filter proyectos for active tab (non-archived projects)
+  const activeProyectos = proyectos.filter(
+    (proyecto) => proyecto.estado !== 'archivado'
+  )
+
   // Filter proyectos based on secondary tab selection
-  const filteredProyectos =
+  const filteredActiveProyectos =
     activeSecondaryTab === 'all'
-      ? proyectos
-      : proyectos.filter((proyecto) => proyecto.estado === activeSecondaryTab)
+      ? activeProyectos
+      : activeProyectos.filter(
+          (proyecto) => proyecto.estado === activeSecondaryTab
+        )
+
+  // Filter archived proyectos
+  const archivedProyectos = proyectos.filter(
+    (proyecto) => proyecto.estado === 'archivado'
+  )
 
   return (
     <ProyectosProvider>
@@ -52,7 +66,6 @@ export function Proyectos() {
             Proyectos
           </h1>
 
-         
           <Tabs
             value={activePrimaryTab}
             onValueChange={setActivePrimaryTab}
@@ -87,22 +100,44 @@ export function Proyectos() {
               </TabsTrigger>
             </TabsList>
           </Tabs>
-           
         </div>
         <Separator className='my-2' />
         <div className='flex items-center justify-end'>
-            <ProyectosPrimaryButtons />
+          <ProyectosPrimaryButtons />
         </div>
         <Separator className='my-2' />
-        {isMobile ? (
-          <ProyectosCards data={filteredProyectos} search={search} navigate={navigate} />
-        ) : (
-          <ProyectosTable
-            data={filteredProyectos}
-            search={search}
-            navigate={navigate}
-          />
-        )}
+        <Tabs value={activePrimaryTab} onValueChange={setActivePrimaryTab}>
+          <TabsContent value='activos' className='mt-0'>
+            {isMobile ? (
+              <ProyectosCards
+                data={filteredActiveProyectos}
+                search={search}
+                navigate={navigate}
+              />
+            ) : (
+              <ProyectosTable
+                data={filteredActiveProyectos}
+                search={search}
+                navigate={navigate}
+              />
+            )}
+          </TabsContent>
+          <TabsContent value='archivados' className='mt-0'>
+            {isMobile ? (
+              <ProyectosCards
+                data={archivedProyectos}
+                search={search}
+                navigate={navigate}
+              />
+            ) : (
+              <ProyectosTableArchived
+                data={archivedProyectos}
+                search={search}
+                navigate={navigate}
+              />
+            )}
+          </TabsContent>
+        </Tabs>
       </Main>
       <ProyectosDialogs />
     </ProyectosProvider>

@@ -15,16 +15,14 @@ export const users = Array.from({ length: 50 }, () => {
       .toLocaleLowerCase(),
     email: faker.internet.email({ firstName }).toLocaleLowerCase(),
     phoneNumber: faker.phone.number({ style: 'international' }),
-    status: faker.helpers.arrayElement([
-      'habilitado',
-      'deshabilitado',
-    ]),
+    status: faker.helpers.arrayElement(['habilitado', 'deshabilitado']),
     role: faker.helpers.arrayElement([
       'supervisor_general',
       'produccion',
       'gerente_general',
       'gerente_proyecto',
       'control_costos',
+      'secundario',
     ]),
     createdAt: faker.date.past(),
     updatedAt: faker.date.recent(),

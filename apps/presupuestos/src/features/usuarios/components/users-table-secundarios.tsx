@@ -23,7 +23,6 @@ import { cn } from '@workspace/ui/lib/utils'
 import { type NavigateFn, useTableUrlState } from '@/hooks/use-table-url-state'
 import { DataTableToolbar } from '@/components/data-table'
 import { DataTablePaginationControls } from '@/components/data-table/pagination-controls'
-import { roles } from '../data/data'
 import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
 import { usersColumns as columns } from './users-columns'
@@ -41,17 +40,17 @@ type DataTableProps = {
   navigate: NavigateFn
 }
 
-export function UsersTable({ data, search, navigate }: DataTableProps) {
+export function UsersTableSecundarios({
+  data,
+  search,
+  navigate,
+}: DataTableProps) {
   // Local UI-only states
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([])
 
-  // Local state management for table (uncomment to use local-only state, not synced with URL)
-  // const [columnFilters, onColumnFiltersChange] = useState<ColumnFiltersState>([])
-  // const [pagination, onPaginationChange] = useState<PaginationState>({ pageIndex: 0, pageSize: 10 })
-
-  // Synced with URL states (keys/defaults mirror users route search schema)
+  // Synced with URL states
   const {
     columnFilters,
     onColumnFiltersChange,
@@ -64,10 +63,12 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
     pagination: { defaultPage: 1, defaultPageSize: 10 },
     globalFilter: { enabled: false },
     columnFilters: [
-      // id per-column text filter
-      { columnId: 'id', searchKey: 'id', type: 'string' },
-      { columnId: 'status', searchKey: 'status', type: 'array' },
-      { columnId: 'role', searchKey: 'role', type: 'array' },
+      {
+        columnId: 'id',
+        searchKey: 'id',
+        type: 'string',
+      },
+      // Note: No role filter for secundarios table
     ],
   })
 
@@ -103,7 +104,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
     <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
       <DataTableToolbar
         table={table}
-        searchPlaceholder='Filtrar usuarios...'
+        searchPlaceholder='Filtrar usuarios secundarios...'
         searchKey='id'
         filters={[
           {
@@ -114,11 +115,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
               { label: 'Deshabilitado', value: 'deshabilitado' },
             ],
           },
-          {
-            columnId: 'role',
-            title: 'Rol',
-            options: roles.map((role) => ({ ...role })),
-          },
+          // Note: No role filter for secundarios table
         ]}
       />
       <div className='overflow-hidden rounded-md border'>
@@ -178,7 +175,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  Sin resultados.
+                  No hay usuarios secundarios.
                 </TableCell>
               </TableRow>
             )}

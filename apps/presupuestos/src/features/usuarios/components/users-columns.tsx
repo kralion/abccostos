@@ -1,7 +1,7 @@
 import { type ColumnDef } from '@tanstack/react-table'
-import { cn } from '@workspace/ui/lib/utils'
 import { Badge } from '@workspace/ui/components/badge'
 import { Checkbox } from '@workspace/ui/components/checkbox'
+import { cn } from '@workspace/ui/lib/utils'
 import { DataTableColumnHeader } from '@/components/data-table'
 import { LongText } from '@/components/long-text'
 import { callTypes, roles } from '../data/data'
@@ -42,7 +42,9 @@ export const usersColumns: ColumnDef<User>[] = [
       <DataTableColumnHeader column={column} title='Id' />
     ),
     cell: ({ row }) => (
-      <div className='w-fit ps-3'>{(row.getValue('id') as string).slice(0, 3)}</div>
+      <div className='w-fit ps-3'>
+        {(row.getValue('id') as string).slice(0, 3)}
+      </div>
     ),
     meta: {
       className: cn(
@@ -105,7 +107,11 @@ export const usersColumns: ColumnDef<User>[] = [
       const userType = roles.find(({ value }) => value === role)
 
       if (!userType) {
-        return null
+        return (
+          <div className='flex items-center gap-x-2'>
+            <span className='text-sm'>Secundario</span>
+          </div>
+        )
       }
 
       return (

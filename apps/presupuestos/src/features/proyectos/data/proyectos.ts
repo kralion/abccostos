@@ -18,9 +18,12 @@ export const proyectos = Array.from({ length: 20 }, (_, index) => {
       'activo',
       'terminado',
       'en ejecucion',
+      'archivado',
     ] as const),
     fechaBase: fechaBase,
     plazo: `${plazoMeses} meses`,
-    tipo: faker.helpers.arrayElement(['venta', 'meta'] as const),
+    meta: faker.helpers.arrayElement([true, false]),
+    venta: faker.helpers.arrayElement([true, false]),
+    desviacion: faker.number.float({ min: 0, max: 10000 }),
   }
 })

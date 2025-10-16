@@ -6,10 +6,9 @@ import { cn } from '@workspace/ui/lib/utils'
 import { es } from 'date-fns/locale'
 import { DataTableColumnHeader } from '@/components/data-table'
 import { LongText } from '@/components/long-text'
-import { estadoTypes, tipoTypes } from '../data/data'
+import { estadoTypes } from '../data/data'
 import { type Proyecto } from '../data/schema'
 import { DataTableRowActions } from './data-table-row-actions'
-import { Link } from '@tanstack/react-router'
 
 export const proyectosColumns: ColumnDef<Proyecto>[] = [
   {
@@ -42,7 +41,7 @@ export const proyectosColumns: ColumnDef<Proyecto>[] = [
   {
     accessorKey: 'codigo',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Código' />
+      <DataTableColumnHeader column={column} title='ID' />
     ),
     cell: ({ row }) => (
       <div className='w-fit ps-3 text-nowrap'>{row.getValue('codigo')}</div>
@@ -123,20 +122,30 @@ export const proyectosColumns: ColumnDef<Proyecto>[] = [
     enableSorting: false,
   },
   {
-    accessorKey: 'tipo',
+    accessorKey: 'presupuestos',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Tipo' />
+      <DataTableColumnHeader column={column} title='Presupuestos' />
     ),
     cell: ({ row }) => {
-      const { tipo } = row.original
-      const badgeColor = tipoTypes.get(tipo)
+      const { meta, venta } = row.original
       return (
-        <div className='flex space-x-2'>
-          <Link to='/'>
-          <Badge variant='outline' className={cn('capitalize', badgeColor)}>
-            {row.getValue('tipo')}
-          </Badge>
-          </Link>
+        <div className='flex items-center gap-2'>
+          {meta && (
+            <Badge
+              variant='outline'
+              className='border-green-200 bg-green-100/50 text-green-800 dark:text-green-200'
+            >
+              Meta
+            </Badge>
+          )}
+          {venta && (
+            <Badge
+              variant='outline'
+              className='border-orange-200 bg-orange-100/50 text-orange-800 dark:text-orange-200'
+            >
+              Venta
+            </Badge>
+          )}
         </div>
       )
     },
