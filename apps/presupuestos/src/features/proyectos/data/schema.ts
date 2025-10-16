@@ -12,6 +12,7 @@ const proyectoSchema = z.object({
   codigo: z.string(),
   nombreDeProyecto: z.string(),
   nombreCorto: z.string(),
+  ubicacion: z.string(),
   estado: proyectoEstadoSchema,
   fechaBase: z.coerce.date(),
   meta: z.boolean(),

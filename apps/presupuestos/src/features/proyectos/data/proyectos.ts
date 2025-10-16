@@ -14,6 +14,7 @@ export const proyectos = Array.from({ length: 20 }, (_, index) => {
     codigo: String(index + 1).padStart(3, '0'),
     nombreDeProyecto: `Mejoramiento de de los servicio del penal de ${faker.location.city()}`,
     nombreCorto: `Penal - ${faker.location.city()}`,
+    ubicacion: faker.location.city(),
     estado: faker.helpers.arrayElement([
       'activo',
       'terminado',

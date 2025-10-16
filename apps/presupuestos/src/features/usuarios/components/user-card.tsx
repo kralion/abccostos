@@ -24,6 +24,7 @@ const roleLabels = {
   gerente_general: 'Gerente General',
   gerente_proyecto: 'Gerente de Proyecto',
   control_costos: 'Control de Costos',
+  secundario: 'Secundario',
 }
 
 const statusColors = {

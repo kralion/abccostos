@@ -11,7 +11,7 @@ import {
 import { cn } from '@workspace/ui/lib/utils'
 import { es } from 'date-fns/locale'
 import { FolderPlus, GitCompareArrows, Pencil, Trash2 } from 'lucide-react'
-import { estadoTypes, tipoTypes } from '../data/data'
+import { estadoTypes } from '../data/data'
 import { type Proyecto } from '../data/schema'
 import { useProyectos } from './proyectos-provider'
 

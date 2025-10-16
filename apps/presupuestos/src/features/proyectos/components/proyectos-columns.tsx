@@ -75,6 +75,15 @@ export const proyectosColumns: ColumnDef<Proyecto>[] = [
     ),
   },
   {
+    accessorKey: 'ubicacion',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Ubicación' />
+    ),
+    cell: ({ row }) => (
+      <LongText className='max-w-32'>{row.getValue('ubicacion')}</LongText>
+    ),
+  },
+  {
     accessorKey: 'estado',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Estado' />

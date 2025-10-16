@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { Button } from '@workspace/ui/components/button'
+import { useEffect, useState } from 'react'
 import { Separator } from '@workspace/ui/components/separator'
 import {
   Tabs,
@@ -7,16 +6,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@workspace/ui/components/tabs'
-import {
-  BoxesIcon,
-  BrainIcon,
-  HouseIcon,
-  PickaxeIcon,
-  PlusIcon,
-  Rows4Icon,
-  SettingsIcon,
-  UsersIcon,
-} from 'lucide-react'
+import { BrainIcon, HouseIcon, SettingsIcon } from 'lucide-react'
 import { CustomEmpty } from '@/components/custom-empty'
 
 interface SecondaryTab {

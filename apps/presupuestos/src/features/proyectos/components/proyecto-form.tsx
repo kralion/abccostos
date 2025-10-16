@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@workspace/ui/components/button'
 import { Calendar } from '@workspace/ui/components/calendar'
+import { Checkbox } from '@workspace/ui/components/checkbox'
 import {
   Dialog,
   DialogContent,
@@ -26,18 +27,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@workspace/ui/components/popover'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@workspace/ui/components/select'
 import { cn } from '@workspace/ui/lib/utils'
 import { es } from 'date-fns/locale'
 import { CalendarIcon, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { tipos } from '../data/data'
+
+// Removed tipos import - now using meta and venta boolean fields
 
 const fileSchema = z.custom<File>((value) => value instanceof File, {
   message: 'Seleccione una imagen válida',
@@ -61,10 +56,8 @@ const formSchema = z.object({
   }),
   plazo: z.string().min(1, 'Por favor ingrese el plazo'),
   logoProyecto: fileSchema,
-  tipo: z.enum(['venta', 'meta'], {
-    error: (iss) =>
-      iss.input === undefined ? 'Por favor seleccione un tipo' : undefined,
-  }),
+  meta: z.boolean(),
+  venta: z.boolean(),
 })
 
 interface ProyectoFormProps {
@@ -76,8 +69,10 @@ interface ProyectoFormProps {
     ubicacion: string
     fechaBase: Date
     plazo: string
-    logoProyecto?: string
-    tipo: 'venta' | 'meta'
+    meta: boolean
+    venta: boolean
+    desviacion: number
+    logoProyecto?: File
   } | null
 }
 
@@ -99,7 +94,8 @@ export default function ProyectoForm({
           fechaBase: currentRow.fechaBase,
           plazo: currentRow.plazo,
           logoProyecto: undefined,
-          tipo: currentRow.tipo,
+          meta: currentRow.meta,
+          venta: currentRow.venta,
         }
       : {
           nombreDeProyecto: '',
@@ -108,7 +104,8 @@ export default function ProyectoForm({
           fechaBase: undefined,
           plazo: '',
           logoProyecto: undefined,
-          tipo: undefined,
+          meta: false,
+          venta: false,
         },
   })
 
@@ -164,28 +161,35 @@ export default function ProyectoForm({
           >
             <FormField
               control={form.control}
-              name='tipo'
+              name='meta'
               render={({ field }) => (
-                <FormItem className='md:col-span-2'>
-                  <FormLabel>Tipo</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className='w-full'>
-                        <SelectValue placeholder='Selecciona un tipo' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {tipos.map((tipo) => (
-                        <SelectItem key={tipo.value} value={tipo.value}>
-                          {tipo.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
+                <FormItem className='flex flex-row items-start space-y-0 space-x-3 md:col-span-1'>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className='space-y-1 leading-none'>
+                    <FormLabel>Meta</FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='venta'
+              render={({ field }) => (
+                <FormItem className='flex flex-row items-start space-y-0 space-x-3 md:col-span-1'>
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className='space-y-1 leading-none'>
+                    <FormLabel>Venta</FormLabel>
+                  </div>
                 </FormItem>
               )}
             />
