@@ -1,11 +1,4 @@
-import {
-  Shield,
-  Wrench,
-  UserCheck,
-  Briefcase,
-  Calculator,
-  User,
-} from 'lucide-react'
+import { Briefcase, Calculator, Shield, UserCheck, Wrench } from 'lucide-react'
 import { type UserStatus } from './schema'
 
 export const callTypes = new Map<UserStatus, string>([
