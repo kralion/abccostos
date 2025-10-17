@@ -10,7 +10,7 @@ import {
 } from '@workspace/ui/components/dropdown-menu'
 import { cn } from '@workspace/ui/lib/utils'
 import { es } from 'date-fns/locale'
-import { Pencil, Trash2, UserPlus } from 'lucide-react'
+import { Pencil, Power, Trash2, UserPlus } from 'lucide-react'
 import { type User } from '../data/schema'
 import { useUsers } from './users-provider'
 
@@ -25,6 +25,7 @@ const roleLabels = {
   gerente_proyecto: 'Gerente de Proyecto',
   control_costos: 'Control de Costos',
   secundario: 'Secundario',
+  no_asignado: 'No asignado',
 }
 
 const statusColors = {
@@ -34,10 +35,20 @@ const statusColors = {
     'bg-red-100 text-red-800 border-red-200 dark:bg-red-900 dark:text-red-200',
 }
 
+const roleColors = {
+  supervisor_general: 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900 dark:text-purple-200',
+  produccion: 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-200',
+  gerente_general: 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-200',
+  gerente_proyecto: 'bg-indigo-100 text-indigo-800 border-indigo-200 dark:bg-indigo-900 dark:text-indigo-200',
+  control_costos: 'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900 dark:text-orange-200',
+  secundario: 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-800 dark:text-gray-200',
+  no_asignado: 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-800 dark:text-gray-200',
+}
+
 export function UserCard({ user }: UserCardProps) {
   const { setOpen, setCurrentRow } = useUsers()
 
-  const onAction = (action: 'edit' | 'invite' | 'delete') => {
+  const onAction = (action: Parameters<typeof setOpen>[0]) => {
     setCurrentRow(user)
     setOpen(action)
   }
@@ -73,12 +84,22 @@ export function UserCard({ user }: UserCardProps) {
                 Invitar
               </DropdownMenuItem>
               <DropdownMenuItem
+                className={cn(
+                  user.status === 'habilitado' ? 'text-red-500' : 'text-green-500'
+                )}
+                onClick={() => onAction('toggle-status')}
+              >
+                <Power size={16} className='opacity-60' aria-hidden='true' />
+                {user.status === 'habilitado' ? 'Deshabilitar' : 'Habilitar'}
+              </DropdownMenuItem>
+              <DropdownMenuItem
                 onClick={() => onAction('delete')}
                 className='text-red-500!'
               >
                 <Trash2 size={16} className='opacity-60' aria-hidden='true' />
                 Eliminar
               </DropdownMenuItem>
+              
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -104,7 +125,7 @@ export function UserCard({ user }: UserCardProps) {
       <div className='flex flex-wrap items-center gap-2'>
         <Badge
           variant='outline'
-          className='border-blue-200 bg-blue-100/50 text-blue-800 capitalize dark:text-blue-200'
+          className={cn('capitalize', roleColors[user.role])}
         >
           {roleLabels[user.role]}
         </Badge>

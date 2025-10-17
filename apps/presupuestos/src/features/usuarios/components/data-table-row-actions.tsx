@@ -1,6 +1,6 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { type Row } from '@tanstack/react-table'
-import { Trash2, UserPen } from 'lucide-react'
+import { Power, Trash2, UserPen } from 'lucide-react'
 import { Button } from '@workspace/ui/components/button'
 import {
   DropdownMenu,
@@ -10,6 +10,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
+import { cn } from '@workspace/ui/lib/utils'
 import { type User } from '../data/schema'
 import { useUsers } from './users-provider'
 
@@ -41,6 +42,20 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             Editar
             <DropdownMenuShortcut>
               <UserPen size={16} />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className={cn(
+              row.original.status === 'habilitado' ? 'text-red-500' : 'text-green-500'
+            )}
+            onClick={() => {
+              setCurrentRow(row.original)
+              setOpen('toggle-status')
+            }}
+          >
+            {row.original.status === 'habilitado' ? 'Deshabilitar' : 'Habilitar'}
+            <DropdownMenuShortcut>
+              <Power size={16} />
             </DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuSeparator />

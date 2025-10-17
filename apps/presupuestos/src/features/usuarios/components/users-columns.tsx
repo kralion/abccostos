@@ -5,6 +5,15 @@ import { cn } from '@workspace/ui/lib/utils'
 import { DataTableColumnHeader } from '@/components/data-table'
 import { LongText } from '@/components/long-text'
 import { callTypes, roles } from '../data/data'
+
+const roleColors = {
+  supervisor_general: 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900 dark:text-purple-200',
+  produccion: 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-200',
+  gerente_general: 'bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-200',
+  gerente_proyecto: 'bg-indigo-100 text-indigo-800 border-indigo-200 dark:bg-indigo-900 dark:text-indigo-200',
+  control_costos: 'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900 dark:text-orange-200',
+  secundario: 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-800 dark:text-gray-200',
+}
 import { type User } from '../data/schema'
 import { DataTableRowActions } from './data-table-row-actions'
 
@@ -109,14 +118,24 @@ export const usersColumns: ColumnDef<User>[] = [
       if (!userType) {
         return (
           <div className='flex items-center gap-x-2'>
-            <span className='text-sm'>Secundario</span>
+            <Badge
+              variant='outline'
+              className={cn('capitalize', roleColors.secundario)}
+            >
+              Secundario
+            </Badge>
           </div>
         )
       }
 
       return (
         <div className='flex items-center gap-x-2'>
-          <span className='text-sm'>{userType.label}</span>
+          <Badge
+            variant='outline'
+            className={cn('capitalize', roleColors[role])}
+          >
+            {userType.label}
+          </Badge>
         </div>
       )
     },

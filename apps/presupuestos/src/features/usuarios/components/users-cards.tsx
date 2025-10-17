@@ -138,6 +138,42 @@ export function UsersCards({ data, search, navigate }: UsersCardsProps) {
         ]}
       />
 
+      {(() => {
+        const filteredRows = table.getPrePaginationRowModel().rows
+        const habilitados = filteredRows.filter(
+          (row) => row.original.status === 'habilitado'
+        ).length
+        const deshabilitados = filteredRows.filter(
+          (row) => row.original.status === 'deshabilitado'
+        ).length
+        const total = habilitados + deshabilitados
+        const habilitadosPercent = total > 0 ? (habilitados / total) * 100 : 50
+
+        return (
+          <div className='rounded-lg border bg-white p-4 shadow-sm'>
+            <div className='flex items-center justify-between gap-4'>
+              <div className='text-3xl font-bold text-gray-900'>{habilitados}</div>
+              <div className='flex-1 text-center'>
+                <div className='text-sm font-medium text-gray-600'>
+                  Estado de usuarios
+                </div>
+              </div>
+              <div className='text-3xl font-bold text-gray-900'>{deshabilitados}</div>
+            </div>
+            <div className='mt-2 flex h-2 overflow-hidden rounded-full'>
+              <div
+                className='bg-green-500'
+                style={{ width: `${habilitadosPercent}%` }}
+              />
+              <div
+                className='bg-red-500'
+                style={{ width: `${100 - habilitadosPercent}%` }}
+              />
+            </div>
+          </div>
+        )
+      })()}
+
       {currentRows.length === 0 ? (
         <div className='text-muted-foreground py-10 text-center text-sm'>
           No hay resultados.
