@@ -11,6 +11,7 @@ import {
   LineChart,
   Line,
   ComposedChart,
+  ReferenceLine,
 } from 'recharts'
 import { useState, useMemo } from 'react'
 import {
@@ -20,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@workspace/ui/components/select'
+import { calculateParetoData, getParetoColors, formatCurrency } from '@/lib/pareto-utils'
 
 const projectOptions = [
   { id: '1', name: 'Edificio Central' },
@@ -104,6 +106,15 @@ export default function VentasVsMetaCharts() {
       }
     })
   }, [currentData])
+
+  // Pareto analysis of variance (absolute values)
+  const variancePareto = useMemo(() => {
+    const varianceData = dataWithVariance.map(item => ({
+      name: item.label,
+      value: Math.abs(item.variance)
+    }))
+    return calculateParetoData(varianceData, 'value', 'name')
+  }, [dataWithVariance])
 
   const totalMeta = currentData.reduce((sum, item) => sum + item.meta, 0)
   const totalVenta = currentData.reduce((sum, item) => sum + item.venta, 0)
@@ -313,6 +324,53 @@ export default function VentasVsMetaCharts() {
               </ComposedChart>
             </ResponsiveContainer>
           </div>
+        </div>
+      </div>
+
+      {/* Pareto Analysis of Variance */}
+      <div className='card bg-base-100 shadow-sm'>
+        <div className='card-body'>
+          <h2 className='card-title text-base'>Análisis Pareto de Variaciones</h2>
+          <p className='text-sm text-gray-600 mb-4'>
+            Identifica qué elementos contribuyen más a las variaciones del presupuesto (80/20 rule)
+          </p>
+          <ResponsiveContainer width='100%' height={400}>
+            <ComposedChart data={variancePareto}>
+              <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
+              <XAxis
+                dataKey='name'
+                tick={{ fontSize: 10 }}
+                angle={-15}
+                textAnchor='end'
+                height={80}
+              />
+              <YAxis yAxisId='left' tick={{ fontSize: 11 }} />
+              <YAxis yAxisId='right' orientation='right' tick={{ fontSize: 11 }} tickFormatter={(v) => `${v}%`} />
+              <Tooltip
+                formatter={(value: any, name: string) => {
+                  if (name === 'Variación Absoluta') return `${value.toFixed(2)}%`
+                  if (name === 'Cumulative %') return `${value.toFixed(1)}%`
+                  return value
+                }}
+              />
+              <Legend />
+              <Bar yAxisId='left' dataKey='value' name='Variación Absoluta' radius={[4, 4, 0, 0]}>
+                {variancePareto.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={getParetoColors(entry.isVitalFew)} />
+                ))}
+              </Bar>
+              <Line
+                yAxisId='right'
+                type='monotone'
+                dataKey='cumulativePercent'
+                stroke='#EF4444'
+                strokeWidth={2}
+                name='Cumulative %'
+                dot={{ fill: '#EF4444', r: 4 }}
+              />
+              <ReferenceLine yAxisId='right' y={80} stroke='#10B981' strokeDasharray='3 3' />
+            </ComposedChart>
+          </ResponsiveContainer>
         </div>
       </div>
 

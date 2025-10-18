@@ -11,8 +11,12 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis
+  YAxis,
+  ComposedChart,
+  Line,
+  ReferenceLine,
 } from 'recharts'
+import { calculateParetoData, getParetoColors, formatCurrency } from '@/lib/pareto-utils'
 
 const project1Data = {
   name: 'Edificio Central',
@@ -96,6 +100,7 @@ const renderCustomizedLabel = ({
 
 function ProjectCard({ projectData }: { projectData: typeof project1Data }) {
   const usagePercent = (projectData.spent / projectData.budget) * 100
+  const paretoData = calculateParetoData(projectData.subPresupuestos, 'value', 'name')
 
   return (
     <div className='card bg-base-100 shadow-sm'>
@@ -140,36 +145,54 @@ function ProjectCard({ projectData }: { projectData: typeof project1Data }) {
         </div>
 
         <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-          {/* Distribution Chart */}
+          {/* Distribution Chart - Pareto */}
           <div>
             <h3 className='font-semibold mb-3 text-sm'>
-              Distribución del Presupuesto
+              Distribución del Presupuesto (Pareto)
             </h3>
             <ResponsiveContainer width='100%' height={250}>
-              <PieChart>
-                <Pie
-                  data={projectData.subPresupuestos}
-                  cx='50%'
-                  cy='50%'
-                  labelLine={false}
-                  label={renderCustomizedLabel}
-                  outerRadius={80}
-                  fill='#8884d8'
-                  dataKey='value'
-                >
-                  {projectData.subPresupuestos.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+              <ComposedChart data={paretoData}>
+                <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
+                <XAxis 
+                  dataKey='name' 
+                  tick={{ fontSize: 9 }}
+                  angle={-15}
+                  textAnchor='end'
+                  height={50}
+                />
+                <YAxis yAxisId='left' tick={{ fontSize: 10 }} />
+                <YAxis yAxisId='right' orientation='right' tick={{ fontSize: 10 }} tickFormatter={(v) => `${v}%`} />
+                <Tooltip 
+                  formatter={(value: any, name: string) => {
+                    if (name === 'Valor') return formatCurrency(value)
+                    if (name === 'Cumulative %') return `${value.toFixed(1)}%`
+                    return value
+                  }}
+                />
+                <Legend />
+                <Bar yAxisId='left' dataKey='value' name='Valor' radius={[2, 2, 0, 0]}>
+                  {paretoData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={getParetoColors(entry.isVitalFew)} />
                   ))}
-                </Pie>
-                <Tooltip formatter={(value) => `$${value.toLocaleString()}`} />
-              </PieChart>
+                </Bar>
+                <Line 
+                  yAxisId='right' 
+                  type='monotone' 
+                  dataKey='cumulativePercent' 
+                  stroke='#EF4444' 
+                  strokeWidth={2}
+                  name='Cumulative %'
+                  dot={{ fill: '#EF4444', r: 3 }}
+                />
+                <ReferenceLine yAxisId='right' y={80} stroke='#10B981' strokeDasharray='3 3' />
+              </ComposedChart>
             </ResponsiveContainer>
             <div className='mt-2 space-y-1'>
-              {projectData.subPresupuestos.map((item, index) => (
+              {paretoData.map((item, index) => (
                 <div key={index} className='flex items-center gap-2 text-xs'>
                   <div
                     className='w-3 h-3 rounded'
-                    style={{ backgroundColor: item.color }}
+                    style={{ backgroundColor: getParetoColors(item.isVitalFew) }}
                   />
                   <span>{item.name}</span>
                   <span className='ml-auto font-medium'>
