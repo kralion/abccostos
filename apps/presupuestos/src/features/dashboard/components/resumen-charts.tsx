@@ -1,20 +1,19 @@
+import { calculateParetoData, formatCurrency, getParetoColors } from '@/lib/pareto-utils'
 import {
-  BarChart,
   Bar,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
   CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  Line,
+  Cell,
   ComposedChart,
+  Legend,
+  Line,
+  Pie,
+  PieChart,
   ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from 'recharts'
-import { calculateParetoData, getParetoColors, formatCurrency } from '@/lib/pareto-utils'
 
 const subPresupuestosData = [
   { name: 'Estructura', value: 2000 },
@@ -99,10 +98,48 @@ export default function ResumenCharts() {
         </div>
       </div>
 
-      {/* Distribution Pie Chart - Pareto */}
+      {/* Distribution Pie Chart */}
       <div className='card bg-base-100 shadow-sm'>
         <div className='card-body'>
-          <h2 className='card-title text-base'>Distribución por Categoría (Pareto)</h2>
+          <h2 className='card-title text-base'>Distribución por Categoría</h2>
+          <ResponsiveContainer width='100%' height={300}>
+            <PieChart>
+              <Pie
+                data={distributionData}
+                cx='50%'
+                cy='50%'
+                labelLine={false}
+                label={({ percent }: any) => `${(percent * 100).toFixed(0)}%`}
+                outerRadius={80}
+                innerRadius={40}
+                fill='#8884d8'
+                dataKey='value'
+              >
+                {distributionData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className='mt-2 space-y-1'>
+            {distributionData.map((item, index) => (
+              <div key={index} className='flex items-center gap-2 text-xs'>
+                <div
+                  className='w-3 h-3 rounded'
+                  style={{ backgroundColor: item.color }}
+                />
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Distribution Pareto Chart */}
+      <div className='card bg-base-100 shadow-sm'>
+        <div className='card-body'>
+          <h2 className='card-title text-base'>Análisis Pareto - Distribución</h2>
           <ResponsiveContainer width='100%' height={300}>
             <ComposedChart data={distributionPareto}>
               <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
@@ -198,10 +235,48 @@ export default function ResumenCharts() {
         </div>
       </div>
 
-      {/* Mano de Obra vs Materiales - Pareto */}
+      {/* Mano de Obra vs Materiales Pie Chart */}
       <div className='card bg-base-100 shadow-sm'>
         <div className='card-body'>
-          <h2 className='card-title text-base'>Mano de Obra vs Materiales (Pareto)</h2>
+          <h2 className='card-title text-base'>Mano de Obra vs Materiales</h2>
+          <ResponsiveContainer width='100%' height={300}>
+            <PieChart>
+              <Pie
+                data={manoObraMaterialesData}
+                cx='50%'
+                cy='50%'
+                labelLine={false}
+                label={({ percent }: any) => `${(percent * 100).toFixed(0)}%`}
+                outerRadius={80}
+                innerRadius={40}
+                fill='#8884d8'
+                dataKey='value'
+              >
+                {manoObraMaterialesData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+          <div className='mt-2 space-y-1'>
+            {manoObraMaterialesData.map((item, index) => (
+              <div key={index} className='flex items-center gap-2 text-xs'>
+                <div
+                  className='w-3 h-3 rounded'
+                  style={{ backgroundColor: item.color }}
+                />
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Mano de Obra vs Materiales Pareto Chart */}
+      <div className='card bg-base-100 shadow-sm'>
+        <div className='card-body'>
+          <h2 className='card-title text-base'>Análisis Pareto - Mano de Obra</h2>
           <ResponsiveContainer width='100%' height={300}>
             <ComposedChart data={manoObraPareto}>
               <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />

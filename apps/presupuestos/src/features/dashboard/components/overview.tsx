@@ -1,5 +1,5 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, ComposedChart, Line, ReferenceLine, Cell, Legend, CartesianGrid, Tooltip } from 'recharts'
-import { calculateParetoData, getParetoColors, formatCurrency } from '@/lib/pareto-utils'
+import { calculateParetoData, formatCurrency, getParetoColors } from '@/lib/pareto-utils'
+import { Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 const data = [
   {

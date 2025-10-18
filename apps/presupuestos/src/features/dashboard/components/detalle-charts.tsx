@@ -1,18 +1,17 @@
+import { calculateParetoData, formatNumber, getParetoColors } from '@/lib/pareto-utils'
 import {
-  BarChart,
   Bar,
-  XAxis,
-  YAxis,
   CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
+  Cell,
   ComposedChart,
+  Legend,
   Line,
   ReferenceLine,
-  Cell,
-  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from 'recharts'
-import { calculateParetoData, getParetoColors, formatNumber } from '@/lib/pareto-utils'
 
 const unidadesProduccionData = [
   { name: 'Bloque 1', value: 850 },

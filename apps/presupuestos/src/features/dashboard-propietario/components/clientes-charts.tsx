@@ -1,30 +1,28 @@
+import { clientes } from '@/features/clientes/data/clientes'
+import { calculateParetoData, formatNumber, getParetoColors } from '@/lib/pareto-utils'
 import { useMemo } from 'react'
 import {
-  ResponsiveContainer,
-  BarChart,
   Bar,
-  XAxis,
-  YAxis,
   CartesianGrid,
-  Tooltip,
-  Legend,
-  LineChart,
-  Line,
-  PieChart,
-  Pie,
   Cell,
   ComposedChart,
+  Legend,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
   ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
 } from 'recharts'
-import { clientes } from '@/features/clientes/data/clientes'
-import { calculateParetoData, getParetoColors, formatNumber } from '@/lib/pareto-utils'
 
 const COLORS = ['#5B7EC5', '#60D5DC', '#7BC9E0', '#4A5568', '#EF4444', '#10B981']
 
 export default function ClientesCharts() {
   const {
     customersPerMonth,
-    projectsByCompany,
     statusBreakdown,
     projectsPareto,
     statusPareto,
@@ -138,10 +136,28 @@ export default function ClientesCharts() {
         </div>
       </div>
 
+      {/* Status Breakdown Pie Chart */}
+      <div className='card bg-base-100 shadow-sm'>
+        <div className='card-body'>
+          <h2 className='card-title text-base'>Estado de Clientes</h2>
+          <ResponsiveContainer width='100%' height={300}>
+            <PieChart>
+              <Pie data={statusBreakdown} dataKey='value' nameKey='name' cx='50%' cy='50%' outerRadius={80} innerRadius={40} label>
+                {statusBreakdown.map((_entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
       {/* Status Breakdown - Pareto */}
       <div className='card bg-base-100 shadow-sm'>
         <div className='card-body'>
-          <h2 className='card-title text-base'>Estado de Clientes (Pareto)</h2>
+          <h2 className='card-title text-base'>Análisis Pareto - Estado</h2>
           <ResponsiveContainer width='100%' height={300}>
             <ComposedChart data={statusPareto}>
               <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />

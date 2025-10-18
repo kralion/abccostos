@@ -1,19 +1,4 @@
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  ComposedChart,
-  ReferenceLine,
-} from 'recharts'
-import { useState, useMemo } from 'react'
+import { calculateParetoData, getParetoColors } from '@/lib/pareto-utils'
 import {
   Select,
   SelectContent,
@@ -21,7 +6,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@workspace/ui/components/select'
-import { calculateParetoData, getParetoColors, formatCurrency } from '@/lib/pareto-utils'
+import { useMemo, useState } from 'react'
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ComposedChart,
+  Legend,
+  Line,
+  LineChart,
+  ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 
 const projectOptions = [
   { id: '1', name: 'Edificio Central' },

@@ -1,3 +1,4 @@
+import { calculateParetoData, formatCurrency, getParetoColors } from '@/lib/pareto-utils'
 import {
   Area,
   AreaChart,
@@ -5,18 +6,17 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
+  ComposedChart,
   Legend,
+  Line,
   Pie,
   PieChart,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
-  ComposedChart,
-  Line,
-  ReferenceLine,
+  YAxis
 } from 'recharts'
-import { calculateParetoData, getParetoColors, formatCurrency } from '@/lib/pareto-utils'
 
 const project1Data = {
   name: 'Edificio Central',
@@ -144,11 +144,52 @@ function ProjectCard({ projectData }: { projectData: typeof project1Data }) {
           </div>
         </div>
 
-        <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-4'>
+          {/* Distribution Pie Chart */}
+          <div>
+            <h3 className='font-semibold mb-3 text-sm'>
+              Distribución del Presupuesto
+            </h3>
+            <ResponsiveContainer width='100%' height={250}>
+              <PieChart>
+                <Pie
+                  data={projectData.subPresupuestos}
+                  cx='50%'
+                  cy='50%'
+                  labelLine={false}
+                  label={renderCustomizedLabel}
+                  outerRadius={80}
+                  innerRadius={40}
+                  fill='#8884d8'
+                  dataKey='value'
+                >
+                  {projectData.subPresupuestos.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip formatter={(value) => `$${value.toLocaleString()}`} />
+              </PieChart>
+            </ResponsiveContainer>
+            <div className='mt-2 space-y-1'>
+              {projectData.subPresupuestos.map((item, index) => (
+                <div key={index} className='flex items-center gap-2 text-xs'>
+                  <div
+                    className='w-3 h-3 rounded'
+                    style={{ backgroundColor: item.color }}
+                  />
+                  <span>{item.name}</span>
+                  <span className='ml-auto font-medium'>
+                    ${item.value.toLocaleString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Distribution Chart - Pareto */}
           <div>
             <h3 className='font-semibold mb-3 text-sm'>
-              Distribución del Presupuesto (Pareto)
+              Análisis Pareto
             </h3>
             <ResponsiveContainer width='100%' height={250}>
               <ComposedChart data={paretoData}>
