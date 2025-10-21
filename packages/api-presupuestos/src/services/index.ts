@@ -1,9 +1,12 @@
 import { supabase } from '@workspace/supabase/client'
-import type { Database } from '@workspace/supabase/client'
+import type { Database } from '@workspace/supabase/types'
 
-export type Proyecto = Database['public']['Tables']['proyectos']['Row']
+export type ProyectoRow = Database['public']['Tables']['proyectos']['Row']
 export type ProyectoInsert = Database['public']['Tables']['proyectos']['Insert']
 export type ProyectoUpdate = Database['public']['Tables']['proyectos']['Update']
+
+// Transformed type with Date for fechaBase
+export type Proyecto = Omit<ProyectoRow, 'fechaBase'> & { fechaBase: Date }
 
 // Get all proyectos
 export const getProyectos = async (): Promise<Proyecto[]> => {
@@ -17,7 +20,11 @@ export const getProyectos = async (): Promise<Proyecto[]> => {
     return []
   }
 
-  return data || []
+  // Transform fechaBase from string to Date
+  return (data || []).map(proyecto => ({
+    ...proyecto,
+    fechaBase: new Date(proyecto.fechaBase)
+  }))
 }
 
 // Get proyecto by ID
@@ -33,7 +40,11 @@ export const getProyectoById = async (id: string): Promise<Proyecto | null> => {
     return null
   }
 
-  return data
+  // Transform fechaBase from string to Date
+  return {
+    ...data,
+    fechaBase: new Date(data.fechaBase)
+  }
 }
 
 // Create a new proyecto
@@ -49,7 +60,11 @@ export const createProyecto = async (proyecto: ProyectoInsert): Promise<Proyecto
     return null
   }
 
-  return data
+  // Transform fechaBase from string to Date
+  return {
+    ...data,
+    fechaBase: new Date(data.fechaBase)
+  }
 }
 
 // Update proyecto
@@ -66,7 +81,11 @@ export const updateProyecto = async (id: string, updates: ProyectoUpdate): Promi
     return null
   }
 
-  return data
+  // Transform fechaBase from string to Date
+  return {
+    ...data,
+    fechaBase: new Date(data.fechaBase)
+  }
 }
 
 // Delete proyecto

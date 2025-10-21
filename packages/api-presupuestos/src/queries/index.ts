@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import * as proyectosService from '../services/index.js'
+import type { Proyecto } from '../services/index.js'
 import { toast } from 'sonner'
 
 export const useProyectos = () => {

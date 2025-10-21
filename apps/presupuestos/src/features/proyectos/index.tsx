@@ -19,10 +19,7 @@ import { ProyectosProvider } from './components/proyectos-provider'
 import { ProyectosTable } from './components/proyectos-table'
 import { ProyectosTableArchived } from './components/proyectos-table-archived'
 import { useProyectos } from '@workspace/api-presupuestos/queries'
-import type { Database } from '@workspace/supabase/types'
-
-type ProyectoRow = Database['public']['Tables']['proyectos']['Row']
-type Proyecto = Omit<ProyectoRow, 'fechaBase'> & { fechaBase: Date }
+import type { Proyecto } from '@workspace/api-presupuestos/services'
 
 const route = getRouteApi('/_authenticated/(principal)/proyectos/')
 
@@ -71,14 +68,8 @@ export function Proyectos() {
     )
   }
 
-  // Transform proyectos to convert fechaBase from string to Date
-  const transformedProyectos: Proyecto[] = proyectos.map(proyecto => ({
-    ...proyecto,
-    fechaBase: new Date(proyecto.fechaBase)
-  }))
-
   // Filter proyectos for active tab (non-archived projects)
-  const activeProyectos = transformedProyectos.filter(
+  const activeProyectos = proyectos.filter(
     (proyecto) => proyecto.estado !== 'archivado'
   )
 
@@ -91,7 +82,7 @@ export function Proyectos() {
         )
 
   // Filter archived proyectos
-  const archivedProyectos = transformedProyectos.filter(
+  const archivedProyectos = proyectos.filter(
     (proyecto) => proyecto.estado === 'archivado'
   )
 

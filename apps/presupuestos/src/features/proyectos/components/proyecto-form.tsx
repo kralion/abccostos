@@ -31,9 +31,7 @@ import { cn } from '@workspace/ui/lib/utils'
 import { es } from 'date-fns/locale'
 import { CalendarIcon, Loader2 } from 'lucide-react'
 import { useCreateProyecto, useUpdateProyecto } from '@workspace/api-presupuestos/queries'
-import type { Database } from '@workspace/supabase/types'
-
-type Proyecto = Database['public']['Tables']['proyectos']['Row']
+import type { Proyecto } from '@workspace/api-presupuestos/services'
 
 // Removed tipos import - now using meta and venta boolean fields
 
