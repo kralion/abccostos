@@ -119,9 +119,11 @@ export const deleteProyecto = async (id: string): Promise<boolean> => {
 // Get all usuarios
 export const getUsuarios = async (): Promise<Usuario[]> => {
   const { data, error } = await supabase
-    .from('usuarios')
+    .from('profiles')
     .select('*')
     .order('created_at', { ascending: false })
+
+    console.log(data)
 
   if (error) {
     console.error('Error fetching usuarios:', error)
@@ -139,7 +141,7 @@ export const getUsuarios = async (): Promise<Usuario[]> => {
 // Get usuario by ID
 export const getUsuarioById = async (id: string): Promise<Usuario | null> => {
   const { data, error } = await supabase
-    .from('usuarios')
+    .from('profiles')
     .select('*')
     .eq('id', id)
     .single()
@@ -160,7 +162,7 @@ export const getUsuarioById = async (id: string): Promise<Usuario | null> => {
 // Create a new usuario
 export const createUsuario = async (usuario: UsuarioInsert): Promise<Usuario | null> => {
   const { data, error } = await supabase
-    .from('usuarios')
+    .from('profiles')
     .insert(usuario)
     .select()
     .single()
@@ -181,7 +183,7 @@ export const createUsuario = async (usuario: UsuarioInsert): Promise<Usuario | n
 // Update usuario
 export const updateUsuario = async (id: string, updates: UsuarioUpdate): Promise<Usuario | null> => {
   const { data, error } = await supabase
-    .from('usuarios')
+    .from('profiles')
     .update(updates)
     .eq('id', id)
     .select()
@@ -203,7 +205,7 @@ export const updateUsuario = async (id: string, updates: UsuarioUpdate): Promise
 // Delete usuario
 export const deleteUsuario = async (id: string): Promise<boolean> => {
   const { error } = await supabase
-    .from('usuarios')
+    .from('profiles')
     .delete()
     .eq('id', id)
 
