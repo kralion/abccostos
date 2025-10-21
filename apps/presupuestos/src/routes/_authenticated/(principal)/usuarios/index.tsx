@@ -25,6 +25,9 @@ const usersSearchSchema = z.object({
     .catch([]),
   // Per-column text filter (example for username)
   username: z.string().optional().catch(''),
+  // Action parameters
+  edit: z.string().optional(),
+  delete: z.string().optional(),
 })
 
 export const Route = createFileRoute('/_authenticated/(principal)/usuarios/')({

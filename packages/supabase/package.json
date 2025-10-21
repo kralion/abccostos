@@ -7,11 +7,15 @@
   },
   "exports": {
     "./client": {
-      "types": "./src/client.ts",
+      "development": "./src/client.ts",
+      "production": "./dist/client.js",
+      "types": "./dist/client.d.ts",
       "default": "./src/client.ts"
     },
     "./types": {
-      "types": "./src/types.ts",
+      "development": "./src/types.ts", 
+      "production": "./dist/types.js",
+      "types": "./dist/types.d.ts",
       "default": "./src/types.ts"
     }
   },

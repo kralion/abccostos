@@ -31,7 +31,7 @@ import { cn } from '@workspace/ui/lib/utils'
 import { es } from 'date-fns/locale'
 import { CalendarIcon, Loader2 } from 'lucide-react'
 import { useCreateProyecto, useUpdateProyecto } from '@workspace/api-presupuestos/queries'
-import type { Proyecto } from '@workspace/api-presupuestos/services'
+import type { Database } from '@workspace/supabase/types'
 
 // Removed tipos import - now using meta and venta boolean fields
 
@@ -64,7 +64,7 @@ const formSchema = z.object({
 interface ProyectoFormProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  currentRow?: Proyecto | null
+  currentRow?: Database['public']['Tables']['proyectos']['Row'] | null
 }
 
 export default function ProyectoForm({

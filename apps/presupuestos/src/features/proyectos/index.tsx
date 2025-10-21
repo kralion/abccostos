@@ -1,5 +1,9 @@
-import { useState } from 'react'
+import { Header } from '@/components/layout/header'
+import { Main } from '@/components/layout/main'
+import { ProfileDropdown } from '@/components/profile-dropdown'
+import { useIsMobile } from '@/hooks/use-mobile'
 import { getRouteApi } from '@tanstack/react-router'
+import { useProyectos } from '@workspace/api-presupuestos/queries'
 import { Separator } from '@workspace/ui/components/separator'
 import {
   Tabs,
@@ -8,18 +12,13 @@ import {
   TabsTrigger,
 } from '@workspace/ui/components/tabs'
 import { FileTextIcon } from 'lucide-react'
-import { useIsMobile } from '@/hooks/use-mobile'
-import { Header } from '@/components/layout/header'
-import { Main } from '@/components/layout/main'
-import { ProfileDropdown } from '@/components/profile-dropdown'
+import { useState } from 'react'
 import { ProyectosCards } from './components/proyectos-cards'
 import { ProyectosDialogs } from './components/proyectos-dialogs'
 import { ProyectosPrimaryButtons } from './components/proyectos-primary-buttons'
 import { ProyectosProvider } from './components/proyectos-provider'
 import { ProyectosTable } from './components/proyectos-table'
 import { ProyectosTableArchived } from './components/proyectos-table-archived'
-import { useProyectos } from '@workspace/api-presupuestos/queries'
-import type { Proyecto } from '@workspace/api-presupuestos/services'
 
 const route = getRouteApi('/_authenticated/(principal)/proyectos/')
 
