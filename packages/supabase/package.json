@@ -7,12 +7,12 @@
   },
   "exports": {
     "./client": {
-      "types": "./dist/client.d.ts",
-      "default": "./dist/client.js"
+      "types": "./src/client.ts",
+      "default": "./src/client.ts"
     },
     "./types": {
-      "types": "./dist/types.d.ts",
-      "default": "./dist/types.js"
+      "types": "./src/types.ts",
+      "default": "./src/types.ts"
     }
   },
   "devDependencies": {

@@ -7,12 +7,12 @@
   },
   "exports": {
     "./services": {
-      "types": "./dist/services/index.d.ts",
-      "default": "./dist/services/index.js"
+      "types": "./src/services/index.ts",
+      "default": "./src/services/index.ts"
     },
     "./queries": {
-      "types": "./dist/queries/index.d.ts",
-      "default": "./dist/queries/index.js"
+      "types": "./src/queries/index.ts",
+      "default": "./src/queries/index.ts"
     }
   },
   "devDependencies": {
