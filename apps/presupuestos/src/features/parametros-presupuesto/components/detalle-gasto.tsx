@@ -20,13 +20,9 @@ import {
   Copy,
   List,
   Grid3x3,
-  Plus,
   CircleX,
   ExternalLink,
-  CirclePlus,
   Circle,
-  CircleCheckBig,
-  CircleMinus,
   CircleDot,
 } from 'lucide-react'
 import { type GastoGeneral } from '../data/schema'
