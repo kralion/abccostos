@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Separator } from '@workspace/ui/components/separator'
+import { Button } from '@workspace/ui/components/button'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
+import { CirclePlus } from 'lucide-react'
 import PrimaryTabs from './components/primarytabs'
 import SecondaryTabs from './components/secondarytabs'
 
@@ -14,6 +16,10 @@ export function Presupuesto() {
       {/* ===== Top Heading ===== */}
       <Header>
         <div className='ms-auto flex items-center space-x-4'>
+          <Button variant='ghost' size='sm' className='gap-2'>
+            <CirclePlus className='size-4' />
+            Sub-presupuesto
+          </Button>
           <ProfileDropdown />
         </div>
       </Header>

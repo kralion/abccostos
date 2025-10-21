@@ -7,6 +7,9 @@ import {
 } from '@workspace/ui/components/tabs'
 import { ChartNoAxesCombinedIcon, HouseIcon, ReceiptIcon } from 'lucide-react'
 import { CustomEmpty } from '@/components/custom-empty'
+import { PartidasTable } from './partidas-table'
+import { partidasColumns } from './partidas-columns'
+import { mockPartidas } from '../data/mock-data'
 
 interface SecondaryTab {
   label: string
@@ -185,8 +188,8 @@ export default function SecondaryTabs({
         ))}
       </TabsList>
       {currentSecondaryTabs.map((tab) => (
-        <TabsContent key={tab.value} value={tab.value}>
-          <CustomEmpty {...getEmptyContent(activePrimaryTab, tab.value)} />
+        <TabsContent key={tab.value} value={tab.value} className='mt-4'>
+          <PartidasTable data={mockPartidas} columns={partidasColumns} />
         </TabsContent>
       ))}
     </Tabs>

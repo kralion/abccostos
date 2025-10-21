@@ -5,13 +5,14 @@ import {
 } from "lucide-react"
 import { useEffect, useState } from "react"
 
-  import { CustomEmpty } from "@/components/custom-empty"
+import { CustomEmpty } from "@/components/custom-empty"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@workspace/ui/components/tabs"
+import { GastosGenerales } from "./gastos-generales"
 
 interface SecondaryTab {
   label: string
@@ -72,6 +73,9 @@ interface SecondaryTabsComponentProps {
     }, [activePrimaryTab, activeSecondaryTab])
 
     if (!currentSecondaryTabs || currentSecondaryTabs.length === 0) {
+      if (activePrimaryTab === 'gastos-generales') {
+        return <GastosGenerales />
+      }
       const emptyContent = getEmptyContent(activePrimaryTab)
       return <CustomEmpty {...emptyContent} />
     }

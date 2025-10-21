@@ -4,21 +4,25 @@ import {
   BrainIcon,
   HouseIcon,
   PickaxeIcon,
-  PlusIcon,
   Rows4Icon,
   SettingsIcon,
   UsersIcon
 } from "lucide-react"
 
-  import { CustomEmpty } from "@/components/custom-empty"
+import { CustomEmpty } from "@/components/custom-empty"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@workspace/ui/components/tabs"
-import { Button } from "@workspace/ui/components/button"
 import { Separator } from "@workspace/ui/components/separator"
+import GeneralData from "./general-data"
+import UsuariosData from "./usuarios-data"
+import EspecialidadesData from "./especialidades-data"
+import UnidadesProduccionData from "./unidades-produccion-data"
+import TrenesData from "./trenes-data"
+import FasesData from "./fases-data"
 
 interface SecondaryTab {
   label: string
@@ -50,7 +54,7 @@ const secondaryTabs: Record<string, SecondaryTab[] | null> = {
       icon: <Rows4Icon size={16} className="me-1.5 opacity-60 md:-ms-0.5" aria-hidden="true" />,
     },
   ],
-  roles: null
+  usuarios: null
 }
 
 const getEmptyContent = (primaryTab: string, secondaryTab?: string) => {
@@ -104,10 +108,10 @@ const getEmptyContent = (primaryTab: string, secondaryTab?: string) => {
         description: "Aqui se mostrarán las configuraciones",
         icon: <SettingsIcon />
       }
-    case 'roles':
+    case 'usuarios':
       return {
-        title: "No hay Roles",
-        description: "Aqui se mostrarán los roles",
+        title: "No hay Usuarios",
+        description: "Aqui se mostrarán los usuarios",
         icon: <UsersIcon />
       }
     default:
@@ -137,6 +141,12 @@ interface SecondaryTabsComponentProps {
     }, [activePrimaryTab, activeSecondaryTab])
 
     if (!currentSecondaryTabs || currentSecondaryTabs.length === 0) {
+      if (activePrimaryTab === "general") {
+        return <GeneralData />
+      }
+      if (activePrimaryTab === "usuarios") {
+        return <UsuariosData />
+      }
       const emptyContent = getEmptyContent(activePrimaryTab)
       return <CustomEmpty {...emptyContent} />
     }
@@ -156,42 +166,19 @@ interface SecondaryTabsComponentProps {
               </TabsTrigger>
             ))}
           </TabsList>
-          {activeSecondaryTab === "especialidades" && (
-            <CustomNewButton trigger="especialidades" title="Nueva Especialidad" />
-          )}
-          {activeSecondaryTab === "unidades-produccion" && (
-            <CustomNewButton trigger="unidades-produccion" title="Nueva U.P." />
-          )}
-          {activeSecondaryTab === "trenes" && (
-            <CustomNewButton trigger="trenes" title="Nuevo Tren" />
-          )}
-          {activeSecondaryTab === "fases" && (
-            <CustomNewButton trigger="fases" title="Nueva Fase" />
-          )}
         </div>
         <Separator /> 
         {currentSecondaryTabs.map((tab) => (
           <TabsContent key={tab.value} value={tab.value}>
-            <CustomEmpty {...getEmptyContent(activePrimaryTab, tab.value)} />
+            {tab.value === 'especialidades' && <EspecialidadesData />}
+            {tab.value === 'unidades-produccion' && <UnidadesProduccionData />}
+            {tab.value === 'trenes' && <TrenesData />}
+            {tab.value === 'fases' && <FasesData />}
+            {!['especialidades', 'unidades-produccion', 'trenes', 'fases'].includes(tab.value) && (
+              <CustomEmpty {...getEmptyContent(activePrimaryTab, tab.value)} />
+            )}
           </TabsContent>
         ))}
       </Tabs>
-    )
-  }
-  
-
-  interface CustomNewButtonProps {
-    trigger: string
-    title: string
-}
-  function CustomNewButton({ trigger, title }: CustomNewButtonProps) {
-    return (
-      <Button
-        variant="ghost"
-        onClick={() => console.log(trigger)}
-      >
-        <PlusIcon />
-        {title}
-      </Button>
     )
   }

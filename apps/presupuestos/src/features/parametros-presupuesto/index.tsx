@@ -25,7 +25,7 @@ export function ParametrosPresupuesto() {
           <div className='md:hidden' />
 
           <h1 className='hidden text-2xl font-bold tracking-tight md:block'>
-            Parámetros Presupuesto
+            Parámetros del Presupuesto
           </h1>
           <PrimaryTabs
             activeTab={activePrimaryTab}
