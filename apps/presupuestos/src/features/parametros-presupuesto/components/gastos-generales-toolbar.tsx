@@ -1,23 +1,18 @@
-import { type Table } from '@tanstack/react-table'
 import { Button } from '@workspace/ui/components/button'
 import {
-  Copy,
-  ArrowUp,
   ArrowDown,
+  ArrowUp,
+  Copy,
+  Filter,
   Grid3x3,
   List,
-  Pencil,
   Minus,
-  Filter,
+  Pencil,
   Repeat2,
 } from 'lucide-react'
-import { type GastoGeneral } from '../data/schema'
 
-interface GastosGeneralesToolbarProps {
-  table: Table<GastoGeneral>
-}
 
-export function GastosGeneralesToolbar({ table }: GastosGeneralesToolbarProps) {
+export function GastosGeneralesToolbar() {
   return (
     <div className='flex items-center justify-between border-b bg-muted/30 px-4 py-2'>
       <div className='flex items-center gap-1'>

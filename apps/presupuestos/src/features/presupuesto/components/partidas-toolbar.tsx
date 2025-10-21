@@ -1,4 +1,3 @@
-import { type Table } from '@tanstack/react-table'
 import { Button } from '@workspace/ui/components/button'
 import { Input } from '@workspace/ui/components/input'
 import {
@@ -24,13 +23,10 @@ import {
   Settings,
   Upload,
 } from 'lucide-react'
-import { type Partida } from '../data/schema'
 
-interface PartidasToolbarProps {
-  table: Table<Partida>
-}
 
-export function PartidasToolbar({ table }: PartidasToolbarProps) {
+
+export function PartidasToolbar() {
   return (
     <div className='space-y-4'>
       <div className='flex flex-wrap items-center gap-2'>

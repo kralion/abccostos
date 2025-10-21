@@ -1,5 +1,4 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
-import { type Row } from '@tanstack/react-table'
 import { Button } from '@workspace/ui/components/button'
 import {
   DropdownMenu,
@@ -9,13 +8,8 @@ import {
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
 import { Pencil, Trash2 } from 'lucide-react'
-import { type Partida } from '../data/schema'
 
-type DataTableRowActionsProps = {
-  row: Row<Partida>
-}
-
-export function DataTableRowActions({ row }: DataTableRowActionsProps) {
+export function DataTableRowActions() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>

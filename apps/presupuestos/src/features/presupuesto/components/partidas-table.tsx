@@ -69,7 +69,7 @@ export function PartidasTable({ data, columns }: DataTableProps) {
 
   return (
     <div className='space-y-4'>
-      <PartidasToolbar table={table} />
+      <PartidasToolbar />
       
       <div className='rounded-md border'>
         <Table>

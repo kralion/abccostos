@@ -5,7 +5,13 @@ import {
 } from "lucide-react"
 import { useEffect, useState } from "react"
 
-  import { CustomEmpty } from "@/components/custom-empty"
+import { CustomEmpty } from "@/components/custom-empty"
+import TitulosTable from "./titulos-table"
+import ElementosTable from "./elementos-table"
+import PartidasTable from "./partidas-table"
+import RecursosTable from "./recursos-table"
+import UnidadesTable from "./unidades-table"
+import IndicesUnificadosTable from "./indices-unificados-table"
 import {
   Tabs,
   TabsContent,
@@ -21,8 +27,11 @@ interface SecondaryTab {
 
 const secondaryTabs: Record<string, SecondaryTab[] | null> = {
     'titulos': null,
+    'elementos': null,
     'partidas': null,
     'recursos': null,
+    'unidades': null,
+    'indices-unificados': null,
 }
 
 const getEmptyContent = (primaryTab: string) => {
@@ -31,6 +40,12 @@ const getEmptyContent = (primaryTab: string) => {
       return {
         title: "Sin Titulos",
         description: "Aqui se mostrarán los titulos",
+        icon: <ReceiptIcon />
+      }
+    case 'elementos':
+      return {
+        title: "Sin Elementos",
+        description: "Aqui se mostrarán los elementos",
         icon: <ReceiptIcon />
       }
     case 'partidas':
@@ -43,6 +58,18 @@ const getEmptyContent = (primaryTab: string) => {
       return {
         title: "Sin Recursos",
         description: "Aqui se mostrarán los recursos",
+        icon: <ReceiptIcon />
+      }
+    case 'unidades':
+      return {
+        title: "Sin Unidades",
+        description: "Aqui se mostrarán las unidades",
+        icon: <ReceiptIcon />
+      }
+    case 'indices-unificados':
+      return {
+        title: "Sin Índices Unificados",
+        description: "Aqui se mostrarán los índices unificados",
         icon: <ReceiptIcon />
       }
     default:
@@ -72,6 +99,24 @@ interface SecondaryTabsComponentProps {
     }, [activePrimaryTab, activeSecondaryTab])
 
     if (!currentSecondaryTabs || currentSecondaryTabs.length === 0) {
+      if (activePrimaryTab === 'titulos') {
+        return <TitulosTable />
+      }
+      if (activePrimaryTab === 'elementos') {
+        return <ElementosTable />
+      }
+      if (activePrimaryTab === 'partidas') {
+        return <PartidasTable />
+      }
+      if (activePrimaryTab === 'recursos') {
+        return <RecursosTable />
+      }
+      if (activePrimaryTab === 'unidades') {
+        return <UnidadesTable />
+      }
+      if (activePrimaryTab === 'indices-unificados') {
+        return <IndicesUnificadosTable />
+      }
       const emptyContent = getEmptyContent(activePrimaryTab)
       return <CustomEmpty {...emptyContent} />
     }
