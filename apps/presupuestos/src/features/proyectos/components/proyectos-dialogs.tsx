@@ -3,6 +3,8 @@ import { ProyectosComparativaDialog } from './proyectos-comparativa-dialog'
 import { ProyectosCreateDialog } from './proyectos-create-dialog'
 import { ProyectosDeleteDialog } from './proyectos-delete-dialog'
 import { useProyectos } from './proyectos-provider'
+import type { Database } from '@workspace/supabase/types'
+type Proyecto = Database['public']['Tables']['proyectos']['Row']
 
 export function ProyectosDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useProyectos()
@@ -35,7 +37,7 @@ export function ProyectosDialogs() {
                 setCurrentRow(null)
               }, 500)
             }}
-            currentRow={currentRow}
+            currentRow  ={currentRow as unknown as Proyecto}
           />
 
           <ProyectosDeleteDialog

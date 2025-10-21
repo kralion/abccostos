@@ -7,7 +7,7 @@ type ProyectosDialogType = 'add' | 'edit' | 'delete' | 'create' | 'comparativa'
 type ProyectosContextType = {
   open: ProyectosDialogType | null
   setOpen: (str: ProyectosDialogType | null) => void
-  currentRow: Proyecto | null
+  currentRow: Proyecto | null | undefined
   setCurrentRow: React.Dispatch<React.SetStateAction<Proyecto | null>>
 }
 

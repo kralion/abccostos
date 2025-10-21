@@ -2,6 +2,8 @@ import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { getRouteApi } from '@tanstack/react-router'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { ClientesCards } from './components/clientes-cards'
 import { ClientesDialogs } from './components/clientes-dialogs'
 import { ClientesPrimaryButtons } from './components/clientes-primary-buttons'
 import { ClientesProvider } from './components/clientes-provider'
@@ -14,6 +16,7 @@ const route = getRouteApi('/_authenticated/(propietario)/clientes/')
 export function Clientes() {
   const search = route.useSearch()
   const navigate = route.useNavigate()
+  const isMobile = useIsMobile()
 
   return (
     <ClientesProvider>
@@ -32,7 +35,11 @@ export function Clientes() {
         </div>
         <Separator className='mb-4' />
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <ClientesTable data={clientes} search={search} navigate={navigate} />
+          {isMobile ? (
+            <ClientesCards data={clientes} search={search} navigate={navigate} />
+          ) : (
+            <ClientesTable data={clientes} search={search} navigate={navigate} />
+          )}
         </div>
       </Main>
       <ClientesDialogs />

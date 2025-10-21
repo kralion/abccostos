@@ -1,4 +1,5 @@
-import { type Proyecto } from '../data/schema'
+import type { Database } from '@workspace/supabase/types'
+type Proyecto = Database['public']['Tables']['proyectos']['Row']
 import ProyectoForm from './proyecto-form'
 
 interface ProyectosActionDialogProps {

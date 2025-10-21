@@ -18,7 +18,11 @@ import { ProyectosPrimaryButtons } from './components/proyectos-primary-buttons'
 import { ProyectosProvider } from './components/proyectos-provider'
 import { ProyectosTable } from './components/proyectos-table'
 import { ProyectosTableArchived } from './components/proyectos-table-archived'
-import { proyectos } from './data/proyectos'
+import { useProyectos } from '@workspace/api-presupuestos/queries'
+import type { Database } from '@workspace/supabase/types'
+
+type ProyectoRow = Database['public']['Tables']['proyectos']['Row']
+type Proyecto = Omit<ProyectoRow, 'fechaBase'> & { fechaBase: Date }
 
 const route = getRouteApi('/_authenticated/(principal)/proyectos/')
 
@@ -31,8 +35,50 @@ export function Proyectos() {
   >('all')
   const isMobile = useIsMobile()
 
+  const { data: proyectos = [], isLoading, error } = useProyectos()
+
+  if (isLoading) {
+    return (
+      <ProyectosProvider>
+        <Header fixed>
+          <div className='ms-auto flex items-center space-x-4'>
+            <ProfileDropdown />
+          </div>
+        </Header>
+        <Main>
+          <div className='flex items-center justify-center h-64'>
+            <div className='text-muted-foreground'>Cargando proyectos...</div>
+          </div>
+        </Main>
+      </ProyectosProvider>
+    )
+  }
+
+  if (error) {
+    return (
+      <ProyectosProvider>
+        <Header fixed>
+          <div className='ms-auto flex items-center space-x-4'>
+            <ProfileDropdown />
+          </div>
+        </Header>
+        <Main>
+          <div className='flex items-center justify-center h-64'>
+            <div className='text-destructive'>Error al cargar los proyectos</div>
+          </div>
+        </Main>
+      </ProyectosProvider>
+    )
+  }
+
+  // Transform proyectos to convert fechaBase from string to Date
+  const transformedProyectos: Proyecto[] = proyectos.map(proyecto => ({
+    ...proyecto,
+    fechaBase: new Date(proyecto.fechaBase)
+  }))
+
   // Filter proyectos for active tab (non-archived projects)
-  const activeProyectos = proyectos.filter(
+  const activeProyectos = transformedProyectos.filter(
     (proyecto) => proyecto.estado !== 'archivado'
   )
 
@@ -45,7 +91,7 @@ export function Proyectos() {
         )
 
   // Filter archived proyectos
-  const archivedProyectos = proyectos.filter(
+  const archivedProyectos = transformedProyectos.filter(
     (proyecto) => proyecto.estado === 'archivado'
   )
 

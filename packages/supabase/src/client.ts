@@ -1,10 +1,11 @@
 import { createClient } from '@supabase/supabase-js'
 import type { User, Session } from '@supabase/supabase-js'
+import type { Database } from './types.js'
 
-export type { User, Session }
+export type { User, Session, Database }
 
-const supabaseUrl =  import.meta.env.VITE_SUPABASE_URL!;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY!;
+const supabaseUrl = process.env.VITE_SUPABASE_URL!;
+const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {

@@ -7,7 +7,9 @@ import {
 } from '@workspace/ui/components/tabs'
 import { ChartNoAxesCombinedIcon, HouseIcon, ReceiptIcon } from 'lucide-react'
 import { CustomEmpty } from '@/components/custom-empty'
+import { useIsMobile } from '@/hooks/use-mobile'
 import { PartidasTable } from './partidas-table'
+import { PartidasCards } from './partidas-cards'
 import { partidasColumns } from './partidas-columns'
 import { mockPartidas } from '../data/mock-data'
 
@@ -155,6 +157,7 @@ export default function SecondaryTabs({
   const [activeSecondaryTab, setActiveSecondaryTab] = useState(
     currentSecondaryTabs.length > 0 ? currentSecondaryTabs[0].value : ''
   )
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const newSecondaryTabs = secondaryTabs[activePrimaryTab] || []
@@ -189,7 +192,11 @@ export default function SecondaryTabs({
       </TabsList>
       {currentSecondaryTabs.map((tab) => (
         <TabsContent key={tab.value} value={tab.value} className='mt-4'>
-          <PartidasTable data={mockPartidas} columns={partidasColumns} />
+          {isMobile ? (
+            <PartidasCards data={mockPartidas} />
+          ) : (
+            <PartidasTable data={mockPartidas} columns={partidasColumns} />
+          )}
         </TabsContent>
       ))}
     </Tabs>

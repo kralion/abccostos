@@ -9,6 +9,7 @@ const proyectoEstadoSchema = z.union([
 export type ProyectoEstado = z.infer<typeof proyectoEstadoSchema>
 
 const proyectoSchema = z.object({
+  id: z.string(),
   codigo: z.string(),
   nombreDeProyecto: z.string(),
   nombreCorto: z.string(),
@@ -19,6 +20,8 @@ const proyectoSchema = z.object({
   venta: z.boolean(),
   plazo: z.string(),
   desviacion: z.number(),
+  created_at: z.string(),
+  updated_at: z.string(),
 })
 export type Proyecto = z.infer<typeof proyectoSchema>
 

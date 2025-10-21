@@ -6,12 +6,19 @@ import {
 import { useEffect, useState } from "react"
 
 import { CustomEmpty } from "@/components/custom-empty"
+import { useIsMobile } from "@/hooks/use-mobile"
 import TitulosTable from "./titulos-table"
+import TitulosCards from "./titulos-cards"
 import ElementosTable from "./elementos-table"
+import ElementosCards from "./elementos-cards"
 import PartidasTable from "./partidas-table"
+import PartidasCards from "./partidas-cards"
 import RecursosTable from "./recursos-table"
+import RecursosCards from "./recursos-cards"
 import UnidadesTable from "./unidades-table"
+import UnidadesCards from "./unidades-cards"
 import IndicesUnificadosTable from "./indices-unificados-table"
+import IndicesUnificadosCards from "./indices-unificados-cards"
 import {
   Tabs,
   TabsContent,
@@ -90,6 +97,7 @@ interface SecondaryTabsComponentProps {
     const [activeSecondaryTab, setActiveSecondaryTab] = useState(
       currentSecondaryTabs.length > 0 ? currentSecondaryTabs[0].value : ""
     )
+    const isMobile = useIsMobile()
 
     useEffect(() => {
       const newSecondaryTabs = secondaryTabs[activePrimaryTab] || []
@@ -100,22 +108,22 @@ interface SecondaryTabsComponentProps {
 
     if (!currentSecondaryTabs || currentSecondaryTabs.length === 0) {
       if (activePrimaryTab === 'titulos') {
-        return <TitulosTable />
+        return isMobile ? <TitulosCards /> : <TitulosTable />
       }
       if (activePrimaryTab === 'elementos') {
-        return <ElementosTable />
+        return isMobile ? <ElementosCards /> : <ElementosTable />
       }
       if (activePrimaryTab === 'partidas') {
-        return <PartidasTable />
+        return isMobile ? <PartidasCards /> : <PartidasTable />
       }
       if (activePrimaryTab === 'recursos') {
-        return <RecursosTable />
+        return isMobile ? <RecursosCards /> : <RecursosTable />
       }
       if (activePrimaryTab === 'unidades') {
-        return <UnidadesTable />
+        return isMobile ? <UnidadesCards /> : <UnidadesTable />
       }
       if (activePrimaryTab === 'indices-unificados') {
-        return <IndicesUnificadosTable />
+        return isMobile ? <IndicesUnificadosCards /> : <IndicesUnificadosTable />
       }
       const emptyContent = getEmptyContent(activePrimaryTab)
       return <CustomEmpty {...emptyContent} />

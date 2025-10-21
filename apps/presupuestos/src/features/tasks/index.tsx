@@ -3,6 +3,8 @@ import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
+import { useIsMobile } from '@/hooks/use-mobile'
+import { TasksCards } from './components/tasks-cards'
 import { TasksDialogs } from './components/tasks-dialogs'
 import { TasksPrimaryButtons } from './components/tasks-primary-buttons'
 import { TasksProvider } from './components/tasks-provider'
@@ -10,6 +12,8 @@ import { TasksTable } from './components/tasks-table'
 import { tasks } from './data/tasks'
 
 export function Tasks() {
+  const isMobile = useIsMobile()
+
   return (
     <TasksProvider>
       <Header fixed>
@@ -31,7 +35,11 @@ export function Tasks() {
           <TasksPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <TasksTable data={tasks} />
+          {isMobile ? (
+            <TasksCards data={tasks} />
+          ) : (
+            <TasksTable data={tasks} />
+          )}
         </div>
       </Main>
 

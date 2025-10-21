@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useDeleteProyecto } from '@workspace/api-presupuestos/queries'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -10,7 +10,6 @@ import {
 } from '@workspace/ui/components/alert-dialog'
 import { Button } from '@workspace/ui/components/button'
 import { Loader2 } from 'lucide-react'
-import { toast } from 'sonner'
 import { type Proyecto } from '../data/schema'
 
 interface ProyectosDeleteDialogProps {
@@ -24,25 +23,14 @@ export function ProyectosDeleteDialog({
   onOpenChange,
   currentRow,
 }: ProyectosDeleteDialogProps) {
-  const [isLoading, setIsLoading] = useState(false)
+  const deleteProyecto = useDeleteProyecto()
 
   async function handleDelete() {
-    setIsLoading(true)
-
     try {
-      // TODO: Implement API call to delete proyecto
-      console.log('Deleting proyecto:', currentRow.codigo)
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      toast.success('Proyecto eliminado exitosamente')
+      await deleteProyecto.mutateAsync(currentRow.id)
       onOpenChange()
     } catch (error) {
       console.error('Error deleting proyecto:', error)
-      toast.error('Error al eliminar el proyecto')
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -57,13 +45,13 @@ export function ProyectosDeleteDialog({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isLoading}>Cancelar</AlertDialogCancel>
+          <AlertDialogCancel disabled={deleteProyecto.isPending}>Cancelar</AlertDialogCancel>
           <Button
             variant='destructive'
             onClick={handleDelete}
-            disabled={isLoading}
+            disabled={deleteProyecto.isPending}
           >
-            {isLoading ? (
+            {deleteProyecto.isPending ? (
               <>
                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />
                 Eliminando...

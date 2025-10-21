@@ -30,7 +30,10 @@ import {
 import { cn } from '@workspace/ui/lib/utils'
 import { es } from 'date-fns/locale'
 import { CalendarIcon, Loader2 } from 'lucide-react'
-import { toast } from 'sonner'
+import { useCreateProyecto, useUpdateProyecto } from '@workspace/api-presupuestos/queries'
+import type { Database } from '@workspace/supabase/types'
+
+type Proyecto = Database['public']['Tables']['proyectos']['Row']
 
 // Removed tipos import - now using meta and venta boolean fields
 
@@ -63,17 +66,7 @@ const formSchema = z.object({
 interface ProyectoFormProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  currentRow?: {
-    nombreDeProyecto: string
-    nombreCorto: string
-    ubicacion: string
-    fechaBase: Date
-    plazo: string
-    meta: boolean
-    venta: boolean
-    desviacion: number
-    logoProyecto?: File
-  } | null
+  currentRow?: Proyecto | null
 }
 
 export default function ProyectoForm({
@@ -81,8 +74,9 @@ export default function ProyectoForm({
   onOpenChange,
   currentRow,
 }: ProyectoFormProps) {
-  const [isLoading, setIsLoading] = useState(false)
   const isEditMode = !!currentRow
+  const createProyecto = useCreateProyecto()
+  const updateProyecto = useUpdateProyecto()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -91,7 +85,7 @@ export default function ProyectoForm({
           nombreDeProyecto: currentRow.nombreDeProyecto,
           nombreCorto: currentRow.nombreCorto,
           ubicacion: currentRow.ubicacion,
-          fechaBase: currentRow.fechaBase,
+          fechaBase: new Date(currentRow.fechaBase),
           plazo: currentRow.plazo,
           logoProyecto: undefined,
           meta: currentRow.meta,
@@ -110,31 +104,33 @@ export default function ProyectoForm({
   })
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    setIsLoading(true)
-
     try {
-      // TODO: Implement API call to create/update proyecto
-      console.log('Proyecto data:', data)
+      const proyectoData = {
+        codigo: currentRow?.codigo || `${Date.now()}`, // Generate unique code for new projects
+        nombreDeProyecto: data.nombreDeProyecto,
+        nombreCorto: data.nombreCorto,
+        ubicacion: data.ubicacion,
+        fechaBase: data.fechaBase.toISOString(),
+        plazo: data.plazo,
+        meta: data.meta,
+        venta: data.venta,
+        desviacion: currentRow?.desviacion || 0,
+        estado: currentRow?.estado || 'activo',
+      }
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      if (isEditMode && currentRow?.id) {
+        await updateProyecto.mutateAsync({
+          id: currentRow.id,
+          updates: proyectoData,
+        })
+      } else {
+        await createProyecto.mutateAsync(proyectoData)
+      }
 
-      toast.success(
-        isEditMode
-          ? 'Proyecto actualizado exitosamente'
-          : 'Proyecto creado exitosamente'
-      )
       form.reset()
       onOpenChange(false)
     } catch (error) {
       console.error('Error saving proyecto:', error)
-      toast.error(
-        isEditMode
-          ? 'Error al actualizar el proyecto'
-          : 'Error al crear el proyecto'
-      )
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -314,12 +310,12 @@ export default function ProyectoForm({
                 variant='outline'
                 className='flex-1'
                 onClick={() => onOpenChange(false)}
-                disabled={isLoading}
+                disabled={createProyecto.isPending || updateProyecto.isPending}
               >
                 Cancelar
               </Button>
-              <Button className='flex-1' disabled={isLoading}>
-                {isLoading ? (
+              <Button className='flex-1' disabled={createProyecto.isPending || updateProyecto.isPending}>
+                {(createProyecto.isPending || updateProyecto.isPending) ? (
                   <>
                     <Loader2 className='mr-2 h-4 w-4 animate-spin' />
                     {isEditMode ? 'Guardando...' : 'Creando...'}
