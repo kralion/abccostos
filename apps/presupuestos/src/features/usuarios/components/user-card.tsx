@@ -57,15 +57,15 @@ export function UserCard({ user }: UserCardProps) {
     <div className='bg-background flex flex-col gap-3 rounded-md border p-4'>
       <div className='flex items-start justify-between gap-3'>
         <div className='min-w-0'>
-          <div className='text-muted-foreground text-xs'>Username</div>
-          <div className='font-medium'>{user.username}</div>
+          <div className='text-muted-foreground text-xs'>Email</div>
+          <div className='font-medium'>{user.email}</div>
         </div>
         <div className='flex items-center gap-2'>
           <Badge
             variant='outline'
-            className={cn('capitalize', statusColors[user.status])}
+            className={cn('capitalize', statusColors[user.estado])}
           >
-            {user.status}
+            {user.estado}
           </Badge>
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
@@ -85,12 +85,12 @@ export function UserCard({ user }: UserCardProps) {
               </DropdownMenuItem>
               <DropdownMenuItem
                 className={cn(
-                  user.status === 'habilitado' ? 'text-red-500' : 'text-green-500'
+                  user.estado === 'habilitado' ? 'text-red-500' : 'text-green-500'
                 )}
                 onClick={() => onAction('toggle-status')}
               >
                 <Power size={16} className='opacity-60' aria-hidden='true' />
-                {user.status === 'habilitado' ? 'Deshabilitar' : 'Habilitar'}
+                {user.estado === 'habilitado' ? 'Deshabilitar' : 'Habilitar'}
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => onAction('delete')}
@@ -108,7 +108,7 @@ export function UserCard({ user }: UserCardProps) {
       <div className='space-y-1'>
         <div className='text-muted-foreground text-xs'>Nombre Completo</div>
         <div className='font-semibold break-words'>
-          {user.firstName} {user.lastName}
+          {user.nombres} {user.apellidos}
         </div>
       </div>
 
@@ -119,15 +119,15 @@ export function UserCard({ user }: UserCardProps) {
 
       <div className='space-y-1'>
         <div className='text-muted-foreground text-xs'>Teléfono</div>
-        <div className='break-words'>{user.phoneNumber}</div>
+        <div className='break-words'>{user.telefono}</div>
       </div>
 
       <div className='flex flex-wrap items-center gap-2'>
         <Badge
           variant='outline'
-          className={cn('capitalize', roleColors[user.role])}
+          className={cn('capitalize', roleColors[user.rol])}
         >
-          {roleLabels[user.role]}
+          {roleLabels[user.rol]}
         </Badge>
       </div>
 
@@ -135,13 +135,13 @@ export function UserCard({ user }: UserCardProps) {
         <div>
           <span className='me-1'>Creado:</span>
           <span className='text-foreground'>
-            {format(user.createdAt, 'dd/MM/yyyy', { locale: es })}
+            {format(user.created_at, 'dd/MM/yyyy', { locale: es })}
           </span>
         </div>
         <div>
           <span className='me-1'>Actualizado:</span>
           <span className='text-foreground'>
-            {format(user.updatedAt, 'dd/MM/yyyy', { locale: es })}
+            {format(user.updated_at, 'dd/MM/yyyy', { locale: es })}
           </span>
         </div>
       </div>

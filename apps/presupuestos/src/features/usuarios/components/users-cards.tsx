@@ -41,13 +41,13 @@ export function UsersCards({ data, search, navigate }: UsersCardsProps) {
     globalFilter: { enabled: false },
     columnFilters: [
       {
-        columnId: 'firstName',
-        searchKey: 'firstName',
+        columnId: 'nombres',
+        searchKey: 'nombres',
         type: 'string',
       },
       {
-        columnId: 'lastName',
-        searchKey: 'lastName',
+        columnId: 'apellidos',
+        searchKey: 'apellidos',
         type: 'string',
       },
       {
@@ -55,8 +55,8 @@ export function UsersCards({ data, search, navigate }: UsersCardsProps) {
         searchKey: 'email',
         type: 'string',
       },
-      { columnId: 'role', searchKey: 'role', type: 'array' },
-      { columnId: 'status', searchKey: 'status', type: 'array' },
+      { columnId: 'rol', searchKey: 'rol', type: 'array' },
+      { columnId: 'estado', searchKey: 'estado', type: 'array' },
     ],
   })
 
@@ -64,21 +64,21 @@ export function UsersCards({ data, search, navigate }: UsersCardsProps) {
   const columns = useMemo(
     () => [
       {
-        accessorKey: 'firstName',
+        accessorKey: 'nombres',
       },
       {
-        accessorKey: 'lastName',
+        accessorKey: 'apellidos',
       },
       {
         accessorKey: 'email',
       },
       {
-        accessorKey: 'role',
+        accessorKey: 'rol',
         filterFn: (row: any, id: string, value: string[]) =>
           value.includes(row.getValue(id)),
       },
       {
-        accessorKey: 'status',
+        accessorKey: 'estado',
         filterFn: (row: any, id: string, value: string[]) =>
           value.includes(row.getValue(id)),
       },
@@ -120,15 +120,15 @@ export function UsersCards({ data, search, navigate }: UsersCardsProps) {
       <DataTableToolbar
         table={table as any}
         searchPlaceholder='Filtrar usuarios...'
-        searchKey='firstName'
+        searchKey='nombres'
         filters={[
           {
-            columnId: 'role',
+            columnId: 'rol',
             title: 'Rol',
             options: roles.map((r) => ({ ...r })),
           },
           {
-            columnId: 'status',
+            columnId: 'estado',
             title: 'Estado',
             options: [
               { label: 'Habilitado', value: 'habilitado' },
@@ -141,10 +141,10 @@ export function UsersCards({ data, search, navigate }: UsersCardsProps) {
       {(() => {
         const filteredRows = table.getPrePaginationRowModel().rows
         const habilitados = filteredRows.filter(
-          (row) => row.original.status === 'habilitado'
+          (row) => row.original.estado === 'habilitado'
         ).length
         const deshabilitados = filteredRows.filter(
-          (row) => row.original.status === 'deshabilitado'
+          (row) => row.original.estado === 'deshabilitado'
         ).length
         const total = habilitados + deshabilitados
         const habilitadosPercent = total > 0 ? (habilitados / total) * 100 : 50

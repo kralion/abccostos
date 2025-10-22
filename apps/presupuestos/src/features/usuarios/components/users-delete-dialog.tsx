@@ -24,7 +24,7 @@ export function UsersDeleteDialog({
   const [value, setValue] = useState('')
 
   const handleDelete = () => {
-    if (value.trim() !== currentRow.username) return
+    if (value.trim() !== currentRow.email) return
 
     onOpenChange(false)
     showSubmittedData(currentRow, 'El siguiente usuario ha sido eliminado:')
@@ -35,7 +35,7 @@ export function UsersDeleteDialog({
       open={open}
       onOpenChange={onOpenChange}
       handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.username}
+      disabled={value.trim() !== currentRow.email}
       title={
         <span className='text-destructive'>
           <AlertTriangle
@@ -49,21 +49,21 @@ export function UsersDeleteDialog({
         <div className='space-y-4'>
           <p className='mb-2'>
             ¿Estás seguro de que deseas eliminar a{' '}
-            <span className='font-bold'>{currentRow.username}</span>?
+            <span className='font-bold'>{currentRow.email}</span>?
             <br />
             Esta acción eliminará permanentemente el usuario con el rol de{' '}
             <span className='font-bold'>
-              {roles.find(r => r.value === currentRow.role)?.label || currentRow.role}
+              {roles.find(r => r.value === currentRow.rol)?.label || currentRow.rol}
             </span>{' '}
             del sistema. Esto no se puede deshacer.
           </p>
 
           <Label className='my-2'>
-            Nombre de usuario:
+            Email:
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder='Ingresa el nombre de usuario para confirmar.'
+              placeholder='Ingresa el email para confirmar.'
             />
           </Label>
 

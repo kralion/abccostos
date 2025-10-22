@@ -46,14 +46,14 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           </DropdownMenuItem>
           <DropdownMenuItem
             className={cn(
-              row.original.status === 'habilitado' ? 'text-red-500' : 'text-green-500'
+              row.original.estado === 'habilitado' ? 'text-red-500' : 'text-green-500'
             )}
             onClick={() => {
               setCurrentRow(row.original)
               setOpen('toggle-status')
             }}
           >
-            {row.original.status === 'habilitado' ? 'Deshabilitar' : 'Habilitar'}
+            {row.original.estado === 'habilitado' ? 'Deshabilitar' : 'Habilitar'}
             <DropdownMenuShortcut>
               <Power size={16} />
             </DropdownMenuShortcut>
