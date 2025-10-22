@@ -5,7 +5,7 @@ import { Proyectos } from '@/features/proyectos'
 export const Route = createFileRoute('/_authenticated/(principal)/proyectos/')({
   component: RouteComponent,
   beforeLoad: () => {
-    requireRole(['admin'])
+    requireRole(['principal'])
   },
 })
 

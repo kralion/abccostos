@@ -11,13 +11,13 @@ import { AppTitle } from './app-title'
 import { getSidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
 
-const getRoleGroupTitle = (role: string): string => {
-  switch (role) {
-    case 'owner':
+const getRoleGroupTitle = (rol: 'propietario' | 'principal' | 'secundario'): string => {
+  switch (rol) {
+    case 'propietario':
       return 'Propietario'
-    case 'admin':
-      return 'Administrador'
-    case 'user':
+    case 'principal':
+      return 'Principal'
+    case 'secundario':
       return 'Proyecto'
     default:
       return 'Proyecto'
@@ -26,10 +26,10 @@ const getRoleGroupTitle = (role: string): string => {
 
 export function AppSidebar() {
   const { collapsible } = useLayout()
-  const { profile, user } = useAuthStore()
-  const userRole = profile?.role || 'user'
-  const groupTitle = getRoleGroupTitle(userRole)
-  const sidebarData = getSidebarData(profile, user?.email)
+  const { usuario, user } = useAuthStore()
+  const rol = usuario?.rol || 'secundario'
+  const groupTitle = getRoleGroupTitle(rol as 'propietario' | 'principal' | 'secundario')
+  const sidebarData = getSidebarData(usuario, user?.email)
 
   const filteredNavGroups = sidebarData.navGroups.filter(
     (group) => group.title === groupTitle

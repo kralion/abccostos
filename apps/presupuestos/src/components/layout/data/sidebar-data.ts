@@ -10,18 +10,20 @@ import {
   Settings,
   Users,
 } from 'lucide-react'
-import { type Profile } from '@/stores/auth-store'
 import { type SidebarData } from '../types'
+import { type Database } from '@workspace/supabase/types'
+
+type Usuario = Database['public']['Tables']['usuarios']['Row']
 
 export const getSidebarData = (
-  profile: Profile | null,
+  usuario: Usuario | null,
   userEmail?: string
 ): SidebarData => ({
   user: {
-    name: profile ? `${profile.name} ${profile.last_name}` : 'Usuario',
+    name: usuario ? `${usuario.nombres} ${usuario.apellidos}` : 'Usuario',
     email: userEmail || 'usuario@ejemplo.com',
     avatar:
-      profile?.image_url ||
+      usuario?.avatar ||
       'https://img.icons8.com/?size=100&id=p8UFrp2VUgHR&format=png&color=000000',
   },
   projects: [
@@ -54,11 +56,11 @@ export const getSidebarData = (
       ],
     },
     {
-      title: 'Administrador',
+      title: 'Principal',
       items: [
         {
           title: 'Dashboard',
-          url: '/dashboard-admin',
+          url: '/dashboard-principal',
           icon: Monitor,
         },
         {

@@ -1,10 +1,13 @@
+import { DataTableColumnHeader } from '@/components/data-table'
+import { LongText } from '@/components/long-text'
+import { estadoUsuariosTypes } from '@/features/proyectos/data/data'
 import { type ColumnDef } from '@tanstack/react-table'
 import { Badge } from '@workspace/ui/components/badge'
 import { Checkbox } from '@workspace/ui/components/checkbox'
 import { cn } from '@workspace/ui/lib/utils'
-import { DataTableColumnHeader } from '@/components/data-table'
-import { LongText } from '@/components/long-text'
-import { callTypes, roles } from '../data/data'
+import { roles } from '../data/data'
+import { type User } from '../data/schema'
+import { DataTableRowActions } from './data-table-row-actions'
 
 const roleColors = {
   supervisor_general: 'bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900 dark:text-purple-200',
@@ -14,8 +17,6 @@ const roleColors = {
   control_costos: 'bg-orange-100 text-orange-800 border-orange-200 dark:bg-orange-900 dark:text-orange-200',
   secundario: 'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-800 dark:text-gray-200',
 }
-import { type User } from '../data/schema'
-import { DataTableRowActions } from './data-table-row-actions'
 
 export const usersColumns: ColumnDef<User>[] = [
   {
@@ -69,24 +70,24 @@ export const usersColumns: ColumnDef<User>[] = [
       <DataTableColumnHeader column={column} title='Nombre Completo' />
     ),
     cell: ({ row }) => {
-      const { firstName, lastName } = row.original
-      const fullName = `${firstName} ${lastName}`
+      const { nombres, apellidos } = row.original
+      const fullName = `${nombres} ${apellidos}`
       return <LongText className='max-w-36'>{fullName}</LongText>
     },
     meta: { className: 'w-36' },
   },
   {
-    accessorKey: 'status',
+    accessorKey: 'estado',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Estado' />
     ),
     cell: ({ row }) => {
-      const { status } = row.original
-      const badgeColor = callTypes.get(status)
+      const { estado } = row.original
+      const badgeColor = estadoUsuariosTypes.get(estado)
       return (
         <div className='flex space-x-2'>
           <Badge variant='outline' className={cn('capitalize', badgeColor)}>
-            {row.getValue('status')}
+            {row.getValue('estado')}
           </Badge>
         </div>
       )
@@ -107,13 +108,13 @@ export const usersColumns: ColumnDef<User>[] = [
     ),
   },
   {
-    accessorKey: 'role',
+    accessorKey: 'rol',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Rol' />
     ),
     cell: ({ row }) => {
-      const { role } = row.original
-      const userType = roles.find(({ value }) => value === role)
+      const { rol } = row.original
+      const userType = roles.find(({ value }) => value === rol)
 
       if (!userType) {
         return (
@@ -132,7 +133,7 @@ export const usersColumns: ColumnDef<User>[] = [
         <div className='flex items-center gap-x-2'>
           <Badge
             variant='outline'
-            className={cn('capitalize', roleColors[role])}
+            className={cn('capitalize', roleColors[rol])}
           >
             {userType.label}
           </Badge>
@@ -146,11 +147,11 @@ export const usersColumns: ColumnDef<User>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'phoneNumber',
+    accessorKey: 'telefono',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Teléfono' />
     ),
-    cell: ({ row }) => <div>{row.getValue('phoneNumber')}</div>,
+    cell: ({ row }) => <div>{row.getValue('telefono')}</div>,
     enableSorting: false,
   },
   {

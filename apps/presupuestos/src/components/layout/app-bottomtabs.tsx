@@ -4,13 +4,13 @@ import { useAuthStore } from '@/stores/auth-store'
 import { getSidebarData } from './data/sidebar-data'
 import type { NavLink } from './types'
 
-const getRoleGroupTitle = (role: string): string => {
+const getRoleGroupTitle = (role: 'propietario' | 'principal' | 'secundario'): string => {
   switch (role) {
-    case 'owner':
+    case 'propietario':
       return 'Propietario'
-    case 'admin':
-      return 'Administrador'
-    case 'user':
+    case 'principal':
+      return 'Principal'
+    case 'secundario':
       return 'Proyecto'
     default:
       return 'Proyecto'
@@ -20,11 +20,11 @@ const getRoleGroupTitle = (role: string): string => {
 export default function AppBottomTabs() {
   const location = useLocation()
   const pathname = location.pathname || '/'
-  const { profile, user } = useAuthStore()
-  const sidebarData = getSidebarData(profile, user?.email)
+  const { usuario, user } = useAuthStore()
+  const sidebarData = getSidebarData(usuario, user?.email)
 
-  const userRole = profile?.role || 'user'
-  const groupTitle = getRoleGroupTitle(userRole)
+  const userRole = usuario?.rol || 'secundario'
+  const groupTitle = getRoleGroupTitle(userRole as 'propietario' | 'principal' | 'secundario')
 
   const navGroup = sidebarData.navGroups.find(
     (group) => group.title === groupTitle

@@ -5,7 +5,7 @@ import { DashboardPropietario } from '@/features/dashboard-propietario'
 export const Route = createFileRoute('/_authenticated/(propietario)/dashboard-propietario/')({
   component: RouteComponent,
   beforeLoad: () => {
-    requireRole(['owner'])
+    requireRole(['propietario'])
   },
 })
 

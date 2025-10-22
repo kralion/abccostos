@@ -37,13 +37,13 @@ import {
 //TODO: He quitado el title del NavGroup para que se pueda obtener el tipo de presupuesto desde el backend
 export function NavGroup({ items }: NavGroupProps) {
   const { state, isMobile } = useSidebar()
-  const { profile } = useAuthStore()
-  const userRole = profile?.role || 'user'
+  const { usuario } = useAuthStore()
+  const userRole = usuario?.rol || 'secundario'
   const [presupuestoType, _setPresupuestoType] = useState('venta')
   const href = useLocation({ select: (location) => location.href })
   return (
     <SidebarGroup>
-      <SidebarGroupLabel hidden={userRole !== 'user'} className={`${presupuestoType === 'venta' ? 'text-orange-300' : 'text-green-500'} font-light`}>{presupuestoType === 'venta' ? 'Presupuesto  Venta' : 'Presupuesto Meta'}</SidebarGroupLabel>
+      <SidebarGroupLabel hidden={userRole !== 'secundario'} className={`${presupuestoType === 'venta' ? 'text-orange-300' : 'text-green-500'} font-light`}>{presupuestoType === 'venta' ? 'Presupuesto  Venta' : 'Presupuesto Meta'}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
           const key = `${item.title}-${item.url}`

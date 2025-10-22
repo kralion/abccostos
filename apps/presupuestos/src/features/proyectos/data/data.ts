@@ -26,6 +26,11 @@ export const estadoTypes = new Map([
   ],
 ])
 
+export const estadoUsuariosTypes = new Map([
+  ['habilitado', 'bg-green-100/50 text-green-800 dark:text-green-200 border-green-200'],
+  ['deshabilitado', 'bg-red-100/50 text-red-800 dark:text-red-200 border-red-200'],
+])
+
 export const tipos = [
   {
     value: 'venta',

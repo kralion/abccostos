@@ -20,8 +20,8 @@ export function CommandMenu() {
   const navigate = useNavigate()
   const { setTheme } = useTheme()
   const { open, setOpen } = useSearch()
-  const { profile, user } = useAuthStore()
-  const sidebarData = getSidebarData(profile, user?.email)
+  const { usuario, user } = useAuthStore()
+  const sidebarData = getSidebarData(usuario, user?.email)
 
   const runCommand = React.useCallback(
     (command: () => unknown) => {

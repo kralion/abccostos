@@ -1,29 +1,30 @@
 import { redirect } from '@tanstack/react-router'
 import { useAuthStore } from '@/stores/auth-store'
 
-type UserRole = 'owner' | 'admin' | 'user'
+type UserRole = 'propietario' | 'principal' | 'secundario'
 
 const roleHierarchy: Record<UserRole, number> = {
-  owner: 3,
-  admin: 2,
-  user: 1,
+  propietario: 3,
+  principal: 2,
+  secundario: 1,
 }
 
 const getRoleDashboard = (role: UserRole): string => {
   switch (role) {
-    case 'owner':
+    case 'propietario':
       return '/dashboard-propietario'
-    case 'admin':
-      return '/dashboard-admin'
-    case 'user':
+    case 'principal':
+      return '/dashboard-principal'
+    case 'secundario':
+      return '/'
     default:
       return '/'
   }
 }
 
 export const requireRole = (allowedRoles: UserRole[]) => {
-  const { profile } = useAuthStore.getState()
-  const userRole = (profile?.role as UserRole) || 'user'
+  const { usuario } = useAuthStore.getState()
+  const userRole = (usuario?.rol as 'propietario' | 'principal' | 'secundario') || 'secundario'
 
   if (!allowedRoles.includes(userRole)) {
     throw redirect({
@@ -34,8 +35,8 @@ export const requireRole = (allowedRoles: UserRole[]) => {
 }
 
 export const requireMinRole = (minRole: UserRole) => {
-  const { profile } = useAuthStore.getState()
-  const userRole = (profile?.role as UserRole) || 'user'
+  const { usuario } = useAuthStore.getState()
+  const userRole = (usuario?.rol as 'propietario' | 'principal' | 'secundario') || 'secundario'
 
   if (roleHierarchy[userRole] < roleHierarchy[minRole]) {
     throw redirect({

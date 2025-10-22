@@ -40,7 +40,7 @@ import { Route as AuthenticatedpropietarioDashboardPropietarioIndexRouteImport }
 import { Route as AuthenticatedpropietarioClientesIndexRouteImport } from './routes/_authenticated/(propietario)/clientes/index'
 import { Route as AuthenticatedprincipalUsuariosIndexRouteImport } from './routes/_authenticated/(principal)/usuarios/index'
 import { Route as AuthenticatedprincipalProyectosIndexRouteImport } from './routes/_authenticated/(principal)/proyectos/index'
-import { Route as AuthenticatedprincipalDashboardAdminIndexRouteImport } from './routes/_authenticated/(principal)/dashboard-admin/index'
+import { Route as AuthenticatedprincipalDashboardPrincipalIndexRouteImport } from './routes/_authenticated/(principal)/dashboard-principal/index'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -212,10 +212,10 @@ const AuthenticatedprincipalProyectosIndexRoute =
     path: '/proyectos/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedprincipalDashboardAdminIndexRoute =
-  AuthenticatedprincipalDashboardAdminIndexRouteImport.update({
-    id: '/(principal)/dashboard-admin/',
-    path: '/dashboard-admin/',
+const AuthenticatedprincipalDashboardPrincipalIndexRoute =
+  AuthenticatedprincipalDashboardPrincipalIndexRouteImport.update({
+    id: '/(principal)/dashboard-principal/',
+    path: '/dashboard-principal/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -242,7 +242,7 @@ export interface FileRoutesByFullPath {
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/dashboard-admin': typeof AuthenticatedprincipalDashboardAdminIndexRoute
+  '/dashboard-principal': typeof AuthenticatedprincipalDashboardPrincipalIndexRoute
   '/proyectos': typeof AuthenticatedprincipalProyectosIndexRoute
   '/usuarios': typeof AuthenticatedprincipalUsuariosIndexRoute
   '/clientes': typeof AuthenticatedpropietarioClientesIndexRoute
@@ -274,7 +274,7 @@ export interface FileRoutesByTo {
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/dashboard-admin': typeof AuthenticatedprincipalDashboardAdminIndexRoute
+  '/dashboard-principal': typeof AuthenticatedprincipalDashboardPrincipalIndexRoute
   '/proyectos': typeof AuthenticatedprincipalProyectosIndexRoute
   '/usuarios': typeof AuthenticatedprincipalUsuariosIndexRoute
   '/clientes': typeof AuthenticatedpropietarioClientesIndexRoute
@@ -309,7 +309,7 @@ export interface FileRoutesById {
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
-  '/_authenticated/(principal)/dashboard-admin/': typeof AuthenticatedprincipalDashboardAdminIndexRoute
+  '/_authenticated/(principal)/dashboard-principal/': typeof AuthenticatedprincipalDashboardPrincipalIndexRoute
   '/_authenticated/(principal)/proyectos/': typeof AuthenticatedprincipalProyectosIndexRoute
   '/_authenticated/(principal)/usuarios/': typeof AuthenticatedprincipalUsuariosIndexRoute
   '/_authenticated/(propietario)/clientes/': typeof AuthenticatedpropietarioClientesIndexRoute
@@ -344,7 +344,7 @@ export interface FileRouteTypes {
     | '/help-center'
     | '/settings/'
     | '/tasks'
-    | '/dashboard-admin'
+    | '/dashboard-principal'
     | '/proyectos'
     | '/usuarios'
     | '/clientes'
@@ -376,7 +376,7 @@ export interface FileRouteTypes {
     | '/help-center'
     | '/settings'
     | '/tasks'
-    | '/dashboard-admin'
+    | '/dashboard-principal'
     | '/proyectos'
     | '/usuarios'
     | '/clientes'
@@ -410,7 +410,7 @@ export interface FileRouteTypes {
     | '/_authenticated/help-center/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
-    | '/_authenticated/(principal)/dashboard-admin/'
+    | '/_authenticated/(principal)/dashboard-principal/'
     | '/_authenticated/(principal)/proyectos/'
     | '/_authenticated/(principal)/usuarios/'
     | '/_authenticated/(propietario)/clientes/'
@@ -654,11 +654,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedprincipalProyectosIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/(principal)/dashboard-admin/': {
-      id: '/_authenticated/(principal)/dashboard-admin/'
-      path: '/dashboard-admin'
-      fullPath: '/dashboard-admin'
-      preLoaderRoute: typeof AuthenticatedprincipalDashboardAdminIndexRouteImport
+    '/_authenticated/(principal)/dashboard-principal/': {
+      id: '/_authenticated/(principal)/dashboard-principal/'
+      path: '/dashboard-principal'
+      fullPath: '/dashboard-principal'
+      preLoaderRoute: typeof AuthenticatedprincipalDashboardPrincipalIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
@@ -695,7 +695,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
-  AuthenticatedprincipalDashboardAdminIndexRoute: typeof AuthenticatedprincipalDashboardAdminIndexRoute
+  AuthenticatedprincipalDashboardPrincipalIndexRoute: typeof AuthenticatedprincipalDashboardPrincipalIndexRoute
   AuthenticatedprincipalProyectosIndexRoute: typeof AuthenticatedprincipalProyectosIndexRoute
   AuthenticatedprincipalUsuariosIndexRoute: typeof AuthenticatedprincipalUsuariosIndexRoute
   AuthenticatedpropietarioClientesIndexRoute: typeof AuthenticatedpropietarioClientesIndexRoute
@@ -714,8 +714,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
-  AuthenticatedprincipalDashboardAdminIndexRoute:
-    AuthenticatedprincipalDashboardAdminIndexRoute,
+  AuthenticatedprincipalDashboardPrincipalIndexRoute:
+    AuthenticatedprincipalDashboardPrincipalIndexRoute,
   AuthenticatedprincipalProyectosIndexRoute:
     AuthenticatedprincipalProyectosIndexRoute,
   AuthenticatedprincipalUsuariosIndexRoute:

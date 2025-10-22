@@ -12,61 +12,38 @@ export interface Database {
       usuarios: {
         Row: {
           id: string
-          email: string
+          id_auth: string | null
           nombres: string
-          usuario: string
-          password: string
-          billetera_id: string | null
-          codigo_referido: string
-          referido_id: string | null
+          avatar: string | null
           apellidos: string
           telefono: string | null
-          rol: 'provider' | 'admin' | 'seller' | 'registered'
+          rol: 'supervisor_general' | 'produccion' | 'gerente_general' | 'gerente_proyecto' | 'control_costos' | 'secundario' | 'principal' | 'propietario'
           created_at: string
-          updated_at: string
-          estado_habilitado: boolean
+          estado: 'habilitado' | 'deshabilitado'
         }
         Insert: {
           id?: string
-          email: string
+          id_auth?: string | null
           nombres: string
-          usuario: string
-          password?: string
-          billetera_id?: string | null
-          codigo_referido?: string
-          referido_id?: string | null
+          avatar?: string | null
           apellidos: string
           telefono?: string | null
-          rol?: 'provider' | 'admin' | 'seller' | 'registered'
+          rol?: 'supervisor_general' | 'produccion' | 'gerente_general' | 'gerente_proyecto' | 'control_costos' | 'secundario' | 'principal' | 'propietario'
           created_at?: string
-          updated_at?: string
-          estado_habilitado?: boolean
+          estado?: 'habilitado' | 'deshabilitado'
         }
         Update: {
           id?: string
-          email?: string
+          id_auth?: string | null
           nombres?: string
-          usuario?: string
-          password?: string
-          billetera_id?: string | null
-          codigo_referido?: string
-          referido_id?: string | null
+          avatar?: string | null
           apellidos?: string
           telefono?: string | null
-          rol?: 'provider' | 'admin' | 'seller' | 'registered'
+          rol?: 'supervisor_general' | 'produccion' | 'gerente_general' | 'gerente_proyecto' | 'control_costos' | 'secundario' | 'principal' | 'propietario'
           created_at?: string
-          updated_at?: string
-          estado_habilitado?: boolean
+          estado?: 'habilitado' | 'deshabilitado'
         }
-        Relationships: [
-          {
-            foreignKeyName: "usuarios_referido_id_fkey"
-            columns: ["referido_id"]
-            isOneToOne: false
-            referencedRelation: "usuarios"
-            referencedColumns: ["id"]
-          }
-        ]
+       
       }
   
       proyectos: {

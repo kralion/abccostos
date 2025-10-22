@@ -34,6 +34,6 @@ export const Route = createFileRoute('/_authenticated/(principal)/usuarios/')({
   validateSearch: usersSearchSchema,
   component: Usuarios,
   beforeLoad: () => {
-    requireRole(['admin'])
+    requireRole(['principal'])
   },
 })

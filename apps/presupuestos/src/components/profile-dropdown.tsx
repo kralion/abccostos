@@ -24,7 +24,7 @@ import { SignOutDialog } from '@/components/sign-out-dialog'
 
 export function ProfileDropdown() {
   const [open, setOpen] = useDialogState()
-  const { profile } = useAuthStore()
+  const { usuario } = useAuthStore()
   const { theme, setTheme } = useTheme()
 
   const roles = [
@@ -33,7 +33,7 @@ export function ProfileDropdown() {
     { value: 'owner', label: 'Propietario' },
   ]
   const roleLabel =
-    roles.find((role) => role.value === profile?.role)?.label || 'Principal'
+    roles.find((role) => role.value === usuario?.rol)?.label || 'Principal'
   return (
     <>
       <DropdownMenu modal={false}>
@@ -67,21 +67,21 @@ export function ProfileDropdown() {
                 <Avatar className='h-10 w-10'>
                   <AvatarImage
                     src={
-                      profile?.image_url ||
+                      usuario?.avatar ||
                       'https://img.icons8.com/?size=100&id=p8UFrp2VUgHR&format=png&color=000000'
                     }
                     alt='avatar'
                   />
                   <AvatarFallback>
-                    {profile?.name?.[0]}
-                    {profile?.last_name?.[0]}
+                    {usuario?.nombres?.[0]}
+                    {usuario?.apellidos?.[0]}
                   </AvatarFallback>
                 </Avatar>
               </Button>
               <div className='hidden flex-col md:flex'>
                 <p className='text-sm font-medium'>
-                  {profile
-                    ? `${profile.name} ${profile.last_name}`
+                  {usuario
+                    ? `${usuario.nombres} ${usuario.apellidos}`
                     : 'Sin Nombres'}
                 </p>
                 <p className='text-muted-foreground text-xs'>{roleLabel}</p>
@@ -93,8 +93,8 @@ export function ProfileDropdown() {
           <DropdownMenuLabel className='font-normal'>
             <div className='flex flex-col gap-1.5'>
               <p className='text-sm leading-none font-medium'>
-                {profile
-                  ? `${profile.name} ${profile.last_name}`
+                {usuario
+                  ? `${usuario.nombres} ${usuario.apellidos}`
                   : 'Sin Nombres'}
               </p>
               <p className='text-muted-foreground text-xs leading-none'>
@@ -111,10 +111,10 @@ export function ProfileDropdown() {
               <Link to='/settings'>Configuración</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild hidden={profile?.role !== 'admin'}>
+            <DropdownMenuItem asChild hidden={(usuario?.rol as string) !== 'principal'}>
               <Link to='/proyectos'>Ir a Proyectos</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild hidden={profile?.role !== 'admin'}>
+            <DropdownMenuItem asChild hidden={(usuario?.rol as string) !== 'principal'}>
               <Link to='/settings'>Ir a Módulos</Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>

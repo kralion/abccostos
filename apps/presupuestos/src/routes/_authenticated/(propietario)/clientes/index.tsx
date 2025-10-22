@@ -20,7 +20,7 @@ export const Route = createFileRoute('/_authenticated/(propietario)/clientes/')(
     validateSearch: clientesSearchSchema,
     component: Clientes,
     beforeLoad: () => {
-      requireRole(['owner'])
+      requireRole(['propietario'])
     },
   }
 )
