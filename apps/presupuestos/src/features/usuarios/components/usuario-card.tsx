@@ -77,35 +77,35 @@ export function UsuarioCard({ usuario }: UsuarioCardProps) {
       <CardContent className='pt-0'>
         <div className='space-y-3'>
           <div className='flex items-center justify-between'>
-            <span className='text-sm font-medium'>Usuario:</span>
-            <span className='text-sm text-muted-foreground'>{usuario.nombres} {usuario.apellidos}</span>
+            <span className='text-xs font-medium'>Usuario:</span>
+            <span className='text-xs text-muted-foreground'>{usuario.nombres} {usuario.apellidos}</span>
           </div>
           
           <div className='flex items-center justify-between'>
-            <span className='text-sm font-medium'>Rol:</span>
+            <span className='text-xs font-medium'>Rol:</span>
             <Badge variant={(usuario.rol as 'propietario' | 'principal' | 'secundario') === 'principal' ? 'default' : 'secondary'}>
               {roleConfig?.label || usuario.rol}
             </Badge>
           </div>
           
           <div className='flex items-center justify-between'>
-            <span className='text-sm font-medium'>Estado:</span>
+            <span className='text-xs font-medium'>Estado:</span>
             <Badge variant={usuario.estado === 'habilitado' ? 'default' : 'destructive'}>
               {usuario.estado === 'habilitado' ? 'Habilitado' : 'Deshabilitado'}
             </Badge>
           </div>
           
           <div className='flex items-center justify-between'>
-            <span className='text-sm font-medium'>Creado:</span>
-            <span className='text-sm text-muted-foreground'>
+            <span className='text-xs font-medium'>Creado:</span>
+            <span className='text-xs text-muted-foreground'>
               {format(usuario.created_at, 'PPP', { locale: es })}
             </span>
           </div>
           
           {usuario.telefono && (
             <div className='flex items-center justify-between'>
-              <span className='text-sm font-medium'>Teléfono:</span>
-              <span className='text-sm text-muted-foreground'>{usuario.telefono}</span>
+              <span className='text-xs font-medium'>Teléfono:</span>
+              <span className='text-xs text-muted-foreground'>{usuario.telefono}</span>
             </div>
           )}
           
