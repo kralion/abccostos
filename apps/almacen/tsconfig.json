@@ -1,0 +1,21 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@workspace/ui/*": ["../../packages/ui/src/*"],
+      "@workspace/supabase/*": ["../../packages/supabase/src/*"],
+      "@workspace/api-presupuestos/*": ["../../packages/api-presupuestos/src/*"]
+    },
+    "plugins": [
+      {
+        "name": "presupuestos"
+      }
+    ]
+  }
+}
