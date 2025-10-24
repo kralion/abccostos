@@ -91,7 +91,7 @@ export default function GeneralData() {
   return (
     <div className='space-y-6'>
       {/* Form Section */}
-      <div className="rounded-lg border bg-white p-6">
+      <div className="rounded-lg border  p-6">
         <div
           className="
             grid

@@ -38,19 +38,19 @@ export function PartidasToolbar() {
           />
         </div>
 
-        <Button variant='outline' size='sm' className='h-9'>
-          <span className='hidden sm:inline mr-2'>Precios OK</span>
+        <Button variant='outline' size='sm' >
+          <span className='hidden sm:inline text-xs mr-2'>Precios OK</span>
           <div className='size-2 rounded-full bg-green-500' />
         </Button>
 
-        <Button variant='outline' size='sm' className='h-9 gap-2'>
+        <Button variant='outline' size='sm' >
           <Calendar className='size-4' />
-          <span className='hidden sm:inline'>Fecha base</span>
+          <span className='hidden sm:inline text-xs'>Fecha base</span>
         </Button>
 
         <div className='flex items-center gap-2 rounded-md border px-3 h-9'>
-          <span className='text-sm text-muted-foreground'>Jornada</span>
-          <span className='font-semibold text-red-600'>8.0</span>
+          <span className='text-xs text-muted-foreground'>Jornada</span>
+          <span className='text-xs font-semibold text-red-600'>8.0</span>
         </div>
 
         <Select defaultValue='soles'>
@@ -63,9 +63,9 @@ export function PartidasToolbar() {
           </SelectContent>
         </Select>
 
-        <Button variant='outline' size='sm' className='h-9 gap-2'>
+        <Button variant='outline' size='sm' >
           <Filter className='size-4' />
-          <span className='hidden sm:inline'>Filter</span>
+          <span className='hidden sm:inline text-xs'>Filter</span>
         </Button>
       </div>
 
@@ -106,21 +106,21 @@ export function PartidasToolbar() {
         <div className='ml-auto flex items-center gap-2'>
           <Button size='sm' className='h-8 gap-2'>
             <Plus className='size-4' />
-            <span className='hidden sm:inline'>Título</span>
+            <span className='hidden sm:inline text-xs'>Título</span>
           </Button>
           <Button size='sm' className='h-8 gap-2'>
             <Plus className='size-4' />
-            <span className='hidden sm:inline'>Elementos</span>
+            <span className='hidden sm:inline text-xs'>Elementos</span>
           </Button>
           <Button size='sm' className='h-8 gap-2'>
             <Plus className='size-4' />
-            <span className='hidden sm:inline'>Partida</span>
+            <span className='hidden sm:inline text-xs'>Partida</span>
           </Button>
           <Button variant='outline' size='sm' className='h-8'>
-            Tarjeta de precios
+            <span className='text-xs'>Tarjeta de precios</span>
           </Button>
           <Button variant='outline' size='sm' className='h-8'>
-            Precio Meta
+            <span className='text-xs'>Precio Meta</span>
           </Button>
         </div>
       </div>

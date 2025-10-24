@@ -1,6 +1,5 @@
-import { Link, useLocation } from '@tanstack/react-router'
-import { Button } from '@workspace/ui/components/button'
 import { useAuthStore } from '@/stores/auth-store'
+import { Link, useLocation } from '@tanstack/react-router'
 import { getSidebarData } from './data/sidebar-data'
 import type { NavLink } from './types'
 
@@ -45,27 +44,27 @@ export default function AppBottomTabs() {
             }>
 
             return (
-              <Button
+              <button
                 key={item.title}
-                variant='ghost'
-                size='sm'
-                className={`h-full flex-1 rounded-none ${
+                className={`h-full flex-1 rounded-none text-muted-foreground hover:text-foreground hover:bg-accent ${
                   isActive
                     ? 'text-white'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
-                asChild
               >
                 <Link
-                  className='flex-col items-center justify-center'
+                  className='flex flex-col items-center justify-center mx-auto h-full w-full'
                   to={item.url}
-                >
+                > 
+                <div className='flex flex-col gap-1 items-center justify-center mx-auto h-full w-full'>
+
                   {IconComponent && <IconComponent className='h-6 w-6' />}
-                  <span className='text-[10px]'>
+                  <span className='text-[10px] text-center w-full flex justify-center items-center'>
                     {item.title === 'Datos Principales' ? 'Datos' : item.title}
                   </span>
+                </div>
                 </Link>
-              </Button>
+              </button>
             )
           })}
       </div>

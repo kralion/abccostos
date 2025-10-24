@@ -37,7 +37,7 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
               'peer-data-[variant=inset]:has-[[data-layout=fixed]]:h-[calc(100svh-(var(--spacing)*4))]',
 
               // On mobile, account for bottom tabs height (64px = h-16)
-              isMobile && 'pb-16'
+              isMobile && 'pb-24'
             )}
           >
             {children ?? <Outlet />}

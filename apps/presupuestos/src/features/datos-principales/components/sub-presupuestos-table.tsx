@@ -16,6 +16,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@workspace/ui/components/table'
 import { MoreVerticalIcon } from 'lucide-react'
 import { useState } from 'react'
 import { SubPresupuesto } from '../types'
@@ -74,7 +82,7 @@ export function SubPresupuestosTable({
       accessorKey: 'costoDirecto',
       header: 'Costo Directo',
       cell: ({ getValue }) => (
-        <div className='text-right text-sm text-blue-600'>
+        <div className='text-center text-sm text-blue-600'>
           {(getValue() as number).toFixed(2)}
         </div>
       ),
@@ -83,7 +91,7 @@ export function SubPresupuestosTable({
       accessorKey: 'gastosGenerales',
       header: 'Gastos Generales',
       cell: ({ getValue }) => (
-        <div className='text-right text-sm text-blue-600'>
+          <div className='text-center text-sm text-blue-600'>
           {(getValue() as number).toFixed(2)}
         </div>
       ),
@@ -94,7 +102,7 @@ export function SubPresupuestosTable({
       cell: ({ getValue }) => {
         const value = getValue() as number
         return (
-          <div className='text-right text-sm'>
+          <div className='text-center text-sm'>
             {value > 0 ? value.toFixed(2) : ''}
           </div>
         )
@@ -104,7 +112,7 @@ export function SubPresupuestosTable({
       accessorKey: 'subTotal',
       header: 'Sub total',
       cell: ({ getValue }) => (
-        <div className='text-right text-sm'>
+        <div className='text-center text-sm'>
           {(getValue() as number).toFixed(2)}
         </div>
       ),
@@ -113,7 +121,7 @@ export function SubPresupuestosTable({
       accessorKey: 'igv',
       header: 'Igv',
       cell: ({ getValue }) => (
-        <div className='text-right text-sm'>
+        <div className='text-center text-sm'>
           {(getValue() as number).toFixed(2)}
         </div>
       ),
@@ -122,7 +130,7 @@ export function SubPresupuestosTable({
       accessorKey: 'total',
       header: 'Total',
       cell: ({ getValue }) => (
-        <div className='text-right text-sm text-orange-600'>
+        <div className='text-center text-sm text-orange-600'>
           {(getValue() as number).toFixed(2)}
         </div>
       ),
@@ -170,66 +178,39 @@ export function SubPresupuestosTable({
   })
 
   return (
-    <div className='rounded-lg border bg-white'>
-      <div className='overflow-x-auto'>
-        <table className='w-full'>
-          <thead className='border-b bg-gray-50'>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    className={`p-3 text-sm font-semibold ${
-                      header.id === 'select' || header.id === 'actions'
-                        ? 'text-center'
-                        : header.id.includes('Directo') ||
-                          header.id.includes('Generales') ||
-                          header.id.includes('Utilidad') ||
-                          header.id.includes('total') ||
-                          header.id.includes('Igv')
-                        ? 'text-right'
-                        : 'text-left'
-                    }`}
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row, index) => (
-              <tr
-                key={row.id}
-                className={`border-b last:border-0 ${
-                  index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                }`}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    className={`p-3 ${
-                      cell.column.id === 'select' || cell.column.id === 'actions'
-                        ? 'text-center'
-                        : cell.column.id.includes('Directo') ||
-                          cell.column.id.includes('Generales') ||
-                          cell.column.id.includes('Utilidad') ||
-                          cell.column.id.includes('total') ||
-                          cell.column.id.includes('Igv')
-                        ? 'text-right'
-                        : 'text-left'
-                    }`}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className='rounded-lg border'>
+      <Table>
+        <TableHeader className='bg-primary/20'>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <TableHead
+                  key={header.id}
+                  className='text-center'
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(header.column.columnDef.header, header.getContext())}
+                </TableHead>
+              ))}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows.map((row) => (
+            <TableRow key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <TableCell
+                  key={cell.id}
+                  className='text-center'
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   )
 }

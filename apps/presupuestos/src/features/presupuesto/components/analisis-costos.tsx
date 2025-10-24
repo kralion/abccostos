@@ -66,8 +66,8 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
   }
 
   return (
-    <Card className='mt-4 border-l-4 border-l-purple-500'>
-      <div className='bg-gray-50 px-4 py-3 border-b'>
+    <Card className='mt-4 border-l-4 border-l-purple-500 pt-0'>
+      <div className='bg-primary/20 px-4 py-3 border-b'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-4'>
             <span className='font-semibold text-purple-700'>{partida.codigo}</span>
@@ -75,7 +75,7 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
           </div>
           <div className='flex items-center gap-6'>
             <div className='flex items-center gap-2'>
-              <span className='text-sm text-muted-foreground'>Unidad</span>
+              <span className='text-xs text-muted-foreground'>Unidad</span>
               <Input
                 value={unidad}
                 onChange={(e) => setUnidad(e.target.value)}
@@ -83,7 +83,7 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
               />
             </div>
             <div className='flex items-center gap-2'>
-              <span className='text-sm text-muted-foreground'>Rendimiento</span>
+              <span className='text-xs text-muted-foreground'>Rendimiento</span>
               <Input
                 value={rendimiento}
                 onChange={(e) => setRendimiento(e.target.value)}
@@ -91,12 +91,12 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
               />
             </div>
             <div className='flex items-center gap-2'>
-              <span className='text-sm text-muted-foreground'>Precio Unitario</span>
+              <span className='text-xs text-muted-foreground'>Precio Unitario</span>
               <span className='font-semibold rounded bg-purple-600 px-3 py-1 text-white'>
                 20.00
               </span>
             </div>
-            <div className='flex gap-1'>
+            <div className='flex gap-1 items-center'>
               <Button variant='ghost' size='icon' className='size-8'>
                 <CirclePlus className='size-4' />
               </Button>
@@ -107,24 +107,24 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
                 <Trash2 className='size-4' />
               </Button>
               <div className='flex gap-1 ml-2'>
-                <div className='size-8 rounded-full bg-red-500' />
-                <div className='size-8 rounded-full bg-gray-400' />
-                <div className='size-8 rounded-full bg-orange-500' />
-                <div className='size-8 rounded-full bg-green-500' />
-                <div className='size-8 rounded-full border-2 border-gray-300 bg-white' />
+                <div className='size-6 rounded-full bg-red-500' />
+                <div className='size-6 rounded-full bg-gray-400' />
+                <div className='size-6 rounded-full bg-orange-500' />
+                <div className='size-6 rounded-full bg-green-500' />
+                <div className='size-6 rounded-full border-2 border-gray-300 bg-white' />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className='p-4'>
-        <div className='flex items-center justify-between mb-3'>
+      <div >
+        <div className='flex items-center justify-end mb-3'>
           <div className='flex items-center gap-2'>
-            <Button variant='ghost' size='icon' className='size-8'>
+            <Button variant='ghost' size='sm' className='gap-2'>
               <CirclePlus className='size-4' />
+          Nuevo Recurso
             </Button>
-            <span className='text-sm font-medium'>Nuevo Recurso</span>
           </div>
           <Button variant='ghost' size='sm' className='gap-2 text-purple-600'>
             <CirclePlus className='size-4' />
@@ -133,15 +133,15 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
         </div>
 
         <Table>
-          <TableHeader>
-            <TableRow className='bg-gray-50'>
+          <TableHeader className='bg-primary/50'>
+            <TableRow>
               <TableHead className='w-12'></TableHead>
               <TableHead>Descripción</TableHead>
-              <TableHead className='text-center'>Und</TableHead>
-              <TableHead className='text-center'>Cuadrilla</TableHead>
-              <TableHead className='text-center'>Cantidad</TableHead>
-              <TableHead className='text-center'>Precio</TableHead>
-              <TableHead className='text-center'>Parcial</TableHead>
+              <TableHead >Und</TableHead>
+              <TableHead >Cuadrilla</TableHead>
+              <TableHead >Cantidad</TableHead>
+              <TableHead >Precio</TableHead>
+              <TableHead >Parcial</TableHead>
               <TableHead className='w-12'></TableHead>
             </TableRow>
           </TableHeader>
@@ -152,7 +152,7 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
                   <TipoIcon tipo={recurso.tipo} />
                 </TableCell>
                 <TableCell>{recurso.descripcion}</TableCell>
-                <TableCell className='text-center'>{recurso.unidad}</TableCell>
+                <TableCell >{recurso.unidad}</TableCell>
                 <TableCell>
                   {recurso.cuadrilla !== undefined ? (
                     <Input
@@ -162,14 +162,14 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
                       step='0.01'
                     />
                   ) : (
-                    <div className='text-center'>-</div>
+                    <div >-</div>
                   )}
                 </TableCell>
                 <TableCell>
                   <Input
                     type='number'
                     defaultValue={recurso.cantidad}
-                    className='h-7 w-20 text-center'
+                    className='h-7 w-20 '
                     step='0.01'
                   />
                 </TableCell>
@@ -177,14 +177,14 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
                   <Input
                     type='number'
                     defaultValue={recurso.precio}
-                    className='h-7 w-24 text-center'
+                    className='h-7 w-24 '
                     step='0.01'
                   />
                 </TableCell>
-                <TableCell className='text-center font-medium'>
+                <TableCell className=' font-medium'>
                   {recurso.parcial.toFixed(2)}
                 </TableCell>
-                <TableCell>
+                <TableCell >
                   <Button variant='ghost' size='icon' className='size-6'>
                     <Trash2 className='size-3 text-red-600' />
                   </Button>
@@ -194,7 +194,7 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
           </TableBody>
         </Table>
 
-        <div className='mt-6'>
+        <div className='mt-6 px-4'>
           <Tabs defaultValue='presupuesto' className='w-full'>
             <div className='flex items-center justify-between border-t pt-4'>
               <TabsList className='bg-transparent'>
@@ -321,7 +321,7 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
           </div>
 
           <div className='mt-4 grid grid-cols-3 gap-4'>
-            <div className='flex items-center justify-between rounded-md bg-purple-100 px-3 py-2'>
+            <div className='flex items-center justify-between rounded-md  px-3 py-2'>
               <span className='text-sm font-medium'>Utilidad</span>
               <div className='flex items-center gap-2'>
                 <span className='text-sm'>%</span>
@@ -329,7 +329,7 @@ export function AnalisisCostos({ partida, recursos }: AnalisisCostosProps) {
                 <span className='text-sm font-medium'>10.00</span>
               </div>
             </div>
-            <div className='flex items-center justify-between rounded-md bg-purple-100 px-3 py-2'>
+            <div className='flex items-center  justify-between rounded-md  px-3 py-2'>
               <span className='text-sm font-medium'>Utilidad</span>
               <span className='text-sm font-medium'>498,297.24</span>
             </div>

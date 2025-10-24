@@ -33,37 +33,37 @@ export function PartidasCards({ data }: PartidasCardsProps) {
             />
           </div>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center">
           {/* Desktop: show icons and text, Mobile: show only icons */}
-          <Button variant="outline" size="sm" className="hidden md:inline-flex">
+          <Button variant="ghost" size="sm" className="hidden md:inline-flex">
             <Save className="h-4 w-4 mr-2" />
             Guardar
           </Button>
-          <Button variant="outline" size="sm" className="inline-flex md:hidden">
+          <Button variant="ghost" size="sm" className="inline-flex md:hidden">
             <Save className="h-4 w-4" />
           </Button>
 
-          <Button variant="outline" size="sm" className="hidden md:inline-flex">
+          <Button variant="ghost" size="sm" className="hidden md:inline-flex">
             <FileDown className="h-4 w-4 mr-2" />
             PDF
           </Button>
-          <Button variant="outline" size="sm" className="inline-flex md:hidden">
+          <Button variant="ghost" size="sm" className="inline-flex md:hidden">
             <FileDown className="h-4 w-4" />
           </Button>
 
-          <Button variant="outline" size="sm" className="hidden md:inline-flex">
+          <Button variant="ghost" size="sm" className="hidden md:inline-flex">
             <Download className="h-4 w-4 mr-2" />
             Excel
           </Button>
-          <Button variant="outline" size="sm" className="inline-flex md:hidden">
+          <Button variant="ghost" size="sm" className="inline-flex md:hidden">
             <Download className="h-4 w-4" />
           </Button>
 
-          <Button variant="outline" size="sm" className="hidden md:inline-flex">
+          <Button variant="ghost" size="sm" className="hidden md:inline-flex">
             <Upload className="h-4 w-4 mr-2" />
             Importar
           </Button>
-          <Button variant="outline" size="sm" className="inline-flex md:hidden">
+          <Button variant="ghost" size="sm" className="inline-flex md:hidden">
             <Upload className="h-4 w-4" />
           </Button>
 
