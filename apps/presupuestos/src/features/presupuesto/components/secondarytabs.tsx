@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { CustomEmpty } from '@/components/custom-empty'
+import { useIsMobile } from '@/hooks/use-mobile'
 import {
   Tabs,
   TabsContent,
@@ -6,12 +7,10 @@ import {
   TabsTrigger,
 } from '@workspace/ui/components/tabs'
 import { ChartNoAxesCombinedIcon, HouseIcon, ReceiptIcon } from 'lucide-react'
-import { CustomEmpty } from '@/components/custom-empty'
-import { useIsMobile } from '@/hooks/use-mobile'
-import { PartidasTable } from './partidas-table'
-import { PartidasCards } from './partidas-cards'
-import { partidasColumns } from './partidas-columns'
+import { useEffect, useState } from 'react'
 import { mockPartidas } from '../data/mock-data'
+import { partidasColumns } from './partidas-columns'
+import { PartidasTable } from './partidas-table'
 
 interface SecondaryTab {
   label: string
@@ -192,11 +191,9 @@ export default function SecondaryTabs({
       </TabsList>
       {currentSecondaryTabs.map((tab) => (
         <TabsContent key={tab.value} value={tab.value} className='mt-4'>
-          {isMobile ? (
-            <PartidasCards data={mockPartidas} />
-          ) : (
+         
             <PartidasTable data={mockPartidas} columns={partidasColumns} />
-          )}
+         
         </TabsContent>
       ))}
     </Tabs>

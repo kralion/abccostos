@@ -33,14 +33,24 @@ import { mockRecursos } from '../data/recursos-mock'
 type DataTableProps = {
   data: Partida[]
   columns: ColumnDef<Partida>[]
+  enableRowExpansion?: boolean
 }
 
-export function PartidasTable({ data, columns }: DataTableProps) {
+export function PartidasTable({ data, columns, enableRowExpansion = false }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
   const [expanded, setExpanded] = useState<ExpandedState>({})
+  const [isRowExpansionEnabled, setIsRowExpansionEnabled] = useState(enableRowExpansion)
+
+  const handleToggleRowExpansion = (enabled: boolean) => {
+    setIsRowExpansionEnabled(enabled)
+    if (!enabled) {
+      // Collapse all rows when disabling expansion
+      setExpanded({})
+    }
+  }
 
   const table = useReactTable({
     data,
@@ -69,7 +79,10 @@ export function PartidasTable({ data, columns }: DataTableProps) {
 
   return (
     <div className='space-y-4'>
-      <PartidasToolbar />
+      <PartidasToolbar 
+        enableRowExpansion={isRowExpansionEnabled}
+        onToggleRowExpansion={handleToggleRowExpansion}
+      />
       
       <div className='rounded-md border'>
         <Table>
@@ -103,11 +116,11 @@ export function PartidasTable({ data, columns }: DataTableProps) {
                       key={row.id}
                       data-state={row.getIsSelected() && 'selected'}
                       onClick={() => {
-                        if (canExpand) {
+                        if (canExpand && isRowExpansionEnabled) {
                           row.toggleExpanded()
                         }
                       }}
-                      className={canExpand ? 'cursor-pointer hover:bg-muted/50' : ''}
+                      className={canExpand && isRowExpansionEnabled ? 'cursor-pointer hover:bg-muted/50' : ''}
                     >
                       {row.getVisibleCells().map((cell) => (
                         <TableCell key={cell.id}>
