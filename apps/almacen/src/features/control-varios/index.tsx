@@ -3,34 +3,24 @@ import { Separator } from '@workspace/ui/components/separator'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
-import PrimaryTabs from './components/primarytabs'
-import GestionTrabajos from './components/job-management'
-import UnidadesProduccionData from './components/unidades-produccion-data'
-import TrenesData from './components/trenes-data'
-import JobsData from './components/jobs-data'
-import PartidasData from './components/partidas-data'
 import { CustomEmpty } from '@/components/custom-empty'
-import { BrainIcon, HouseIcon, Rows4Icon, SettingsIcon } from 'lucide-react'
+import PrimaryTabs from './components/primarytabs'
+import Concreto from './components/concreto'
+import { BrainIcon, HouseIcon } from 'lucide-react'
 
 const getEmptyContent = (primaryTab: string) => {
   switch (primaryTab) {
-    case 'trabajos':
+    case 'guia-ingreso':
       return {
-        title: "Sin Trabajos",
-        description: "Aqui se mostrarán los trabajos",
+        title: "Sin Alimentación",
+        description: "Aqui se mostrarán los datos de alimentación",
         icon: <BrainIcon />
       }
-    case 'partidas':
+    case 'guia-salida':
       return {
-        title: "Sin Partidas",
-        description: "Aqui se mostrarán las partidas",
-        icon: <Rows4Icon />
-      }
-    case 'trabajos-partidas':
-      return {
-        title: "Sin Trabajos y Partidas",
-        description: "Aqui se mostrarán los trabajos y partidas",
-        icon: <SettingsIcon />
+        title: "Sin Varios",
+        description: "Aqui se mostrarán los datos varios",
+        icon: <BrainIcon />
       }
     default:
       return {
@@ -43,20 +33,12 @@ const getEmptyContent = (primaryTab: string) => {
 
 const renderTabContent = (activePrimaryTab: string) => {
   switch (activePrimaryTab) {
-    case "general":
-      return <GestionTrabajos />
-    case "unidades-produccion":
-      return <UnidadesProduccionData />
-    case "usuarios":
-      return <TrenesData />
-    case "trabajos":
-      return <JobsData />
-    case "partidas":
-      return <PartidasData />
-    case "trabajos-partidas": {
-      const emptyContent = getEmptyContent(activePrimaryTab)
-      return <CustomEmpty {...emptyContent} />
-    }
+    case "orden-compra":
+      return <Concreto />
+    case "guia-ingreso":
+      return <CustomEmpty {...getEmptyContent('guia-ingreso')} />
+    case "guia-salida":
+      return <CustomEmpty {...getEmptyContent('guia-salida')} />
     default: {
       const emptyContent = getEmptyContent(activePrimaryTab)
       return <CustomEmpty {...emptyContent} />
@@ -64,8 +46,8 @@ const renderTabContent = (activePrimaryTab: string) => {
   }
 }
 
-export function DatosPrincipales() {
-  const [activePrimaryTab, setActivePrimaryTab] = useState('general')
+export function ControlVarios() {
+  const [activePrimaryTab, setActivePrimaryTab] = useState('orden-compra')
 
   return (
     <>
@@ -82,7 +64,7 @@ export function DatosPrincipales() {
         <div className='flex items-center justify-between'>
           <div className='md:hidden' />
           <h1 className='hidden text-2xl font-bold tracking-tight md:block'>
-            Datos Principales
+            Control Varios
           </h1>
           <PrimaryTabs
             activeTab={activePrimaryTab}

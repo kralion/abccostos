@@ -1,4 +1,4 @@
-import { Catalogos } from '@/features/catalogos'
+import { ControlVarios } from '@/features/control-varios'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/(secundario)/control-varios/')({
@@ -6,5 +6,5 @@ export const Route = createFileRoute('/_authenticated/(secundario)/control-vario
 })
 
 function RouteComponent() {
-  return <Catalogos />
+  return <ControlVarios />
 }
