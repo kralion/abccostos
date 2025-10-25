@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from '@workspace/ui/components/tabs'
-import { BoxesIcon, BriefcaseIcon, FileTextIcon, HouseIcon, ListIcon, PickaxeIcon } from 'lucide-react'
+import { BoxIcon, BoxesIcon, BriefcaseIcon, FileTextIcon, ListIcon, PickaxeIcon } from 'lucide-react'
 
 interface PrimaryTabsProps {
   activeTab: string
@@ -15,20 +15,20 @@ export default function PrimaryTabs({
       <div className='flex items-center justify-between'>
         <TabsList className='text-foreground h-auto rounded-none border-b bg-transparent px-0'>
           <TabsTrigger
-            value='general'
+            value='orden-compra'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
-            <HouseIcon
+            <BoxIcon
               className='me-1.5 opacity-60 md:-ms-0.5'
               size={16}
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Gestión de Trabajos
+              Orden de Compra
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='unidades-produccion'
+            value='guia-ingreso'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <BoxesIcon
@@ -37,11 +37,11 @@ export default function PrimaryTabs({
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Unidades de Producción
+              G. de Ingreso
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='usuarios'
+            value='guia-salida'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <PickaxeIcon
@@ -50,11 +50,11 @@ export default function PrimaryTabs({
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Trenes
+              G. de Salida
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='trabajos'
+            value='salida-campo'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <BriefcaseIcon
@@ -63,11 +63,11 @@ export default function PrimaryTabs({
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Trabajos
+              S. de Campo
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='partidas'
+            value='salida-ssomma'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <ListIcon
@@ -76,11 +76,11 @@ export default function PrimaryTabs({
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Partidas
+              S. de Ssomma
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='trabajos-partidas'
+            value='auditoria-consumo-material'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
             <FileTextIcon
@@ -89,7 +89,20 @@ export default function PrimaryTabs({
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Trabajos y Partidas
+              A. de Consumo de Material
+            </span>
+          </TabsTrigger>
+          <TabsTrigger
+            value='control-herramientas'
+            className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
+          >
+            <FileTextIcon
+              className='me-1.5 opacity-60 md:-ms-0.5'
+              size={16}
+              aria-hidden='true'
+            />
+            <span className='hidden group-data-[state=active]:inline md:inline'>
+              Control Herramientas
             </span>
           </TabsTrigger>
         </TabsList>

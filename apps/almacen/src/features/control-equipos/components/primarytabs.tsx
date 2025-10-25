@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from '@workspace/ui/components/tabs'
-import { BoxesIcon, BriefcaseIcon, FileTextIcon, HouseIcon, ListIcon, PickaxeIcon } from 'lucide-react'
+import { ChartNoAxesCombinedIcon, FileIcon, FuelIcon, MonitorIcon, UsersIcon } from 'lucide-react'
 
 interface PrimaryTabsProps {
   activeTab: string
@@ -15,81 +15,95 @@ export default function PrimaryTabs({
       <div className='flex items-center justify-between'>
         <TabsList className='text-foreground h-auto rounded-none border-b bg-transparent px-0'>
           <TabsTrigger
-            value='general'
+            value='relacion-equipos'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
-            <HouseIcon
+            <UsersIcon
+ 
               className='me-1.5 opacity-60 md:-ms-0.5'
               size={16}
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Gestión de Trabajos
+              Relación de Equipos
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='unidades-produccion'
+            value='pd-equipos'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
-            <BoxesIcon
+            <UsersIcon
               className='me-1.5 opacity-60 md:-ms-0.5'
               size={16}
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Unidades de Producción
+              PD. Equipos
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='usuarios'
+            value='liquidacion-equipos'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
-            <PickaxeIcon
+            <MonitorIcon
               className='me-1.5 opacity-60 md:-ms-0.5'
               size={16}
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Trenes
+              Liquidación de Equipos
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='trabajos'
+            value='combustible'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
-            <BriefcaseIcon
+            <FuelIcon
               className='me-1.5 opacity-60 md:-ms-0.5'
               size={16}
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Trabajos
+              Combustible
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='partidas'
+            value='valorizaciones'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
-            <ListIcon
+            <FileIcon
               className='me-1.5 opacity-60 md:-ms-0.5'
               size={16}
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Partidas
+              Valorizaciones
             </span>
           </TabsTrigger>
           <TabsTrigger
-            value='trabajos-partidas'
+            value='ratios'
             className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
           >
-            <FileTextIcon
+            <FileIcon
               className='me-1.5 opacity-60 md:-ms-0.5'
               size={16}
               aria-hidden='true'
             />
             <span className='hidden group-data-[state=active]:inline md:inline'>
-              Trabajos y Partidas
+              Ratios
+            </span>
+          </TabsTrigger>
+          <TabsTrigger
+            value='reportes'
+            className='group hover:bg-accent text-muted-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-black data-[state=active]:shadow-none'
+          >
+            <ChartNoAxesCombinedIcon
+              className='me-1.5 opacity-60 md:-ms-0.5'
+              size={16}
+              aria-hidden='true'
+            />
+            <span className='hidden group-data-[state=active]:inline md:inline'>
+              Reportes
             </span>
           </TabsTrigger>
         </TabsList>

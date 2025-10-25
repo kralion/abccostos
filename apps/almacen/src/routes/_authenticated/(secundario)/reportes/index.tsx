@@ -1,4 +1,4 @@
-import { Catalogos } from '@/features/catalogos'
+import { Reportes } from '@/features/reportes'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_authenticated/(secundario)/reportes/')({
@@ -6,5 +6,5 @@ export const Route = createFileRoute('/_authenticated/(secundario)/reportes/')({
 })
 
 function RouteComponent() {
-  return <Catalogos />
+  return <Reportes />
 }
